@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import { SignInForm } from "../../components/SigninForm";
+import { SignInForm } from "../../../components/SigninForm";
 
 export default function Page() {
   return (
