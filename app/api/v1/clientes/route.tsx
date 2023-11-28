@@ -1,28 +1,39 @@
-import { Customer } from "@/types/customer";
+import { fetchErrorHandler } from "@/app/_lib/errors/fetchErrorHandler";
+import { Cliente } from "@/app/_types/Cliente";
 
-export function GET() {
+const API_URL = process.env.API_URL;
+
+export async function GET() {
   try {
-    const customers: Customer[] = [
-      { uuid: "asdasdas", name: "John Doe" },
-      { uuid: "asdgfdgd", name: "Jane Doe" },
-    ];
+    const res = await fetch(`${API_URL}/clientes/`);
+    const clientes: Cliente[] = await res.json();
 
-    return Response.json(customers);
+    return Response.json(clientes);
   } catch (error) {
-    if (error instanceof Error)
-      return Response.json({ error: error.message }, { status: 500 });
-    else return Response.json({ error: "Unknown error" }, { status: 500 });
+    return fetchErrorHandler(error);
   }
 }
 
-export function POST(req: Request) {
+export async function POST(req: Request) {
   try {
-    const body = req.json();
+    const body = await req.json();
 
-    return Response.json(body);
+    const res = await fetch(`${API_URL}/clientes/`, {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const cliente: Cliente = await res.json();
+
+    if (!res.ok) {
+      throw Error("Erro ao criar cliente");
+    }
+
+    return Response.json(cliente);
   } catch (error) {
-    if (error instanceof Error)
-      return Response.json({ error: error.message }, { status: 500 });
-    else return Response.json({ error: "Unknown error" }, { status: 500 });
+    return fetchErrorHandler(error);
   }
 }

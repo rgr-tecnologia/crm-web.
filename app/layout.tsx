@@ -1,15 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import {
-  AppBar,
-  Box,
-  Button,
-  Container,
-  Menu,
-  MenuItem,
-  Toolbar,
-} from "@mui/material";
+import { AppBar, Box, Button, Container, Toolbar } from "@mui/material";
 import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,24 +17,45 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <AppBar position="relative">
-        <Container>
-          <Toolbar>
-            <Box>
-              <Button>
-                <Link href={"/"}>Home</Link>
-              </Button>
-              <Button>
-                <Link href={"/users"}>Users</Link>
-              </Button>
-              <Button>
-                <Link href={"/customers"}>Clientes</Link>
-              </Button>
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
       <body className={inter.className}>
+        <AppBar position="relative">
+          <Container>
+            <Toolbar>
+              <Box>
+                <Link href={"/"} passHref>
+                  <Button
+                    variant="text"
+                    sx={{
+                      color: "#fff",
+                    }}
+                  >
+                    Home
+                  </Button>
+                </Link>
+                <Link href={"/usuarios"} passHref>
+                  <Button
+                    variant="text"
+                    sx={{
+                      color: "#fff",
+                    }}
+                  >
+                    Usuários
+                  </Button>
+                </Link>
+                <Link href={"/clientes"} passHref>
+                  <Button
+                    variant="text"
+                    sx={{
+                      color: "#fff",
+                    }}
+                  >
+                    Clientes
+                  </Button>
+                </Link>
+              </Box>
+            </Toolbar>
+          </Container>
+        </AppBar>
         <Box>{children}</Box>
       </body>
     </html>

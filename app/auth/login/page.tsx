@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import { LoginForm } from "../../../components/LoginForm";
+import { LoginForm } from "../../_components/forms/LoginForm";
 
 export default function Page() {
   return (
