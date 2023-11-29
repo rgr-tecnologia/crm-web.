@@ -1,19 +1,15 @@
 "use client";
 
 import { Cliente } from "@/app/_types/Cliente";
-import { Button, Card, CardContent, Grid, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-type ClientesListProps = {
-  clientes: Cliente[];
-};
-
-type ActionsProps = {
+type ClientesListActionsProps = {
   cliente: Cliente;
 };
 
-function Actions(props: ActionsProps) {
+export function ClientesListActions(props: ClientesListActionsProps) {
   const currentPath = usePathname();
   const { cliente } = props;
   return (
@@ -37,21 +33,5 @@ function Actions(props: ActionsProps) {
         </Button>
       </Grid>
     </Grid>
-  );
-}
-
-export function ClientesList({ clientes }: ClientesListProps) {
-  return (
-    <>
-      {clientes.map((cliente) => (
-        <Card key={cliente.id}>
-          <CardContent>
-            <Typography variant="body2">{cliente.id}</Typography>
-            <Typography variant="body2">{cliente.nomeFantasia}</Typography>
-            <Actions cliente={cliente} />
-          </CardContent>
-        </Card>
-      ))}
-    </>
   );
 }

@@ -1,8 +1,8 @@
 import { Cliente } from "../_types/Cliente";
 
-export const createCliente = async (data: Omit<Cliente, "id">) => {
-  const BFF_URL = process.env.NEXT_PUBLIC_BFF_URL;
+const BFF_URL = process.env.NEXT_PUBLIC_BFF_URL;
 
+export const createCliente = async (data: Omit<Cliente, "id">) => {
   try {
     const res = await fetch(`${BFF_URL}/clientes`, {
       method: "POST",

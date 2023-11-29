@@ -1,20 +1,14 @@
-import { ClienteForm } from "@/app/_components/forms/ClienteForm";
+import { ClienteQueryProvider } from "@/app/_components/forms/cliente/ClientQueryProvider";
+import { UpdateClienteForm } from "@/app/_components/forms/cliente/UpdateClienteForm";
 
 type PageParams = {
   clienteId: string;
 };
 
-const BFF_URL = process.env.BFF_URL;
-
-async function getCliente(clienteId: string) {
-  const res = await fetch(`${BFF_URL}/clientes/${clienteId}`);
-  const cliente = await res.json();
-
-  return cliente;
-}
-
 export default async function Page({ params }: { params: PageParams }) {
-  const cliente = await getCliente(params.clienteId);
-
-  return <ClienteForm cliente={cliente} />;
+  return (
+    <ClienteQueryProvider>
+      <UpdateClienteForm clienteId={params.clienteId} />
+    </ClienteQueryProvider>
+  );
 }

@@ -1,11 +1,12 @@
 import { Cliente } from "@/app/_types/Cliente";
-import { NextApiRequest, NextApiResponse } from "next";
 
 type Params = {
   clienteId: string;
 };
 
 const API_URL = process.env.API_URL;
+
+export const revalidade = 1;
 
 export async function GET(req: Request, { params }: { params: Params }) {
   try {

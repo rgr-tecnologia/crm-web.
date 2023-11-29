@@ -32,7 +32,7 @@ export default function RootLayout({
                     Home
                   </Button>
                 </Link>
-                <Link href={"/usuarios"} passHref>
+                <Link href={"/usuarios"} passHref={true}>
                   <Button
                     variant="text"
                     sx={{
@@ -42,7 +42,7 @@ export default function RootLayout({
                     Usuários
                   </Button>
                 </Link>
-                <Link href={"/clientes"} passHref>
+                <Link href={"/clientes"} passHref={true}>
                   <Button
                     variant="text"
                     sx={{
