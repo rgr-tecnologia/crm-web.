@@ -1,6 +1,6 @@
 import { Cliente } from "@/app/_types/Cliente";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
-import { ClientesListActions } from "./ClientesLIstActions";
+import { ClientesListActions } from "./ClientesListActions";
 
 type ClientesListProps = {
   clientes: Cliente[];

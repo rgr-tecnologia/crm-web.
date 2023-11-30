@@ -19,7 +19,11 @@ export default async function Page() {
   const clientes = await fetchClientes();
 
   return (
-    <Container>
+    <Container
+      sx={{
+        marginTop: 2,
+      }}
+    >
       <Grid
         container
         spacing={2}

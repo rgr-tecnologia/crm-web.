@@ -1,7 +1,7 @@
 "use client";
 
 import { Cliente } from "@/app/_types/Cliente";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { createCliente } from "../../../_lib/createCliente";
 import { ClienteFormBase } from "./ClienteFormBase";
 
@@ -18,8 +18,14 @@ export function CreateClienteForm() {
   return (
     <Card>
       <CardContent>
-        <Typography variant="h6">Criar cliente</Typography>
-        <ClienteFormBase onSubmit={onSubmit} />
+        <Grid container spacing={2} direction={"column"}>
+          <Grid item>
+            <Typography variant="h6">Novo cliente</Typography>
+          </Grid>
+          <Grid item>
+            <ClienteFormBase onSubmit={onSubmit} />
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   );

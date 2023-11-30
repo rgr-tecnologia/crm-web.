@@ -1,5 +1,6 @@
 import { ClienteQueryProvider } from "@/app/_components/forms/cliente/ClientQueryProvider";
 import { UpdateClienteForm } from "@/app/_components/forms/cliente/UpdateClienteForm";
+import { Container } from "@mui/material";
 
 type PageParams = {
   clienteId: string;
@@ -8,7 +9,13 @@ type PageParams = {
 export default async function Page({ params }: { params: PageParams }) {
   return (
     <ClienteQueryProvider>
-      <UpdateClienteForm clienteId={params.clienteId} />
+      <Container
+        sx={{
+          marginTop: 2,
+        }}
+      >
+        <UpdateClienteForm clienteId={params.clienteId} />
+      </Container>
     </ClienteQueryProvider>
   );
 }

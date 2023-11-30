@@ -1,48 +1,32 @@
-"use client";
-
-import { Button, Card, CardContent, Grid, Typography } from "@mui/material";
+import { Card, CardContent, Container, Grid, Typography } from "@mui/material";
 import { Contrato } from "../_types/Contrato";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { ContratosListActions } from "./ContratosList/ContratosListActions";
 
 type ContratoListProps = {
   contratos: Contrato[];
 };
 
-function Actions({ contrato }: { contrato: Contrato }) {
-  const currentPath = usePathname();
-  return (
-    <Grid container spacing={2} justifyContent={"flex-end"}>
-      <Grid item>
-        <Link href={`${currentPath}/${contrato.id}`} passHref>
-          <Typography variant="body2" color={"black"}>
-            <Button>Editar</Button>
-          </Typography>
-        </Link>
-      </Grid>
-      <Grid item>
-        <Link href={`${currentPath}/${contrato.id}`} passHref>
-          <Typography variant="body2" color={"black"}>
-            <Button>Excluir</Button>
-          </Typography>
-        </Link>
-      </Grid>
-    </Grid>
-  );
-}
-
 export function ContratosList(props: ContratoListProps) {
   const { contratos } = props;
+
+  if (!contratos.length) {
+    return (
+      <Container>
+        <Typography>Nenhum contrato cadastrado</Typography>
+      </Container>
+    );
+  }
+
   return (
     <>
       {contratos.map((contrato) => (
-        <Card key={contrato.id}>
+        <Card key={contrato?.id}>
           <CardContent>
             <Grid container spacing={2} direction={"column"}>
-              <Grid item>Descrição: {contrato.titulo}</Grid>
-              <Grid item>Valor: {contrato.valor}</Grid>
+              <Grid item>Descrição: {contrato?.titulo}</Grid>
+              <Grid item>Valor: {contrato?.valor}</Grid>
             </Grid>
-            <Actions contrato={contrato} />
+            <ContratosListActions contrato={contrato} />
           </CardContent>
         </Card>
       ))}

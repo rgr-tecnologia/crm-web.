@@ -1,7 +1,7 @@
 "use client";
 
 import { Cliente } from "@/app/_types/Cliente";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { updateCliente } from "../../../_lib/updateCliente";
 import { useQuery } from "react-query";
 import { getCliente } from "@/app/_lib/getCliente";
@@ -23,8 +23,14 @@ export function UpdateClienteForm(props: ClienteFormProps) {
   return (
     <Card>
       <CardContent>
-        <Typography variant="h6">Editar cliente</Typography>
-        <ClienteFormBase onSubmit={onSubmit} defaultValues={data} />
+        <Grid container spacing={2} direction={"column"}>
+          <Grid item>
+            <Typography variant="h6">Editar cliente</Typography>
+          </Grid>
+          <Grid item>
+            <ClienteFormBase onSubmit={onSubmit} defaultValues={data} />
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   );
