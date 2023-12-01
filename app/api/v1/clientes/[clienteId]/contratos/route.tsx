@@ -24,3 +24,29 @@ export async function GET(req: Request, { params }: { params: Params }) {
       );
   }
 }
+
+export async function POST(req: Request, { params }: { params: Params }) {
+  try {
+    const { clienteId } = params;
+    const body = await req.json();
+    const res = await fetch(`${API_URL}/clientes/${clienteId}/contratos`, {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const contrato: Contrato = await res.json();
+
+    return Response.json(contrato);
+  } catch (error) {
+    if (error instanceof Error)
+      return Response.json(
+        { error: error.message },
+        {
+          status: 500,
+        }
+      );
+  }
+}

@@ -2,10 +2,10 @@
 import { Contrato } from "@/app/_types/Contrato";
 import { useRouter } from "next/navigation";
 
-import { Card, CardContent, Container, Grid, Typography } from "@mui/material";
+import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { ContratoFormBase } from "./ContratoFormBase";
 
-const BFF_URL = process.env.BFF_URL;
+const BFF_URL = process.env.NEXT_PUBLIC_BFF_URL;
 
 type CreateContratoFormProps = {
   clienteId: string;

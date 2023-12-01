@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Grid, TextField } from "@mui/material";
+import { Button, Grid, MenuItem, Select, TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 import { Contrato } from "@/app/_types/Contrato";
 import { useForm } from "react-hook-form";
@@ -12,17 +12,60 @@ type ContratoFormBaseProps = {
 export const ContratoFormBase = (props: ContratoFormBaseProps) => {
   const { onSubmit } = props;
 
-  const { control, handleSubmit } = useForm<Contrato>();
+  const { control, handleSubmit } = useForm<Contrato>({
+    defaultValues: {
+      representanteId: "",
+      titulo: "",
+      caracteristica: "",
+      valor: 0,
+      dataInicio: "",
+      dataFimPrevista: "",
+      status: "ATIVO",
+    },
+  });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={2} direction={"column"}>
         <Grid item>
           <Controller
+            name="representanteId"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                label="Representante"
+                variant="outlined"
+                {...field}
+                fullWidth
+              />
+            )}
+          />
+        </Grid>
+        <Grid item>
+          <Controller
             name="titulo"
             control={control}
             render={({ field }) => (
-              <TextField label="Nome" variant="outlined" {...field} fullWidth />
+              <TextField
+                label="Titulo"
+                variant="outlined"
+                {...field}
+                fullWidth
+              />
+            )}
+          />
+        </Grid>
+        <Grid item>
+          <Controller
+            name="caracteristica"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                label="Característica"
+                variant="outlined"
+                {...field}
+                fullWidth
+              />
             )}
           />
         </Grid>
@@ -36,21 +79,54 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
                 variant="outlined"
                 {...field}
                 fullWidth
+                type="number"
+                inputProps={{
+                  step: 0.01,
+                }}
               />
             )}
           />
         </Grid>
         <Grid item>
-          <Controller
+          {/* {<Controller
             name="dataInicio"
             control={control}
             render={({ field }) => (
-              <TextField
+              <DateField
                 label="Data de início"
                 variant="outlined"
                 {...field}
                 fullWidth
+                type="date"
               />
+            )}
+          />} */}
+        </Grid>
+        <Grid item>
+          <Controller
+            name="dataFimPrevista"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                label="Data de fim"
+                variant="outlined"
+                {...field}
+                fullWidth
+                type="date"
+              />
+            )}
+          />
+        </Grid>
+
+        <Grid item>
+          <Controller
+            name="status"
+            control={control}
+            render={({ field }) => (
+              <Select label="Status" variant="outlined" {...field} fullWidth>
+                <MenuItem value="ATIVO">Ativo</MenuItem>
+                <MenuItem value="INATIVO">Inativo</MenuItem>
+              </Select>
             )}
           />
         </Grid>
