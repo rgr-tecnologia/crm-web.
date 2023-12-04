@@ -3,8 +3,8 @@ export type Contrato = {
   clienteId: string;
   titulo: string;
   caracteristica: string;
-  dataInicio: string;
-  dataFimPrevista: string;
+  dataInicio: Date;
+  dataFimPrevista: Date;
   valor: number;
   representanteId: string;
   status: string;

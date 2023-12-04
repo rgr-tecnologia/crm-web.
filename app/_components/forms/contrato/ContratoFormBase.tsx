@@ -5,6 +5,11 @@ import { Controller } from "react-hook-form";
 import { Contrato } from "@/app/_types/Contrato";
 import { useForm } from "react-hook-form";
 
+import { DatePicker } from "@mui/x-date-pickers";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
+
 type ContratoFormBaseProps = {
   onSubmit: (data: any) => void;
 };
@@ -18,8 +23,8 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
       titulo: "",
       caracteristica: "",
       valor: 0,
-      dataInicio: "",
-      dataFimPrevista: "",
+      dataInicio: new Date(),
+      dataFimPrevista: new Date(),
       status: "ATIVO",
     },
   });
@@ -92,16 +97,13 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
             name="dataInicio"
             control={control}
             render={({ field }) => (
-              <TextField
-                label="Data de início"
-                variant="outlined"
-                {...field}
-                fullWidth
-                type="date"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  label="Data de início"
+                  {...field}
+                  value={dayjs(field.value)}
+                />
+              </LocalizationProvider>
             )}
           />
         </Grid>
@@ -110,16 +112,13 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
             name="dataFimPrevista"
             control={control}
             render={({ field }) => (
-              <TextField
-                label="Data de fim"
-                variant="outlined"
-                {...field}
-                fullWidth
-                type="date"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  label="Data de fim prevista"
+                  {...field}
+                  value={dayjs(field.value)}
+                />
+              </LocalizationProvider>
             )}
           />
         </Grid>
