@@ -111,6 +111,7 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
                   label="Data de nascimento"
                   {...field}
                   value={dayjs(field.value)}
+                  sx={{ width: "100%" }}
                 />
               </LocalizationProvider>
             )}

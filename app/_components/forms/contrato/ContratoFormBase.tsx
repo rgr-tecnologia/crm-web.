@@ -102,6 +102,7 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
                   label="Data de início"
                   {...field}
                   value={dayjs(field.value)}
+                  sx={{ width: "100%" }}
                 />
               </LocalizationProvider>
             )}
@@ -117,6 +118,7 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
                   label="Data de fim prevista"
                   {...field}
                   value={dayjs(field.value)}
+                  sx={{ width: "100%" }}
                 />
               </LocalizationProvider>
             )}
