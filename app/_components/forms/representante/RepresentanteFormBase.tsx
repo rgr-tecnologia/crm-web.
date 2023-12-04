@@ -11,6 +11,8 @@ import {
   Typography,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Controller } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
@@ -103,7 +105,9 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
             name="dataNascimento"
             control={control}
             render={({ field }) => (
-              <DatePicker label="Data de nascimento" {...field} />
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker label="Data de nascimento" {...field} />
+              </LocalizationProvider>
             )}
           />
         </Grid>
