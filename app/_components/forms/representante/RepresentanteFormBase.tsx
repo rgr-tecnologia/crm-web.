@@ -13,6 +13,7 @@ import {
 import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
 import { Controller } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
@@ -106,7 +107,11 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
             control={control}
             render={({ field }) => (
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker label="Data de nascimento" {...field} />
+                <DatePicker
+                  label="Data de nascimento"
+                  {...field}
+                  value={dayjs(field.value)}
+                />
               </LocalizationProvider>
             )}
           />
