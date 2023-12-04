@@ -10,6 +10,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { DatePicker } from "@mui/x-date-pickers";
 import { Controller } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
@@ -102,16 +103,7 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
             name="dataNascimento"
             control={control}
             render={({ field }) => (
-              <TextField
-                label="Data de nascimento"
-                variant="outlined"
-                {...field}
-                fullWidth
-                type="date"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
+              <DatePicker label="Data de nascimento" {...field} />
             )}
           />
         </Grid>
