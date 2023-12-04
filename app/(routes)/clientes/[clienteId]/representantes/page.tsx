@@ -1,6 +1,7 @@
 import { Button, Container, Grid, Typography } from "@mui/material";
 import { RepresentantesList } from "@/app/_components/lists/RepresentantesList/RepresentantesList";
 import Link from "next/link";
+import { Representate } from "@/app/_types/representante/Representante";
 
 type Params = {
   clienteId: string;
@@ -10,9 +11,12 @@ const BFF_URL = process.env.BFF_URL;
 
 const getRepresentantes = async (clienteId: string) => {
   const response = await fetch(
-    `${BFF_URL}/clientes/${clienteId}/representantes`
+    `${BFF_URL}/clientes/${clienteId}/representantes`,
+    {
+      cache: "no-store",
+    }
   );
-  const data = await response.json();
+  const data: Representate[] = await response.json();
   return data;
 };
 

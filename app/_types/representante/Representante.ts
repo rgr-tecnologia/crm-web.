@@ -1,4 +1,4 @@
-import { RepresentateEndereco } from "./RepresentanteEndereco";
+import { RepresentateEndereco } from "../RepresentanteEndereco";
 
 export type Representate = {
   id: string;

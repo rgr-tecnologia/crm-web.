@@ -1,4 +1,4 @@
-import { Representate } from "@/app/_types/Representante";
+import { Representate } from "@/app/_types/representante/Representante";
 
 const API_URL = process.env.API_URL;
 

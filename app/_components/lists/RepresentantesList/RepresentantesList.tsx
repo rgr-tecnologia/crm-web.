@@ -1,5 +1,6 @@
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { RepresentantesListActions } from "./RepresentantesListActions";
+import { Representate } from "@/app/_types/representante/Representante";
 
 type RepresentantesListProps = {
   representantes: Representate[];

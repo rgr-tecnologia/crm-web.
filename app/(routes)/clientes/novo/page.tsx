@@ -1,4 +1,4 @@
-import { ClienteQueryProvider } from "@/app/_components/forms/cliente/ClientQueryProvider";
+import { ClienteQueryProvider } from "@/app/_components/queryProviders/ClienteQueryProvider";
 import { CreateClienteForm } from "@/app/_components/forms/cliente/CreateClienteForm";
 import { Container } from "@mui/material";
 

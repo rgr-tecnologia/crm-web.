@@ -1,6 +1,6 @@
 "use client";
 
-import { Representate } from "@/app/_types/Representante";
+import { Representate } from "@/app/_types/representante/Representante";
 import {
   Button,
   Divider,
@@ -14,36 +14,44 @@ import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
+import { useEffect } from "react";
 import { Controller } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
 type RepresentanteFormBaseProps = {
   onSubmit: (data: any) => void;
+  defaultValues?: Representate;
 };
 
 export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
-  const { onSubmit } = props;
+  const { onSubmit, defaultValues } = props;
 
-  const { control, handleSubmit } = useForm<Representate>({
+  const { control, handleSubmit, reset } = useForm<Representate>({
     defaultValues: {
       status: "ATIVO",
-      nome: "fasdfasdf",
-      departamento: "asdfasdf",
-      cargo: "asdfasdf",
+      nome: "",
+      departamento: "",
+      cargo: "",
       dataNascimento: new Date(),
-      telefone: "51235123",
-      email: "fasdfsadf@fasdfsadf",
+      telefone: "",
+      email: "",
       endereco: {
-        cep: "23452345",
-        logradouro: "asdfasdf",
-        numero: "213412",
-        complemento: "asdfasdf",
-        bairro: "asdfadf",
-        cidade: "asdfasdf",
-        estado: "asdfasdf",
+        cep: "",
+        logradouro: "",
+        numero: "",
+        complemento: "",
+        bairro: "",
+        cidade: "",
+        estado: "",
       },
     },
   });
+
+  useEffect(() => {
+    if (defaultValues) {
+      reset(defaultValues);
+    }
+  }, [defaultValues]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
