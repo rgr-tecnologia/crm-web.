@@ -8,5 +8,4 @@ export type RepresentateEndereco = {
   cidade: string;
   estado: string;
   cep: string;
-  status: string;
 };
