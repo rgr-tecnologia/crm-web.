@@ -32,6 +32,15 @@ export function ClientesListActions(props: ClientesListActionsProps) {
           </Link>
         </Button>
       </Grid>
+      <Grid item>
+        <Button>
+          <Link href={`${currentPath}/${cliente.id}/representantes`}>
+            <Typography variant="body2" color={"black"}>
+              Ver representantes
+            </Typography>
+          </Link>
+        </Button>
+      </Grid>
     </Grid>
   );
 }

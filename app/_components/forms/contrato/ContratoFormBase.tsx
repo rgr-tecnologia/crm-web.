@@ -88,19 +88,22 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
           />
         </Grid>
         <Grid item>
-          {/* {<Controller
+          <Controller
             name="dataInicio"
             control={control}
             render={({ field }) => (
-              <DateField
+              <TextField
                 label="Data de início"
                 variant="outlined"
                 {...field}
                 fullWidth
                 type="date"
+                InputLabelProps={{
+                  shrink: true,
+                }}
               />
             )}
-          />} */}
+          />
         </Grid>
         <Grid item>
           <Controller
@@ -113,6 +116,9 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
                 {...field}
                 fullWidth
                 type="date"
+                InputLabelProps={{
+                  shrink: true,
+                }}
               />
             )}
           />

@@ -1,6 +1,6 @@
 import { Card, CardContent, Container, Grid, Typography } from "@mui/material";
 import { Contrato } from "../_types/Contrato";
-import { ContratosListActions } from "./ContratosList/ContratosListActions";
+import { ContratosListActions } from "./lists/ContratosList/ContratosListActions";
 
 type ContratoListProps = {
   contratos: Contrato[];

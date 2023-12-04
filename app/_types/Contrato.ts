@@ -5,7 +5,7 @@ export type Contrato = {
   caracteristica: string;
   dataInicio: string;
   dataFimPrevista: string;
-  valor: float;
+  valor: number;
   representanteId: string;
   status: string;
 };
