@@ -1,69 +1,59 @@
 "use client";
 import { Contrato } from "@/app/_types/Contrato";
-import { Button, Grid, TextField } from "@mui/material";
-import { useEffect } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { useQuery } from "react-query";
+import { ContratoFormBase } from "./ContratoFormBase";
+import { Cliente } from "@/app/_types/Cliente";
 
 type UpdateContratoFormProps = {
-  onSubmit: (data: any) => void;
   contratoId: Contrato["id"];
+  clienteId: Cliente["id"];
 };
 
-const BFF_URL = process.env.BFF_URL;
+const BFF_URL = process.env.NEXT_PUBLIC_BFF_URL;
 
 export const UpdateContratoForm = (props: UpdateContratoFormProps) => {
-  const { onSubmit, contratoId } = props;
-  const { control, handleSubmit, reset } = useForm<Contrato>();
+  const { contratoId, clienteId } = props;
 
   const { data: contrato } = useQuery<Contrato>("contrato", () =>
-    fetch(`${BFF_URL}/contratos/${contratoId}`).then((res) => res.json())
+    fetch(`${BFF_URL}/clientes/${clienteId}/contratos/${contratoId}`).then(
+      (res) => res.json()
+    )
   );
 
-  useEffect(() => {
-    reset(contrato);
-  }, [contrato]);
+  const onSubmit = async (data: Contrato) => {
+    const res = await fetch(
+      `${BFF_URL}/clientes/${clienteId}/contratos/${contratoId}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!res.ok) {
+      console.log(res);
+    }
+  };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Grid
-        container
-        spacing={2}
-        justifyContent={"center"}
-        alignItems={"center"}
-        direction={"column"}
-      >
-        <Grid item>
-          <Controller
-            name="titulo"
-            control={control}
-            render={({ field }) => (
-              <TextField label="Nome" variant="outlined" {...field} />
-            )}
-          />
+    <Card>
+      <CardContent>
+        <Grid container spacing={2} direction={"column"}>
+          <Grid item>
+            <Typography variant="h6">Novo contrato</Typography>
+          </Grid>
+          <Grid item>
+            <ContratoFormBase
+              onSubmit={onSubmit}
+              clienteId={clienteId}
+              defaultValues={contrato}
+            />
+          </Grid>
         </Grid>
-        <Grid item>
-          <Controller
-            name="valor"
-            control={control}
-            render={({ field }) => (
-              <TextField label="Valor" variant="outlined" {...field} />
-            )}
-          />
-        </Grid>
-        <Grid item>
-          <Controller
-            name="dataInicio"
-            control={control}
-            render={({ field }) => (
-              <TextField label="Data de início" variant="outlined" {...field} />
-            )}
-          />
-        </Grid>
-        <Button variant={"contained"} type="submit">
-          Salvar
-        </Button>
-      </Grid>
-    </form>
+      </CardContent>
+    </Card>
   );
 };

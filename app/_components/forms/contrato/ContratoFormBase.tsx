@@ -19,10 +19,12 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import { useQuery } from "react-query";
 import { getRepresentantesByClienteId } from "@/app/_lib/representante/getRepresentantesByClienteId";
+import { useEffect } from "react";
 
 type ContratoFormBaseProps = {
   onSubmit: (data: any) => void;
   clienteId: string;
+  defaultValues?: Contrato;
 };
 
 export const ContratoFormBase = (props: ContratoFormBaseProps) => {
@@ -35,6 +37,7 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<Contrato>({
     defaultValues: {
@@ -52,8 +55,20 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
     required: "Campo obrigatório",
   };
 
+  useEffect(() => {
+    reset(props.defaultValues);
+  }, [props.defaultValues]);
+
+  const _onSubmit = async (data: Contrato) => {
+    const transformedData: Contrato = {
+      ...data,
+      valor: Number(data.valor),
+    };
+    onSubmit(transformedData);
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(_onSubmit)}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Controller
