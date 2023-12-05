@@ -1,6 +1,14 @@
 "use client";
 
-import { Button, Grid, MenuItem, Select, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormHelperText,
+  Grid,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import { Controller } from "react-hook-form";
 import { Contrato } from "@/app/_types/Contrato";
 import { useForm } from "react-hook-form";
@@ -9,15 +17,26 @@ import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
+import { useQuery } from "react-query";
+import { getRepresentantesByClienteId } from "@/app/_lib/representante/getRepresentantesByClienteId";
 
 type ContratoFormBaseProps = {
   onSubmit: (data: any) => void;
+  clienteId: string;
 };
 
 export const ContratoFormBase = (props: ContratoFormBaseProps) => {
-  const { onSubmit } = props;
+  const { onSubmit, clienteId } = props;
 
-  const { control, handleSubmit } = useForm<Contrato>({
+  const representantes = useQuery("representantes", async () =>
+    getRepresentantesByClienteId(clienteId)
+  );
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Contrato>({
     defaultValues: {
       representanteId: "",
       titulo: "",
@@ -29,78 +48,116 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
     },
   });
 
+  const rules = {
+    required: "Campo obrigatório",
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Grid container spacing={2} direction={"column"}>
-        <Grid item>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Controller
+            name="status"
+            control={control}
+            rules={rules}
+            render={({ field }) => (
+              <Box>
+                <Select
+                  {...field}
+                  label="Status"
+                  variant="outlined"
+                  fullWidth
+                  error={!!errors.status}
+                >
+                  <MenuItem value="ATIVO">Ativo</MenuItem>
+                  <MenuItem value="INATIVO">Inativo</MenuItem>
+                </Select>
+                {errors.status && (
+                  <FormHelperText>{errors.status.message} </FormHelperText>
+                )}
+              </Box>
+            )}
+          />
+        </Grid>
+        <Grid item xs={12}>
           <Controller
             name="representanteId"
             control={control}
+            rules={rules}
             render={({ field }) => (
-              <TextField
-                label="Representante"
-                variant="outlined"
-                {...field}
-                fullWidth
-              />
+              <Select fullWidth {...field}>
+                {representantes.data?.map((representante) => (
+                  <MenuItem value={representante.id} key={representante.id}>
+                    {representante.nome}
+                  </MenuItem>
+                ))}
+              </Select>
             )}
           />
         </Grid>
-        <Grid item>
+        <Grid item xs={12}>
           <Controller
             name="titulo"
             control={control}
+            rules={rules}
             render={({ field }) => (
               <TextField
-                label="Titulo"
-                variant="outlined"
                 {...field}
+                label="Título"
+                variant="outlined"
                 fullWidth
+                error={!!errors.titulo}
+                helperText={errors.titulo ? errors.titulo.message : null}
               />
             )}
           />
         </Grid>
-        <Grid item>
+        <Grid item xs={12}>
           <Controller
             name="caracteristica"
             control={control}
+            rules={rules}
             render={({ field }) => (
               <TextField
+                {...field}
                 label="Característica"
                 variant="outlined"
-                {...field}
                 fullWidth
+                error={!!errors.caracteristica}
+                helperText={
+                  errors.caracteristica ? errors.caracteristica.message : null
+                }
               />
             )}
           />
         </Grid>
-        <Grid item>
+        <Grid item xs={12}>
           <Controller
             name="valor"
             control={control}
+            rules={rules}
             render={({ field }) => (
               <TextField
+                {...field}
                 label="Valor"
                 variant="outlined"
-                {...field}
                 fullWidth
-                type="number"
-                inputProps={{
-                  step: 0.01,
-                }}
+                error={!!errors.valor}
+                helperText={errors.valor ? errors.valor.message : null}
               />
             )}
           />
         </Grid>
-        <Grid item>
+        <Grid item xs={12}>
           <Controller
             name="dataInicio"
             control={control}
+            rules={rules}
             render={({ field }) => (
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                  label="Data de início"
                   {...field}
+                  label="Data de Início"
                   value={dayjs(field.value)}
                   sx={{ width: "100%" }}
                 />
@@ -108,15 +165,16 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
             )}
           />
         </Grid>
-        <Grid item>
+        <Grid item xs={12}>
           <Controller
             name="dataFimPrevista"
             control={control}
+            rules={rules}
             render={({ field }) => (
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                  label="Data de fim prevista"
                   {...field}
+                  label="Data Fim Prevista"
                   value={dayjs(field.value)}
                   sx={{ width: "100%" }}
                 />
@@ -125,20 +183,8 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
           />
         </Grid>
 
-        <Grid item>
-          <Controller
-            name="status"
-            control={control}
-            render={({ field }) => (
-              <Select label="Status" variant="outlined" {...field} fullWidth>
-                <MenuItem value="ATIVO">Ativo</MenuItem>
-                <MenuItem value="INATIVO">Inativo</MenuItem>
-              </Select>
-            )}
-          />
-        </Grid>
-        <Grid item>
-          <Button variant={"contained"} type="submit" fullWidth>
+        <Grid item xs={12}>
+          <Button variant="contained" color="primary" type="submit">
             Salvar
           </Button>
         </Grid>

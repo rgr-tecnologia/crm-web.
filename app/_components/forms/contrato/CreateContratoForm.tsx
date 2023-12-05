@@ -40,7 +40,7 @@ export const CreateContratoForm = (props: CreateContratoFormProps) => {
             <Typography variant="h6">Novo contrato</Typography>
           </Grid>
           <Grid item>
-            <ContratoFormBase onSubmit={onSubmit} />
+            <ContratoFormBase onSubmit={onSubmit} clienteId={clienteId} />
           </Grid>
         </Grid>
       </CardContent>
