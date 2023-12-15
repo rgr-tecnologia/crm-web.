@@ -4,11 +4,18 @@ import { Cliente } from "@/app/_types/Cliente";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { createCliente } from "../../../_lib/createCliente";
 import { ClienteFormBase } from "./ClienteFormBase";
+import { useMutation } from "react-query";
 
 export function CreateClienteForm() {
+  const { isLoading, mutate, isError, isSuccess } = useMutation({
+    mutationFn: (data: Omit<Cliente, "id">) => {
+      return createCliente(data);
+    },
+  });
+
   const onSubmit = async (formData: Omit<Cliente, "id">) => {
     try {
-      await createCliente(formData);
+      await mutate(formData);
     } catch (error) {
       if (error instanceof Error) {
       }
@@ -23,7 +30,12 @@ export function CreateClienteForm() {
             <Typography variant="h6">Novo cliente</Typography>
           </Grid>
           <Grid item>
-            <ClienteFormBase onSubmit={onSubmit} />
+            <ClienteFormBase
+              onSubmit={onSubmit}
+              isLoading={isLoading}
+              isError={isError}
+              isSuccess={isSuccess}
+            />
           </Grid>
         </Grid>
       </CardContent>

@@ -1,20 +1,24 @@
 "use client";
 
-import { Button, Grid, TextField } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import { Cliente } from "@/app/_types/Cliente";
 import { Controller, useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { LoadingButton } from "../../loadingButton/LoadingButton";
 
 type FormData = Omit<Cliente, "id">;
 
 type ClienteFormProps = {
   onSubmit: (formData: FormData) => void;
   defaultValues?: Cliente;
+  isLoading: boolean;
+  isError: boolean;
+  isSuccess: boolean;
 };
 
 export function ClienteFormBase(props: ClienteFormProps) {
-  const { onSubmit, defaultValues } = props;
+  const { onSubmit, defaultValues, isLoading } = props;
   const router = useRouter();
 
   const { handleSubmit, control, reset } = useForm<FormData>({
@@ -28,7 +32,7 @@ export function ClienteFormBase(props: ClienteFormProps) {
   }, [defaultValues]);
 
   const onSubmitForm = async (formData: FormData) => {
-    onSubmit(formData);
+    await onSubmit(formData);
     router.refresh();
     reset(formData);
   };
@@ -53,9 +57,15 @@ export function ClienteFormBase(props: ClienteFormProps) {
           />
         </Grid>
         <Grid item>
-          <Button type="submit" variant="contained" color="primary" fullWidth>
+          <LoadingButton
+            type="submit"
+            variant="contained"
+            color="primary"
+            loading={isLoading}
+            fullWidth
+          >
             Salvar
-          </Button>
+          </LoadingButton>
         </Grid>
       </Grid>
     </form>
