@@ -2,13 +2,12 @@ import { BaseNotification } from "./BaseNotification";
 
 type ErrorNotificationProps = {
   message: string;
-  onClose: () => void;
+  onClose?: () => void;
+  open: boolean;
 };
 
-export function SuccessNotification(props: ErrorNotificationProps) {
-  const { message, onClose } = props;
+export function ErrorNotification(props: ErrorNotificationProps) {
+  const { message, ...rest } = props;
 
-  return (
-    <BaseNotification message={message} severity="error" onClose={onClose} />
-  );
+  return <BaseNotification message={message} severity="error" {...rest} />;
 }

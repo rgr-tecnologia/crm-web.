@@ -5,9 +5,11 @@ import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { createCliente } from "../../../_lib/createCliente";
 import { ClienteFormBase } from "./ClienteFormBase";
 import { useMutation } from "react-query";
+import { SuccessNotification } from "../../notifications/SuccessNotification";
+import { ErrorNotification } from "../../notifications/ErrorNotification";
 
 export function CreateClienteForm() {
-  const { isLoading, mutate, isError, isSuccess } = useMutation({
+  const { mutate, isLoading, isSuccess, isError } = useMutation({
     mutationFn: (data: Omit<Cliente, "id">) => {
       return createCliente(data);
     },
@@ -23,22 +25,36 @@ export function CreateClienteForm() {
   };
 
   return (
-    <Card>
-      <CardContent>
-        <Grid container spacing={2} direction={"column"}>
-          <Grid item>
-            <Typography variant="h6">Novo cliente</Typography>
+    <>
+      <Card>
+        <CardContent>
+          <Grid container spacing={2} direction={"column"}>
+            <Grid item>
+              <Typography variant="h6">Novo cliente</Typography>
+            </Grid>
+            <Grid item>
+              <ClienteFormBase
+                onSubmit={onSubmit}
+                isLoading={isLoading}
+                isError={isError}
+                isSuccess={isSuccess}
+              />
+            </Grid>
           </Grid>
-          <Grid item>
-            <ClienteFormBase
-              onSubmit={onSubmit}
-              isLoading={isLoading}
-              isError={isError}
-              isSuccess={isSuccess}
-            />
-          </Grid>
-        </Grid>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+      {isSuccess && (
+        <SuccessNotification
+          message="Cliente atualizado com sucesso!"
+          open={isSuccess}
+        />
+      )}
+      {isError && (
+        <ErrorNotification
+          message="Erro ao atualizar cliente!"
+          open={isError}
+        />
+      )}
+    </>
   );
 }

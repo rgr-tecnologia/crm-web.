@@ -6,6 +6,8 @@ import { updateCliente } from "../../../_lib/updateCliente";
 import { useMutation, useQuery } from "react-query";
 import { getCliente } from "@/app/_lib/getCliente";
 import { ClienteFormBase } from "./ClienteFormBase";
+import { SuccessNotification } from "../../notifications/SuccessNotification";
+import { ErrorNotification } from "../../notifications/ErrorNotification";
 
 type ClienteFormProps = {
   clienteId: Cliente["id"];
@@ -16,7 +18,7 @@ export function UpdateClienteForm(props: ClienteFormProps) {
 
   const { data } = useQuery("cliente", () => getCliente(clienteId));
 
-  const { status, mutate, isError, isSuccess } = useMutation({
+  const { mutate, isLoading, isSuccess, isError } = useMutation({
     mutationFn: (data: Cliente) => {
       const { id, ...formData } = data;
       return updateCliente(clienteId, formData);
@@ -31,23 +33,37 @@ export function UpdateClienteForm(props: ClienteFormProps) {
   };
 
   return (
-    <Card>
-      <CardContent>
-        <Grid container spacing={2} direction={"column"}>
-          <Grid item>
-            <Typography variant="h6">Editar cliente</Typography>
+    <>
+      <Card>
+        <CardContent>
+          <Grid container spacing={2} direction={"column"}>
+            <Grid item>
+              <Typography variant="h6">Editar cliente</Typography>
+            </Grid>
+            <Grid item>
+              <ClienteFormBase
+                onSubmit={onSubmit}
+                defaultValues={data}
+                isLoading={isLoading}
+                isError={isError}
+                isSuccess={isSuccess}
+              />
+            </Grid>
           </Grid>
-          <Grid item>
-            <ClienteFormBase
-              onSubmit={onSubmit}
-              defaultValues={data}
-              isLoading={status === "loading"}
-              isError={isError}
-              isSuccess={isSuccess}
-            />
-          </Grid>
-        </Grid>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+      {isSuccess && (
+        <SuccessNotification
+          message="Cliente atualizado com sucesso!"
+          open={isSuccess}
+        />
+      )}
+      {isError && (
+        <ErrorNotification
+          message="Erro ao atualizar cliente!"
+          open={isError}
+        />
+      )}
+    </>
   );
 }
