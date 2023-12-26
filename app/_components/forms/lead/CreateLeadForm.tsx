@@ -1,27 +1,18 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
-import { RepresentanteFormBase } from "./RepresentanteFormBase";
-import { Representate } from "@/app/_types/representante/Representante";
-import { createRepresentante } from "@/app/_lib/representante/createRepresentante";
+import { LeadFormBase } from "./LeadFormBase";
+import { CreateLead } from "@/app/_types/lead/CreateLead";
+import { createLead } from "@/app/_lib/lead/createLead";
 
-type CreateRepresentanteFormProps = {
-  clienteId: string;
-};
+type CreateLeadFormProps = {};
 
-export const CreateRepresentanteForm = (
-  props: CreateRepresentanteFormProps
-) => {
-  const { clienteId } = props;
+export const CreateLeadForm = (props: CreateLeadFormProps) => {
   const router = useRouter();
 
-  const onSubmit = async (data: Representate) => {
-    const { id, endereco, ...representante } = data;
+  const onSubmit = async (data: CreateLead) => {
     try {
-      await createRepresentante(clienteId, {
-        ...representante,
-        clienteId,
-      });
+      await createLead(data);
 
       router.refresh();
     } catch (error) {
@@ -39,7 +30,7 @@ export const CreateRepresentanteForm = (
           <CardContent>
             <Grid container spacing={2} direction={"column"}>
               <Grid item>
-                <RepresentanteFormBase onSubmit={onSubmit} />
+                <LeadFormBase onSubmit={onSubmit} />
               </Grid>
             </Grid>
           </CardContent>
