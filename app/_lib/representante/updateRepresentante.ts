@@ -1,4 +1,4 @@
-import { Cliente } from "@/app/_types/Cliente";
+import { Cliente } from "@/app/_types/cliente/Cliente";
 import { Representate } from "@/app/_types/representante/Representante";
 import { UpdateRepresentante } from "@/app/_types/representante/UpdateRepresentante";
 

@@ -1,4 +1,4 @@
-import { Cliente } from "@/app/_types/Cliente";
+import { Cliente } from "@/app/_types/cliente/Cliente";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { ClientesListActions } from "./ClientesListActions";
 

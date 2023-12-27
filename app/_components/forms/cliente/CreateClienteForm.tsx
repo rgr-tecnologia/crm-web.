@@ -1,21 +1,20 @@
 "use client";
-
-import { Cliente } from "@/app/_types/Cliente";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { createCliente } from "../../../_lib/createCliente";
 import { ClienteFormBase } from "./ClienteFormBase";
 import { useMutation } from "react-query";
 import { SuccessNotification } from "../../notifications/SuccessNotification";
 import { ErrorNotification } from "../../notifications/ErrorNotification";
+import { CreateCliente } from "@/app/_types/cliente/CreateCliente";
 
 export function CreateClienteForm() {
   const { mutate, isLoading, isSuccess, isError } = useMutation({
-    mutationFn: (data: Omit<Cliente, "id">) => {
+    mutationFn: (data: CreateCliente) => {
       return createCliente(data);
     },
   });
 
-  const onSubmit = async (formData: Omit<Cliente, "id">) => {
+  const onSubmit = async (formData: CreateCliente) => {
     try {
       await mutate(formData);
     } catch (error) {

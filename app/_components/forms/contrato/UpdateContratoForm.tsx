@@ -3,7 +3,7 @@ import { Contrato } from "@/app/_types/Contrato";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { useQuery } from "react-query";
 import { ContratoFormBase } from "./ContratoFormBase";
-import { Cliente } from "@/app/_types/Cliente";
+import { Cliente } from "@/app/_types/cliente/Cliente";
 
 type UpdateContratoFormProps = {
   contratoId: Contrato["id"];

@@ -1,9 +1,9 @@
 "use client";
 
-import { Representate } from "@/app/_types/representante/Representante";
+import { CreateRepresentante } from "@/app/_types/representante/CreateRepresentante";
 import {
-  Button,
   Divider,
+  FormHelperText,
   Grid,
   MenuItem,
   Select,
@@ -17,16 +17,24 @@ import dayjs from "dayjs";
 import { useEffect } from "react";
 import { Controller } from "react-hook-form";
 import { useForm } from "react-hook-form";
+import { LoadingButton } from "../../loadingButton/LoadingButton";
 
 type RepresentanteFormBaseProps = {
-  onSubmit: (data: any) => void;
-  defaultValues?: Representate;
+  onSubmit: (formData: CreateRepresentante) => void;
+  defaultValues?: Partial<CreateRepresentante>;
+  isLoading: boolean;
+  isError: boolean;
+  isSuccess: boolean;
 };
 
 export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
-  const { onSubmit, defaultValues } = props;
+  const { onSubmit, defaultValues, isLoading } = props;
 
-  const { control, handleSubmit, reset } = useForm<Representate>({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CreateRepresentante>({
     defaultValues: {
       status: "ATIVO",
       nome: "",
@@ -35,23 +43,13 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
       dataNascimento: new Date(),
       telefone: "",
       email: "",
-      endereco: {
-        cep: "",
-        logradouro: "",
-        numero: "",
-        complemento: "",
-        bairro: "",
-        cidade: "",
-        estado: "",
-      },
+      ...defaultValues,
     },
   });
 
-  useEffect(() => {
-    if (defaultValues) {
-      reset(defaultValues);
-    }
-  }, [defaultValues]);
+  const rules = {
+    required: "Campo obrigatório",
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -76,8 +74,16 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
           <Controller
             name="nome"
             control={control}
+            rules={rules}
             render={({ field }) => (
-              <TextField label="Nome" variant="outlined" {...field} fullWidth />
+              <TextField
+                label="Nome"
+                variant="outlined"
+                {...field}
+                fullWidth
+                error={!!errors.nome}
+                helperText={errors.nome?.message}
+              />
             )}
           />
         </Grid>
@@ -85,12 +91,15 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
           <Controller
             name="departamento"
             control={control}
+            rules={rules}
             render={({ field }) => (
               <TextField
                 label="Departamento"
                 variant="outlined"
                 {...field}
                 fullWidth
+                error={!!errors.departamento}
+                helperText={errors.departamento?.message}
               />
             )}
           />
@@ -99,12 +108,15 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
           <Controller
             name="cargo"
             control={control}
+            rules={rules}
             render={({ field }) => (
               <TextField
                 label="Cargo"
                 variant="outlined"
                 {...field}
                 fullWidth
+                error={!!errors.cargo}
+                helperText={errors.cargo?.message}
               />
             )}
           />
@@ -113,6 +125,7 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
           <Controller
             name="dataNascimento"
             control={control}
+            rules={rules}
             render={({ field }) => (
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
@@ -121,6 +134,11 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
                   value={dayjs(field.value)}
                   sx={{ width: "100%" }}
                 />
+                {errors.dataNascimento && (
+                  <FormHelperText error={!!errors.dataNascimento}>
+                    {errors.dataNascimento?.message}
+                  </FormHelperText>
+                )}
               </LocalizationProvider>
             )}
           />
@@ -129,17 +147,33 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
           <Typography variant="h6">Dados de contato</Typography>
           <Divider />
         </Grid>
-        <Grid item>
+        <Grid item xs={12}>
           <Controller
             name="telefone"
             control={control}
+            rules={{
+              ...rules,
+              maxLength: {
+                value: 11,
+                message: "Telefone deve ter 11 dígitos",
+              },
+              minLength: {
+                value: 11,
+                message: "Telefone deve ter 11 dígitos",
+              },
+            }}
             render={({ field }) => (
               <TextField
-                label="Telefone"
-                variant="outlined"
                 {...field}
                 fullWidth
-                type="number"
+                label="Telefone"
+                error={!!errors.telefone}
+                helperText={errors.telefone?.message}
+                type="tel"
+                inputProps={{
+                  maxLength: 11,
+                  minLength: 11,
+                }}
               />
             )}
           />
@@ -148,6 +182,7 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
           <Controller
             name="email"
             control={control}
+            rules={rules}
             render={({ field }) => (
               <TextField
                 label="Email"
@@ -155,11 +190,13 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
                 {...field}
                 fullWidth
                 type="email"
+                error={!!errors.email}
+                helperText={errors.email?.message}
               />
             )}
           />
         </Grid>
-        <Grid item>
+        {/* {<Grid item>
           <Typography variant="h6">Dados de endereço</Typography>
           <Divider />
         </Grid>
@@ -167,6 +204,16 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
           <Controller
             name="endereco.cep"
             control={control}
+            rules={{
+              maxLength: {
+                value: 8,
+                message: "CEP deve ter 8 dígitos",
+              },
+              minLength: {
+                value: 8,
+                message: "CEP deve ter 8 dígitos",
+              },
+            }}
             render={({ field }) => (
               <TextField
                 label="CEP"
@@ -174,10 +221,15 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
                 {...field}
                 fullWidth
                 type="number"
+                inputProps={{
+                  maxLength: 8,
+                  minLength: 8,
+                }}
               />
             )}
           />
         </Grid>
+
         <Grid item>
           <Controller
             name="endereco.logradouro"
@@ -262,12 +314,18 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
               />
             )}
           />
-        </Grid>
+        </Grid>} */}
 
         <Grid item>
-          <Button variant={"contained"} type="submit" fullWidth>
+          <LoadingButton
+            type="submit"
+            variant="contained"
+            color="primary"
+            loading={isLoading}
+            fullWidth
+          >
             Salvar
-          </Button>
+          </LoadingButton>
         </Grid>
       </Grid>
     </form>

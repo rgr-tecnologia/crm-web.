@@ -1,5 +1,5 @@
 import { ClientesList } from "@/app/_components/lists/ClientesList/ClientesList";
-import { Cliente } from "@/app/_types/Cliente";
+import { Cliente } from "@/app/_types/cliente/Cliente";
 import { Button, Container, Grid } from "@mui/material";
 import Link from "next/link";
 

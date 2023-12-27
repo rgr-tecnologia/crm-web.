@@ -1,10 +1,10 @@
-import { fetchErrorHandler } from "../errors/fetchErrorHandler";
+import { Lead } from "@/app/_types/lead/Lead";
 
-const BFF_URL = process.env.BFF_URL;
+const BFF_URL = process.env.NEXT_PUBLIC_BFF_URL;
 
 export async function getLeadById(id: string) {
   const res = await fetch(`${BFF_URL}/leads/${id}`);
-  const lead = await res.json();
+  const lead: Lead = await res.json();
 
   if (!res.ok) {
     throw Error("Erro ao buscar lead");

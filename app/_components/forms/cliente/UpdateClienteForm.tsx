@@ -1,6 +1,6 @@
 "use client";
 
-import { Cliente } from "@/app/_types/Cliente";
+import { Cliente } from "@/app/_types/cliente/Cliente";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { updateCliente } from "../../../_lib/updateCliente";
 import { useMutation, useQuery } from "react-query";

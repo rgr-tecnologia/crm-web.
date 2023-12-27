@@ -1,6 +1,6 @@
 "use client";
 
-import { Cliente } from "@/app/_types/Cliente";
+import { Cliente } from "@/app/_types/cliente/Cliente";
 import { Button, Grid, Typography } from "@mui/material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

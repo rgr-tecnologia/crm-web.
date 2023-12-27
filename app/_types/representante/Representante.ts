@@ -11,4 +11,6 @@ export type Representate = {
   telefone: string;
   endereco: RepresentateEndereco;
   status: string;
+  createdAt: Date;
+  updatedAt: Date;
 };

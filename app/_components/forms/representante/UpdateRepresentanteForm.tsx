@@ -1,6 +1,6 @@
 "use client";
 
-import { Cliente } from "@/app/_types/Cliente";
+import { Cliente } from "@/app/_types/cliente/Cliente";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { useQuery } from "react-query";
 import { RepresentanteFormBase } from "./RepresentanteFormBase";

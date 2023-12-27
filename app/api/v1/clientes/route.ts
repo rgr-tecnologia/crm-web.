@@ -1,5 +1,5 @@
 import { fetchErrorHandler } from "@/app/_lib/errors/fetchErrorHandler";
-import { Cliente } from "@/app/_types/Cliente";
+import { Cliente } from "@/app/_types/cliente/Cliente";
 
 const API_URL = process.env.API_URL;
 

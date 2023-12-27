@@ -1,5 +1,6 @@
 import { Lead } from "@/app/_types/lead/Lead";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
+import { LeadsListActions } from "./LeadsListActions";
 
 type LeadsListProps = {
   leads: Lead[];
@@ -26,6 +27,7 @@ export function LeadsList({ leads }: LeadsListProps) {
             >
               <CardContent>
                 <Typography variant="body2">{nomeFantasia}</Typography>
+                <LeadsListActions lead={lead} />
               </CardContent>
             </Card>
           </Grid>

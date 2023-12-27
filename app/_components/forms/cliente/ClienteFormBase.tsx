@@ -1,17 +1,14 @@
 "use client";
 
 import { Grid, TextField } from "@mui/material";
-import { Cliente } from "@/app/_types/Cliente";
 import { Controller, useForm } from "react-hook-form";
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { LoadingButton } from "../../loadingButton/LoadingButton";
-
-type FormData = Omit<Cliente, "id">;
+import { CreateCliente } from "@/app/_types/cliente/CreateCliente";
 
 type ClienteFormProps = {
-  onSubmit: (formData: FormData) => void;
-  defaultValues?: Cliente;
+  onSubmit: (formData: CreateCliente) => void;
+  defaultValues?: CreateCliente;
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
@@ -19,9 +16,13 @@ type ClienteFormProps = {
 
 export function ClienteFormBase(props: ClienteFormProps) {
   const { onSubmit, defaultValues, isLoading } = props;
-  const router = useRouter();
 
-  const { handleSubmit, control, reset } = useForm<FormData>({
+  const {
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm<CreateCliente>({
     defaultValues,
   });
 
@@ -31,19 +32,18 @@ export function ClienteFormBase(props: ClienteFormProps) {
     }
   }, [defaultValues]);
 
-  const onSubmitForm = async (formData: FormData) => {
-    await onSubmit(formData);
-    router.refresh();
-    reset(formData);
+  const rules = {
+    required: "Campo obrigatório",
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmitForm)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={2} direction={"column"}>
         <Grid item>
           <Controller
             name="nomeFantasia"
             control={control}
+            rules={rules}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -51,7 +51,8 @@ export function ClienteFormBase(props: ClienteFormProps) {
                 variant="outlined"
                 type="text"
                 fullWidth
-                required
+                helperText={errors.nomeFantasia?.message}
+                error={!!errors.nomeFantasia}
               />
             )}
           />
