@@ -22,13 +22,11 @@ export function ClientesList({ clientes }: ClientesListProps) {
     setFilteredClientes(clientes);
   };
 
-  if (!clientes.length) {
-    return (
-      <Grid item>
-        <Typography>Nenhum cliente cadastrado</Typography>
-      </Grid>
-    );
-  }
+  const content = clientes.length ? (
+    <ClientesCardList clientes={filteredClientes} />
+  ) : (
+    <Typography>Nenhum cliente cadastrado</Typography>
+  );
 
   return (
     <Grid
@@ -63,7 +61,7 @@ export function ClientesList({ clientes }: ClientesListProps) {
           width: "100%",
         }}
       >
-        <ClientesCardList clientes={filteredClientes} />
+        {content}
       </Grid>
     </Grid>
   );

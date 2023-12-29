@@ -1,5 +1,5 @@
 import { OportunidadesList } from "@/app/_components/lists/OportunidadesList/OportunidadesList";
-import { Button, Container, Grid } from "@mui/material";
+import { Button, Container, Grid, Typography } from "@mui/material";
 import Link from "next/link";
 
 type Params = {
@@ -18,6 +18,12 @@ export default async function Page({ params }: { params: Params }) {
   const { clienteId } = params;
   const oportunidades = await getOportunidades(clienteId);
 
+  const content = oportunidades.length ? (
+    <OportunidadesList oportunidades={oportunidades} />
+  ) : (
+    <Typography>Nenhuma oportunidade cadastrada</Typography>
+  );
+
   return (
     <Container
       sx={{
@@ -32,7 +38,7 @@ export default async function Page({ params }: { params: Params }) {
         direction={"column"}
       >
         <Grid item>
-          <Link href={"novo"} passHref>
+          <Link href={"oportunidades/novo"} passHref>
             <Button variant={"contained"}>Nova oportunidade</Button>
           </Link>
         </Grid>
@@ -45,7 +51,7 @@ export default async function Page({ params }: { params: Params }) {
           spacing={2}
           direction={"column"}
         >
-          <OportunidadesList oportunidades={oportunidades} />
+          {content}
         </Grid>
       </Grid>
     </Container>

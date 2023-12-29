@@ -1,5 +1,4 @@
 import { OportunidadeCreateForm } from "@/app/_components/forms/oportunidade/OportunidadeCreateForm";
-import { OportunidadeCreate } from "@/app/_types/oportunidade/OportunidadeCreate";
 import { Container } from "@mui/material";
 
 type PageParams = {
@@ -9,7 +8,11 @@ type PageParams = {
 export default function Page({ params }: { params: PageParams }) {
   const { clienteId } = params;
   return (
-    <Container>
+    <Container
+      sx={{
+        marginTop: 2,
+      }}
+    >
       <OportunidadeCreateForm clienteId={clienteId} />
     </Container>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { Cliente } from "@/app/_types/cliente/Cliente";
-import { Box, Button, Grid, Menu, MenuItem, Typography } from "@mui/material";
+import { Box, Button, Menu, MenuItem } from "@mui/material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -33,17 +33,22 @@ export function ClientesListActions(props: ClientesListActionsProps) {
       <Menu onClose={handleClose} anchorEl={anchorEl} open={open}>
         <MenuItem>
           <Link href={`${currentPath}/${cliente.id}`}>
-            <Button variant="text">Ver detalhes</Button>
+            <Button variant="text">Detalhes</Button>
           </Link>
         </MenuItem>
         <MenuItem>
           <Link href={`${currentPath}/${cliente.id}/contratos`}>
-            <Button variant="text">Ver contratos</Button>
+            <Button variant="text">Contratos</Button>
+          </Link>
+        </MenuItem>
+        <MenuItem>
+          <Link href={`${currentPath}/${cliente.id}/oportunidades`}>
+            <Button variant="text">Oportunidades</Button>
           </Link>
         </MenuItem>
         <MenuItem>
           <Link href={`${currentPath}/${cliente.id}/representantes`}>
-            <Button variant="text">Ver representantes</Button>
+            <Button variant="text">Representantes</Button>
           </Link>
         </MenuItem>
       </Menu>
