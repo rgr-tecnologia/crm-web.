@@ -1,17 +1,14 @@
-import { Grid } from "@mui/material";
-import { SignInForm } from "../../_components/forms/auth/SigninForm";
+import { SignInForm } from "@/app/_components/forms/auth/SigninForm";
+import { Container, Grid } from "@mui/material";
 
 export default function Page() {
   return (
-    <Grid
-      container
-      alignItems={"center"}
-      justifyContent={"center"}
-      height={"100%"}
-    >
-      <Grid item>
-        <SignInForm />
+    <Container>
+      <Grid container>
+        <Grid item xs={12}>
+          <SignInForm />
+        </Grid>
       </Grid>
-    </Grid>
+    </Container>
   );
 }

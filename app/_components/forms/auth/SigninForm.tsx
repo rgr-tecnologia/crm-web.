@@ -33,7 +33,7 @@ export function SignInForm() {
       <CardContent>
         <Grid container textAlign={"center"} spacing={2}>
           <Grid item>
-            <Typography variant="h4">Sign In</Typography>
+            <Typography variant="h6">Sign in</Typography>
           </Grid>
 
           <Grid container item>
