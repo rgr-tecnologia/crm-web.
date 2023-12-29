@@ -23,11 +23,31 @@ export function LeadsList({ leads }: LeadsListProps) {
             <Card
               sx={{
                 width: "100%",
+                borderLeft: "4px solid",
+                borderColor: "primary.main",
               }}
             >
               <CardContent>
-                <Typography variant="body2">{nomeFantasia}</Typography>
-                <LeadsListActions lead={lead} />
+                <Grid
+                  container
+                  justifyContent={"space-between"}
+                  direction={"row"}
+                  spacing={2}
+                >
+                  <Grid item>
+                    <Grid container direction={"column"} spacing={1}>
+                      <Grid item>
+                        <Typography variant="body1" fontWeight={"bold"}>
+                          {nomeFantasia}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+
+                  <Grid item>
+                    <LeadsListActions lead={lead} />
+                  </Grid>
+                </Grid>
               </CardContent>
             </Card>
           </Grid>
