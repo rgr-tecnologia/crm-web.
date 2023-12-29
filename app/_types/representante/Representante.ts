@@ -9,8 +9,8 @@ export type Representate = {
   dataNascimento: Date;
   email: string;
   telefone: string;
-  endereco: RepresentateEndereco;
-  status: string;
+  endereco?: RepresentateEndereco;
+  ativo: boolean;
   createdAt: Date;
   updatedAt: Date;
 };

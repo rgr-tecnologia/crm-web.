@@ -26,16 +26,13 @@ export const LeadFormBase = (props: LeadFormBaseProps) => {
       telefoneRepresentante: "",
       emailRepresentante: "",
       observacao: "",
+      ...defaultValues,
     },
   });
 
   const rules = {
     required: "Campo obrigatório",
   };
-
-  useEffect(() => {
-    reset(defaultValues);
-  }, [defaultValues]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -78,6 +75,10 @@ export const LeadFormBase = (props: LeadFormBaseProps) => {
             control={control}
             rules={{
               ...rules,
+              pattern: {
+                value: /^\d+$/,
+                message: "Telefone deve conter apenas números",
+              },
               maxLength: {
                 value: 11,
                 message: "Telefone deve ter 11 dígitos",
@@ -91,7 +92,7 @@ export const LeadFormBase = (props: LeadFormBaseProps) => {
               <TextField
                 {...field}
                 fullWidth
-                label="Telefone Representante"
+                label="Telefone do representante"
                 error={!!errors.telefoneRepresentante}
                 helperText={errors.telefoneRepresentante?.message}
                 type="tel"
@@ -107,15 +108,20 @@ export const LeadFormBase = (props: LeadFormBaseProps) => {
           <Controller
             name="emailRepresentante"
             control={control}
-            rules={rules}
+            rules={{
+              ...rules,
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                message: "Endereço de email inválido",
+              },
+            }}
             render={({ field }) => (
               <TextField
                 {...field}
                 fullWidth
-                label="Email Representante"
+                label="Email do representante"
                 error={!!errors.emailRepresentante}
                 helperText={errors.emailRepresentante?.message}
-                type="email"
               />
             )}
           />

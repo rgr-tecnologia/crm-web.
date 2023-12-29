@@ -2,14 +2,14 @@
 
 import { Grid, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import { useEffect } from "react";
 import { LoadingButton } from "../../loadingButton/LoadingButton";
 import { CreateCliente } from "@/app/_types/cliente/CreateCliente";
-import { formatCnpj } from "@/app/_lib/utils/formatCnpj";
+import { formatCnpj } from "@/app/_lib/utils/data/formatCnpj";
+import { isCnpjValid } from "@/app/_lib/utils/data/isCnpjValid";
 
 type ClienteFormProps = {
   onSubmit: (formData: CreateCliente) => void;
-  defaultValues?: CreateCliente;
+  defaultValues?: Partial<CreateCliente>;
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
@@ -24,14 +24,11 @@ export function ClienteFormBase(props: ClienteFormProps) {
     reset,
     formState: { errors },
   } = useForm<CreateCliente>({
-    defaultValues,
+    defaultValues: {
+      ...defaultValues,
+      ativo: true,
+    },
   });
-
-  useEffect(() => {
-    if (defaultValues) {
-      reset(defaultValues);
-    }
-  }, [defaultValues]);
 
   const rules = {
     required: "Campo obrigatório",
@@ -65,7 +62,18 @@ export function ClienteFormBase(props: ClienteFormProps) {
           <Controller
             name="cnpj"
             control={control}
-            rules={rules}
+            rules={{
+              ...rules,
+              validate: (value) => isCnpjValid(value) || "CNPJ inválido",
+              maxLength: {
+                value: 18,
+                message: "CNPJ deve ter 14 dígitos",
+              },
+              minLength: {
+                value: 18,
+                message: "CNPJ deve ter 14 dígitos",
+              },
+            }}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -77,6 +85,10 @@ export function ClienteFormBase(props: ClienteFormProps) {
                 error={!!errors.cnpj}
                 InputLabelProps={{
                   shrink: true,
+                }}
+                inputProps={{
+                  maxLength: 18,
+                  minLength: 18,
                 }}
                 value={formatCnpj(String(field.value))}
               />

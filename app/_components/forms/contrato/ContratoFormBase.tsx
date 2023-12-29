@@ -18,7 +18,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import { useQuery } from "react-query";
-import { getRepresentantesByClienteId } from "@/app/_lib/representante/getRepresentantesByClienteId";
+import { getRepresentantesByClienteId } from "@/app/_lib/utils/representante/getRepresentantesByClienteId";
 import { useEffect } from "react";
 
 type ContratoFormBaseProps = {
@@ -28,7 +28,7 @@ type ContratoFormBaseProps = {
 };
 
 export const ContratoFormBase = (props: ContratoFormBaseProps) => {
-  const { onSubmit, clienteId } = props;
+  const { onSubmit, clienteId, defaultValues } = props;
 
   const representantes = useQuery("representantes", async () =>
     getRepresentantesByClienteId(clienteId)
@@ -48,16 +48,13 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
       dataInicio: new Date(),
       dataFimPrevista: new Date(),
       ativo: true,
+      ...defaultValues,
     },
   });
 
   const rules = {
     required: "Campo obrigatório",
   };
-
-  useEffect(() => {
-    reset(props.defaultValues);
-  }, [props.defaultValues]);
 
   const _onSubmit = async (data: Contrato) => {
     const transformedData: Contrato = {

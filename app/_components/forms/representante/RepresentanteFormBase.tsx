@@ -5,16 +5,14 @@ import {
   Divider,
   FormHelperText,
   Grid,
-  MenuItem,
-  Select,
   TextField,
   Typography,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import "dayjs/locale/pt-br";
 import dayjs from "dayjs";
-import { useEffect } from "react";
 import { Controller } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { LoadingButton } from "../../loadingButton/LoadingButton";
@@ -36,14 +34,9 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
     formState: { errors },
   } = useForm<CreateRepresentante>({
     defaultValues: {
-      status: "ATIVO",
-      nome: "",
-      departamento: "",
-      cargo: "",
-      dataNascimento: new Date(),
-      telefone: "",
-      email: "",
       ...defaultValues,
+      ativo: true,
+      dataNascimento: new Date(),
     },
   });
 
@@ -54,18 +47,6 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={2} direction={"column"}>
-        <Grid item>
-          <Controller
-            name="status"
-            control={control}
-            render={({ field }) => (
-              <Select {...field} fullWidth>
-                <MenuItem value={"ATIVO"}>Ativo</MenuItem>
-                <MenuItem value={"INATIVO"}>Inativo</MenuItem>
-              </Select>
-            )}
-          />
-        </Grid>
         <Grid item>
           <Typography variant="h6">Dados gerais</Typography>
           <Divider />
@@ -127,7 +108,10 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
             control={control}
             rules={rules}
             render={({ field }) => (
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <LocalizationProvider
+                dateAdapter={AdapterDayjs}
+                adapterLocale={"pt-br"}
+              >
                 <DatePicker
                   label="Data de nascimento"
                   {...field}
@@ -178,18 +162,22 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
             )}
           />
         </Grid>
-        <Grid item>
+        <Grid item xs={12}>
           <Controller
             name="email"
             control={control}
-            rules={rules}
+            rules={{
+              ...rules,
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                message: "Endereço de email inválido",
+              },
+            }}
             render={({ field }) => (
               <TextField
-                label="Email"
-                variant="outlined"
                 {...field}
                 fullWidth
-                type="email"
+                label="Email do representante"
                 error={!!errors.email}
                 helperText={errors.email?.message}
               />

@@ -1,5 +1,5 @@
-import { Cliente } from "../_types/cliente/Cliente";
-import { CreateCliente } from "../_types/cliente/CreateCliente";
+import { Cliente } from "../../../_types/cliente/Cliente";
+import { CreateCliente } from "../../../_types/cliente/CreateCliente";
 
 const BFF_URL = process.env.NEXT_PUBLIC_BFF_URL;
 

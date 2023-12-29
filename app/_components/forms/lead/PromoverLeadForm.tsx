@@ -5,9 +5,9 @@ import { ClienteQueryProvider } from "@/app/_components/queryProviders/ClienteQu
 import { useState } from "react";
 import { ClienteFormBase } from "@/app/_components/forms/cliente/ClienteFormBase";
 import { useQuery } from "react-query";
-import { getLeadById } from "@/app/_lib/lead/getLeadById";
+import { getLeadById } from "@/app/_lib/utils/lead/getLeadById";
 import { RepresentanteFormBase } from "../representante/RepresentanteFormBase";
-import { promoteLead } from "@/app/_lib/lead/promoteLead";
+import { promoteLead } from "@/app/_lib/utils/lead/promoteLead";
 import { CreateCliente } from "@/app/_types/cliente/CreateCliente";
 import { CreateRepresentante } from "@/app/_types/representante/CreateRepresentante";
 import * as navigation from "next/navigation";

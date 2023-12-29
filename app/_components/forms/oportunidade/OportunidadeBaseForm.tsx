@@ -37,10 +37,6 @@ export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
     required: "Campo obrigatório",
   };
 
-  useEffect(() => {
-    reset(defaultValues);
-  }, [defaultValues]);
-
   /*
   export type Oportunidade = {
   id: string;

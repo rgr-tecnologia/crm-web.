@@ -3,7 +3,8 @@ import { useRouter } from "next/navigation";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { RepresentanteFormBase } from "./RepresentanteFormBase";
 import { Representate } from "@/app/_types/representante/Representante";
-import { createRepresentante } from "@/app/_lib/representante/createRepresentante";
+import { createRepresentante } from "@/app/_lib/utils/representante/createRepresentante";
+import { CreateRepresentante } from "@/app/_types/representante/CreateRepresentante";
 
 type CreateRepresentanteFormProps = {
   clienteId: string;
@@ -15,13 +16,9 @@ export const CreateRepresentanteForm = (
   const { clienteId } = props;
   const router = useRouter();
 
-  const onSubmit = async (data: Representate) => {
-    const { id, endereco, ...representante } = data;
+  const onSubmit = async (data: CreateRepresentante) => {
     try {
-      await createRepresentante(clienteId, {
-        ...representante,
-        clienteId,
-      });
+      await createRepresentante(clienteId, data);
 
       router.refresh();
     } catch (error) {
@@ -39,7 +36,12 @@ export const CreateRepresentanteForm = (
           <CardContent>
             <Grid container spacing={2} direction={"column"}>
               <Grid item>
-                <RepresentanteFormBase onSubmit={onSubmit} />
+                <RepresentanteFormBase
+                  onSubmit={onSubmit}
+                  isLoading={false}
+                  isError={false}
+                  isSuccess={false}
+                />
               </Grid>
             </Grid>
           </CardContent>

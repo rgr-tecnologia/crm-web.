@@ -1,6 +1,6 @@
 "use client";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
-import { createCliente } from "../../../_lib/createCliente";
+import { createCliente } from "../../../_lib/utils/cliente/createCliente";
 import { ClienteFormBase } from "./ClienteFormBase";
 import { useMutation } from "react-query";
 import { SuccessNotification } from "../../notifications/SuccessNotification";
