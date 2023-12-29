@@ -10,7 +10,7 @@ import {
   TextField,
 } from "@mui/material";
 import { Controller } from "react-hook-form";
-import { Contrato } from "@/app/_types/Contrato";
+import { Contrato } from "@/app/_types/contrato/Contrato";
 import { useForm } from "react-hook-form";
 
 import { DatePicker } from "@mui/x-date-pickers";
@@ -47,7 +47,7 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
       valor: 0,
       dataInicio: new Date(),
       dataFimPrevista: new Date(),
-      status: "ATIVO",
+      ativo: true,
     },
   });
 
@@ -70,30 +70,6 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
   return (
     <form onSubmit={handleSubmit(_onSubmit)}>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Controller
-            name="status"
-            control={control}
-            rules={rules}
-            render={({ field }) => (
-              <Box>
-                <Select
-                  {...field}
-                  label="Status"
-                  variant="outlined"
-                  fullWidth
-                  error={!!errors.status}
-                >
-                  <MenuItem value="ATIVO">Ativo</MenuItem>
-                  <MenuItem value="INATIVO">Inativo</MenuItem>
-                </Select>
-                {errors.status && (
-                  <FormHelperText>{errors.status.message} </FormHelperText>
-                )}
-              </Box>
-            )}
-          />
-        </Grid>
         <Grid item xs={12}>
           <Controller
             name="representanteId"

@@ -1,4 +1,4 @@
-import { Contrato } from "@/app/_types/Contrato";
+import { Contrato } from "@/app/_types/contrato/Contrato";
 
 const API_URL = process.env.API_URL;
 

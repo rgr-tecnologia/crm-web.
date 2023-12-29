@@ -7,5 +7,5 @@ export type Contrato = {
   dataFimPrevista: Date;
   valor: number;
   representanteId: string;
-  status: string;
+  ativo: boolean;
 };

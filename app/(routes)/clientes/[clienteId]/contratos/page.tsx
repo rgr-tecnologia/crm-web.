@@ -1,5 +1,5 @@
-import { ContratosList } from "@/app/_components/ContratosList";
-import { Contrato } from "@/app/_types/Contrato";
+import { ContratosList } from "@/app/_components/lists/ContratosList/ContratosList";
+import { Contrato } from "@/app/_types/contrato/Contrato";
 import { Box, Button, Container, Grid } from "@mui/material";
 import Link from "next/link";
 
@@ -10,15 +10,13 @@ type PageParams = {
 
 const BFF_URL = process.env.BFF_URL;
 
-async function getContratos(clienteId: string) {
+async function getContratos(clienteId: string): Promise<Contrato[]> {
   const res = await fetch(`${BFF_URL}/clientes/${clienteId}/contratos`, {
     next: {
       revalidate: 0,
     },
   });
-  const contratos: Contrato[] = await res.json();
-
-  return contratos;
+  return res.json();
 }
 
 export default async function Page({ params }: { params: PageParams }) {

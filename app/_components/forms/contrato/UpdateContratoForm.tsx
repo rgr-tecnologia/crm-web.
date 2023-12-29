@@ -1,5 +1,5 @@
 "use client";
-import { Contrato } from "@/app/_types/Contrato";
+import { Contrato } from "@/app/_types/contrato/Contrato";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { useQuery } from "react-query";
 import { ContratoFormBase } from "./ContratoFormBase";

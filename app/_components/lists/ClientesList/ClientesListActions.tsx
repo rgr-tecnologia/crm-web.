@@ -1,55 +1,52 @@
 "use client";
 
 import { Cliente } from "@/app/_types/cliente/Cliente";
-import { Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Menu, MenuItem, Typography } from "@mui/material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 type ClientesListActionsProps = {
   cliente: Cliente;
 };
 
 export function ClientesListActions(props: ClientesListActionsProps) {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
   const currentPath = usePathname();
   const { cliente } = props;
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
-    <Grid container spacing={2} justifyContent={"flex-end"}>
-      <Grid item>
-        <Button>
+    <Box>
+      <Button variant="outlined" onClick={handleClick}>
+        Ações
+      </Button>
+      <Menu onClose={handleClose} anchorEl={anchorEl} open={open}>
+        <MenuItem>
           <Link href={`${currentPath}/${cliente.id}`}>
-            <Typography variant="body2" color={"black"}>
-              Editar
-            </Typography>
+            <Button variant="text">Ver detalhes</Button>
           </Link>
-        </Button>
-      </Grid>
-      <Grid item>
-        <Button>
+        </MenuItem>
+        <MenuItem>
           <Link href={`${currentPath}/${cliente.id}/contratos`}>
-            <Typography variant="body2" color={"black"}>
-              Ver contratos
-            </Typography>
+            <Button variant="text">Ver contratos</Button>
           </Link>
-        </Button>
-      </Grid>
-      <Grid item>
-        <Button>
+        </MenuItem>
+        <MenuItem>
           <Link href={`${currentPath}/${cliente.id}/representantes`}>
-            <Typography variant="body2" color={"black"}>
-              Ver representantes
-            </Typography>
+            <Button variant="text">Ver representantes</Button>
           </Link>
-        </Button>
-      </Grid>
-      <Grid item>
-        <Button>
-          <Link href={`${currentPath}/${cliente.id}/oportunidades`}>
-            <Typography variant="body2" color={"black"}>
-              Ver oportunidades
-            </Typography>
-          </Link>
-        </Button>
-      </Grid>
-    </Grid>
+        </MenuItem>
+      </Menu>
+    </Box>
   );
 }

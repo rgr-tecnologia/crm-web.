@@ -1,28 +1,34 @@
 "use client";
 
-import { Contrato } from "@/app/_types/Contrato";
-import { Button, Grid, Typography } from "@mui/material";
-import { usePathname } from "next/navigation";
+import { Contrato } from "@/app/_types/contrato/Contrato";
+import { Button, Box, Menu, MenuItem } from "@mui/material";
 import Link from "next/link";
+import { useState } from "react";
 
 export function ContratosListActions({ contrato }: { contrato: Contrato }) {
-  const currentPath = usePathname();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const onClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
-    <Grid container spacing={2} justifyContent={"flex-end"}>
-      <Grid item>
-        <Link href={`${currentPath}/${contrato.id}`} passHref>
-          <Typography variant="body2" color={"black"}>
-            <Button>Editar</Button>
-          </Typography>
-        </Link>
-      </Grid>
-      <Grid item>
-        <Link href={`${currentPath}/${contrato.id}`} passHref>
-          <Typography variant="body2" color={"black"}>
-            <Button>Excluir</Button>
-          </Typography>
-        </Link>
-      </Grid>
-    </Grid>
+    <Box>
+      <Button variant="outlined" onClick={onClick}>
+        Ações
+      </Button>
+      <Menu onClose={onClose} anchorEl={anchorEl} open={open}>
+        <MenuItem>
+          <Link href={`/${contrato.id}`}>
+            <Button variant="text">Ver detalhes</Button>
+          </Link>
+        </MenuItem>
+      </Menu>
+    </Box>
   );
 }

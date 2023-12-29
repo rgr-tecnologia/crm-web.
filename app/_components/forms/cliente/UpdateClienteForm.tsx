@@ -8,6 +8,7 @@ import { getCliente } from "@/app/_lib/getCliente";
 import { ClienteFormBase } from "./ClienteFormBase";
 import { SuccessNotification } from "../../notifications/SuccessNotification";
 import { ErrorNotification } from "../../notifications/ErrorNotification";
+import { CreateCliente } from "@/app/_types/cliente/CreateCliente";
 
 type ClienteFormProps = {
   clienteId: Cliente["id"];
@@ -19,16 +20,14 @@ export function UpdateClienteForm(props: ClienteFormProps) {
   const { data } = useQuery("cliente", () => getCliente(clienteId));
 
   const { mutate, isLoading, isSuccess, isError } = useMutation({
-    mutationFn: (data: Cliente) => {
-      const { id, ...formData } = data;
-      return updateCliente(clienteId, formData);
+    mutationFn: (data: CreateCliente) => {
+      return updateCliente(clienteId, data);
     },
   });
 
-  const onSubmit = async (formData: Omit<Cliente, "id">) => {
+  const onSubmit = async (formData: CreateCliente) => {
     await mutate({
       ...formData,
-      id: clienteId,
     });
   };
 

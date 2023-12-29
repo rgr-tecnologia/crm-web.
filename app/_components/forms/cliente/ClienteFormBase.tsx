@@ -5,6 +5,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { LoadingButton } from "../../loadingButton/LoadingButton";
 import { CreateCliente } from "@/app/_types/cliente/CreateCliente";
+import { formatCnpj } from "@/app/_lib/utils/formatCnpj";
 
 type ClienteFormProps = {
   onSubmit: (formData: CreateCliente) => void;
@@ -53,6 +54,31 @@ export function ClienteFormBase(props: ClienteFormProps) {
                 fullWidth
                 helperText={errors.nomeFantasia?.message}
                 error={!!errors.nomeFantasia}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            )}
+          />
+        </Grid>
+        <Grid item>
+          <Controller
+            name="cnpj"
+            control={control}
+            rules={rules}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label="CNPJ"
+                variant="outlined"
+                type="text"
+                fullWidth
+                helperText={errors.cnpj?.message}
+                error={!!errors.cnpj}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                value={formatCnpj(String(field.value))}
               />
             )}
           />
