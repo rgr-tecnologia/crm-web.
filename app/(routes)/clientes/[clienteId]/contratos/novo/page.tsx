@@ -1,5 +1,5 @@
 import { CreateContratoForm } from "@/app/_components/forms/contrato/CreateContratoForm";
-import { ContratoQueryProvider } from "@/app/_components/queryProviders/ContratoQueryProvider";
+import { RepresentanteQueryProvider } from "@/app/_components/queryProviders/RepresentanteQueryProvider";
 import { Container } from "@mui/material";
 
 type PageParams = {
@@ -9,7 +9,7 @@ type PageParams = {
 export default function Page({ params }: { params: PageParams }) {
   const { clienteId } = params;
   return (
-    <ContratoQueryProvider>
+    <RepresentanteQueryProvider>
       <Container
         sx={{
           marginTop: 2,
@@ -17,6 +17,6 @@ export default function Page({ params }: { params: PageParams }) {
       >
         <CreateContratoForm clienteId={clienteId} />
       </Container>
-    </ContratoQueryProvider>
+    </RepresentanteQueryProvider>
   );
 }

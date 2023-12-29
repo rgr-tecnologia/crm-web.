@@ -1,4 +1,5 @@
 import { OportunidadeCreateForm } from "@/app/_components/forms/oportunidade/OportunidadeCreateForm";
+import { RepresentanteQueryProvider } from "@/app/_components/queryProviders/RepresentanteQueryProvider";
 import { Container } from "@mui/material";
 
 type PageParams = {
@@ -8,12 +9,14 @@ type PageParams = {
 export default function Page({ params }: { params: PageParams }) {
   const { clienteId } = params;
   return (
-    <Container
-      sx={{
-        marginTop: 2,
-      }}
-    >
-      <OportunidadeCreateForm clienteId={clienteId} />
-    </Container>
+    <RepresentanteQueryProvider>
+      <Container
+        sx={{
+          marginTop: 2,
+        }}
+      >
+        <OportunidadeCreateForm clienteId={clienteId} />
+      </Container>
+    </RepresentanteQueryProvider>
   );
 }

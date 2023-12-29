@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  Box,
-  Button,
-  FormHelperText,
-  Grid,
-  MenuItem,
-  Select,
-  TextField,
-} from "@mui/material";
+import { Button, Grid, MenuItem, Select, TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 import { Contrato } from "@/app/_types/contrato/Contrato";
 import { useForm } from "react-hook-form";
@@ -17,9 +9,9 @@ import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
+import "dayjs/locale/pt-br";
 import { useQuery } from "react-query";
 import { getRepresentantesByClienteId } from "@/app/_lib/utils/representante/getRepresentantesByClienteId";
-import { useEffect } from "react";
 
 type ContratoFormBaseProps = {
   onSubmit: (data: any) => void;
@@ -37,14 +29,9 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
   const {
     control,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<Contrato>({
     defaultValues: {
-      representanteId: "",
-      titulo: "",
-      caracteristica: "",
-      valor: 0,
       dataInicio: new Date(),
       dataFimPrevista: new Date(),
       ativo: true,
@@ -142,7 +129,10 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
             control={control}
             rules={rules}
             render={({ field }) => (
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <LocalizationProvider
+                dateAdapter={AdapterDayjs}
+                adapterLocale={"pt-br"}
+              >
                 <DatePicker
                   {...field}
                   label="Data de Início"
@@ -159,7 +149,10 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
             control={control}
             rules={rules}
             render={({ field }) => (
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <LocalizationProvider
+                dateAdapter={AdapterDayjs}
+                adapterLocale={"pt-br"}
+              >
                 <DatePicker
                   {...field}
                   label="Data Fim Prevista"

@@ -9,22 +9,28 @@ import {
   TextField,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import { useEffect } from "react";
 import { OportunidadeCreate } from "@/app/_types/oportunidade/OportunidadeCreate";
 import { OportunidadeEtapa } from "@/app/_types/_enums/OportunidadeEtapa";
+import { getRepresentantesByClienteId } from "@/app/_lib/utils/representante/getRepresentantesByClienteId";
+import { useQuery } from "react-query";
+import "dayjs/locale/pt-br";
 
 type OportunidadeFormBaseProps = {
   onSubmit: (data: OportunidadeCreate) => void;
   defaultValues?: OportunidadeCreate;
+  clienteId: string;
 };
 
 export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
-  const { defaultValues, onSubmit } = props;
+  const { defaultValues, onSubmit, clienteId } = props;
+
+  const representantes = useQuery("representantes", async () =>
+    getRepresentantesByClienteId(clienteId)
+  );
 
   const {
     control,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<OportunidadeCreate>({
     defaultValues: {
@@ -36,18 +42,6 @@ export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
   const rules = {
     required: "Campo obrigatório",
   };
-
-  /*
-  export type Oportunidade = {
-  id: string;
-  titulo: string;
-  representanteId: string;
-  etapa: OportunidadeEtapa;
-  valor: number;
-  createdAt: string;
-  updatedAt: string;
-};
-*/
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -74,13 +68,13 @@ export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
             control={control}
             rules={rules}
             render={({ field }) => (
-              <TextField
-                {...field}
-                fullWidth
-                label="Representante"
-                error={!!errors.representanteId}
-                helperText={errors.representanteId?.message}
-              />
+              <Select fullWidth {...field}>
+                {representantes.data?.map((representante) => (
+                  <MenuItem value={representante.id} key={representante.id}>
+                    {representante.nome}
+                  </MenuItem>
+                ))}
+              </Select>
             )}
           />
         </Grid>
