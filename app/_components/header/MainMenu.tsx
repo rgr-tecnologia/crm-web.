@@ -46,6 +46,16 @@ export function MainMenu() {
           >
             Usuários
           </Button>
+          <Link href={"/calculadora"} passHref={true}>
+            <Button
+              variant="text"
+              sx={{
+                color: "#fff",
+              }}
+            >
+              Calculadora
+            </Button>
+          </Link>
         </Link>
       </Box>
     </Toolbar>

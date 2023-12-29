@@ -1,6 +1,6 @@
 import { AppBar, Container, Grid } from "@mui/material";
 import React from "react";
-import { MainMenu } from "./mainMenu";
+import { MainMenu } from "./MainMenu";
 import { Profile } from "./Profile";
 
 export function Header() {
