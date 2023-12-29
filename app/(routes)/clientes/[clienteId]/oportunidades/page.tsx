@@ -1,21 +1,22 @@
-import { ClientesList } from "@/app/_components/lists/ClientesList/ClientesList";
-import { Cliente } from "@/app/_types/cliente/Cliente";
+import { OportunidadesList } from "@/app/_components/lists/OportunidadesList/OportunidadesList";
 import { Button, Container, Grid } from "@mui/material";
 import Link from "next/link";
 
+type Params = {
+  clienteId: string;
+};
+
 const BFF_URL = process.env.BFF_URL;
 
-async function fetchClientes(): Promise<Cliente[]> {
-  const response = await fetch(`${BFF_URL}/clientes`, {
-    next: {
-      revalidate: 0,
-    },
-  });
+async function getOportunidades(clienteId: string) {
+  const urlToFetch = `${BFF_URL}/clientes/${clienteId}/oportunidades`;
+  const response = await fetch(urlToFetch);
   return response.json();
 }
 
-export default async function Page() {
-  const clientes = await fetchClientes();
+export default async function Page({ params }: { params: Params }) {
+  const { clienteId } = params;
+  const oportunidades = await getOportunidades(clienteId);
 
   return (
     <Container
@@ -31,8 +32,8 @@ export default async function Page() {
         direction={"column"}
       >
         <Grid item>
-          <Link href={"/clientes/novo"} passHref>
-            <Button variant={"contained"}>Novo Cliente</Button>
+          <Link href={"novo"} passHref>
+            <Button variant={"contained"}>Nova oportunidade</Button>
           </Link>
         </Grid>
         <Grid
@@ -44,7 +45,7 @@ export default async function Page() {
           spacing={2}
           direction={"column"}
         >
-          <ClientesList clientes={clientes} />
+          <OportunidadesList oportunidades={oportunidades} />
         </Grid>
       </Grid>
     </Container>
