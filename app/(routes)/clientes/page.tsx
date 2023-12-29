@@ -1,7 +1,6 @@
 import { ClientesList } from "@/app/_components/lists/ClientesList/ClientesList";
 import { Cliente } from "@/app/_types/cliente/Cliente";
-import { Button, Container, Grid } from "@mui/material";
-import Link from "next/link";
+import { Container } from "@mui/material";
 
 const BFF_URL = process.env.BFF_URL;
 
@@ -23,30 +22,7 @@ export default async function Page() {
         marginTop: 2,
       }}
     >
-      <Grid
-        container
-        spacing={2}
-        justifyContent={"center"}
-        alignItems={"center"}
-        direction={"column"}
-      >
-        <Grid item>
-          <Link href={"/clientes/novo"} passHref>
-            <Button variant={"contained"}>Novo Cliente</Button>
-          </Link>
-        </Grid>
-        <Grid
-          item
-          container
-          sx={{
-            width: "100%",
-          }}
-          spacing={2}
-          direction={"column"}
-        >
-          <ClientesList clientes={clientes} />
-        </Grid>
-      </Grid>
+      <ClientesList clientes={clientes} />
     </Container>
   );
 }

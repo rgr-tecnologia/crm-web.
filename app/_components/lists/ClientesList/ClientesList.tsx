@@ -1,12 +1,27 @@
+"use client";
+
 import { Cliente } from "@/app/_types/cliente/Cliente";
-import { Card, CardContent, Grid, Typography } from "@mui/material";
-import { ClientesListActions } from "./ClientesListActions";
+import { Button, Grid, Typography } from "@mui/material";
+import { ClienteAutoComplete } from "../../autocomplete/ClienteAutoComplete";
+import { ClientesCardList } from "./ClientesCardList";
+import { useState } from "react";
+import Link from "next/link";
 
 type ClientesListProps = {
   clientes: Cliente[];
 };
 
 export function ClientesList({ clientes }: ClientesListProps) {
+  const [filteredClientes, setFilteredClientes] = useState<Cliente[]>(clientes);
+
+  const onChange = (cliente: Cliente) => {
+    setFilteredClientes([cliente]);
+  };
+
+  const onClear = () => {
+    setFilteredClientes(clientes);
+  };
+
   if (!clientes.length) {
     return (
       <Grid item>
@@ -16,49 +31,40 @@ export function ClientesList({ clientes }: ClientesListProps) {
   }
 
   return (
-    <>
-      {clientes.map((cliente) => (
-        <Grid item key={cliente.id}>
-          <Card
-            sx={{
-              borderLeft: "4px solid",
-              borderColor: cliente?.ativo ? "success.main" : "error.main",
-            }}
-          >
-            <CardContent>
-              <Grid
-                container
-                justifyContent={"space-between"}
-                direction={"row"}
-                spacing={2}
-              >
-                <Grid item>
-                  <Grid container direction={"column"} spacing={1}>
-                    <Grid item>
-                      <Typography variant="body1" fontWeight={"bold"}>
-                        {cliente.nomeFantasia}
-                      </Typography>
-                    </Grid>
-                    <Grid item>
-                      <Typography
-                        variant="caption"
-                        fontWeight={"bold"}
-                        color={cliente?.ativo ? "success.main" : "error.main"}
-                      >
-                        {cliente?.ativo ? "ATIVO" : "INATIVO"}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Grid>
-
-                <Grid item>
-                  <ClientesListActions cliente={cliente} />
-                </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
+    <Grid
+      container
+      justifyContent={"center"}
+      alignItems={"center"}
+      direction={"column"}
+      spacing={2}
+    >
+      <Grid
+        container
+        item
+        justifyContent={"space-between"}
+        alignItems={"center"}
+      >
+        <Grid item xs={6}>
+          <ClienteAutoComplete
+            clientes={clientes}
+            onChange={onChange}
+            onClear={onClear}
+          />
         </Grid>
-      ))}
-    </>
+        <Grid item>
+          <Link href={"/clientes/novo"} passHref>
+            <Button variant={"contained"}>Novo Cliente</Button>
+          </Link>
+        </Grid>
+      </Grid>
+      <Grid
+        item
+        sx={{
+          width: "100%",
+        }}
+      >
+        <ClientesCardList clientes={filteredClientes} />
+      </Grid>
+    </Grid>
   );
 }
