@@ -1,6 +1,13 @@
 "use client";
 
-import { Button, Grid, MenuItem, Select, TextField } from "@mui/material";
+import {
+  Button,
+  FormHelperText,
+  Grid,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import { Controller } from "react-hook-form";
 import { Contrato } from "@/app/_types/contrato/Contrato";
 import { useForm } from "react-hook-form";
@@ -12,6 +19,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import { useQuery } from "react-query";
 import { getRepresentantesByClienteId } from "@/app/_lib/utils/representante/getRepresentantesByClienteId";
+import { ContratoCaracteristica } from "@/app/_types/_enums/ContratoCaracteristica";
 
 type ContratoFormBaseProps = {
   onSubmit: (data: any) => void;
@@ -35,6 +43,7 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
       dataInicio: new Date(),
       dataFimPrevista: new Date(),
       ativo: true,
+      caracteristica: ContratoCaracteristica.MENSALIDADE,
       ...defaultValues,
     },
   });
@@ -56,22 +65,6 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Controller
-            name="representanteId"
-            control={control}
-            rules={rules}
-            render={({ field }) => (
-              <Select fullWidth {...field}>
-                {representantes.data?.map((representante) => (
-                  <MenuItem value={representante.id} key={representante.id}>
-                    {representante.nome}
-                  </MenuItem>
-                ))}
-              </Select>
-            )}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Controller
             name="titulo"
             control={control}
             rules={rules}
@@ -89,20 +82,41 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
         </Grid>
         <Grid item xs={12}>
           <Controller
+            name="representanteId"
+            control={control}
+            rules={rules}
+            render={({ field }) => (
+              <Select fullWidth {...field} label="Representante">
+                {representantes.data?.map((representante) => (
+                  <MenuItem value={representante.id} key={representante.id}>
+                    {representante.nome}
+                  </MenuItem>
+                ))}
+              </Select>
+            )}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Controller
             name="caracteristica"
             control={control}
             rules={rules}
             render={({ field }) => (
-              <TextField
+              <Select
                 {...field}
-                label="Característica"
-                variant="outlined"
                 fullWidth
+                label="Característica"
                 error={!!errors.caracteristica}
-                helperText={
-                  errors.caracteristica ? errors.caracteristica.message : null
-                }
-              />
+              >
+                {Object.values(ContratoCaracteristica).map((etapa) => (
+                  <MenuItem value={etapa} key={etapa}>
+                    {etapa}
+                  </MenuItem>
+                ))}
+                <FormHelperText>
+                  {errors.caracteristica?.message}
+                </FormHelperText>
+              </Select>
             )}
           />
         </Grid>
@@ -119,6 +133,7 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
                 fullWidth
                 error={!!errors.valor}
                 helperText={errors.valor ? errors.valor.message : null}
+                type="number"
               />
             )}
           />

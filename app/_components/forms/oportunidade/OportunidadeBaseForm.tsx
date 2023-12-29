@@ -68,7 +68,7 @@ export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
             control={control}
             rules={rules}
             render={({ field }) => (
-              <Select fullWidth {...field}>
+              <Select fullWidth {...field} label="Representante">
                 {representantes.data?.map((representante) => (
                   <MenuItem value={representante.id} key={representante.id}>
                     {representante.nome}
@@ -107,6 +107,7 @@ export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
                 label="Valor"
                 error={!!errors.valor}
                 helperText={errors.valor?.message}
+                type="number"
               />
             )}
           />

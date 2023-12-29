@@ -40,7 +40,7 @@ export const OportunidadeCreateForm = (props: OportunidadeCreateFormProps) => {
             <Typography variant="h6">Nova oportunidade</Typography>
           </Grid>
           <Grid item>
-            <OportunidadeFormBase onSubmit={onSubmit} />
+            <OportunidadeFormBase onSubmit={onSubmit} clienteId={clienteId} />
           </Grid>
         </Grid>
       </CardContent>
