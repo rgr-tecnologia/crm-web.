@@ -11,12 +11,12 @@ import {
 
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 
-type SignInFormData = {
+type SignUpFormData = {
   email: string;
   password: string;
 };
 
-export function SignInForm() {
+export function SignUpForm() {
   const { handleSubmit, control } = useForm({
     defaultValues: {
       email: "",
@@ -24,7 +24,7 @@ export function SignInForm() {
     },
   });
 
-  const onSubmit: SubmitHandler<SignInFormData> = (data) => {
+  const onSubmit: SubmitHandler<SignUpFormData> = (data) => {
     console.log(data);
   };
 
@@ -33,7 +33,7 @@ export function SignInForm() {
       <CardContent>
         <Grid container textAlign={"center"} spacing={2}>
           <Grid item>
-            <Typography variant="h6">Sign in</Typography>
+            <Typography variant="h6">Sign up</Typography>
           </Grid>
 
           <Grid container item>
@@ -60,23 +60,6 @@ export function SignInForm() {
                     )}
                   />
                 </Grid>
-                <Grid item>
-                  <Controller
-                    name="password"
-                    control={control}
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        label="Password"
-                        variant="outlined"
-                        type="password"
-                        fullWidth
-                        required
-                      />
-                    )}
-                  />
-                </Grid>
-
                 <Grid item>
                   <Button type="submit" variant="contained" fullWidth>
                     Sign In

@@ -1,4 +1,4 @@
-import { SignInForm } from "@/app/_components/forms/auth/SigninForm";
+import { SignUpForm } from "@/app/_components/forms/auth/SignUpForm";
 import { Container, Grid } from "@mui/material";
 
 export default function Page() {
@@ -6,7 +6,7 @@ export default function Page() {
     <Container>
       <Grid container>
         <Grid item xs={12}>
-          <SignInForm />
+          <SignUpForm />
         </Grid>
       </Grid>
     </Container>
