@@ -16,6 +16,11 @@ async function fetchClientes(): Promise<Cliente[]> {
 export default async function Page() {
   const clientes = await fetchClientes();
 
+  clientes.forEach((cliente) => {
+    cliente.createdAt = new Date(cliente.createdAt);
+    cliente.updatedAt = new Date(cliente.updatedAt);
+  });
+
   return (
     <Container
       sx={{

@@ -36,7 +36,7 @@ export function LeadsList({ leads }: LeadsListProps) {
   return (
     <>
       {orderedLeads.map((lead, index) => {
-        const { nomeFantasia } = lead;
+        const { nomeFantasia, createdAt, updatedAt } = lead;
         return (
           <Grid item key={lead.id}>
             <Card
@@ -65,12 +65,12 @@ export function LeadsList({ leads }: LeadsListProps) {
                       </Grid>
                       <Grid item>
                         <Typography variant="body2">
-                          {`Criado em: ${lead.createdAt.toLocaleDateString()}`}
+                          {`Criado em: ${createdAt.toLocaleDateString()}`}
                         </Typography>
                       </Grid>
                       <Grid item>
                         <Typography variant="body2">
-                          {`Atualizado em: ${lead.updatedAt.toLocaleDateString()}`}
+                          {`Atualizado em: ${updatedAt.toLocaleDateString()}`}
                         </Typography>
                       </Grid>
                     </Grid>

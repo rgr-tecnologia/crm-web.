@@ -3,6 +3,6 @@ export type Cliente = {
   nomeFantasia: string;
   cnpj: string;
   ativo: boolean;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 };
