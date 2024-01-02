@@ -18,6 +18,11 @@ async function fetchLeads(): Promise<Lead[]> {
 export default async function Page() {
   const leads = await fetchLeads();
 
+  leads.forEach((lead) => {
+    lead.createdAt = new Date(lead.createdAt);
+    lead.updatedAt = new Date(lead.updatedAt);
+  });
+
   return (
     <Container
       sx={{
