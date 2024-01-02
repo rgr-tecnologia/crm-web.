@@ -66,11 +66,11 @@ export function ClienteFormBase(props: ClienteFormProps) {
               ...rules,
               validate: (value) => isCnpjValid(value) || "CNPJ inválido",
               maxLength: {
-                value: 14,
+                value: 18,
                 message: "CNPJ deve ter 14 dígitos",
               },
               minLength: {
-                value: 14,
+                value: 18,
                 message: "CNPJ deve ter 14 dígitos",
               },
             }}
