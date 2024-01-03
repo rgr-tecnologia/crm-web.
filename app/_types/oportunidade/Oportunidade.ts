@@ -7,6 +7,6 @@ export type Oportunidade = {
   representanteId: string;
   etapa: OportunidadeEtapa;
   valor: number;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 };

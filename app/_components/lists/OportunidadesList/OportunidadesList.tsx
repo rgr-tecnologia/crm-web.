@@ -1,6 +1,7 @@
 import { Oportunidade } from "@/app/_types/oportunidade/Oportunidade";
-import { Card, CardContent, Grid, Typography } from "@mui/material";
+import { Card, CardContent, Divider, Grid, Typography } from "@mui/material";
 import { OportunidadesListActions } from "./OportunidadesListActions";
+import { ListOrderIdentifier } from "../ListOrderIdentifier/ListOrderIdentifier";
 
 type OportunidadesListProps = {
   oportunidades: Oportunidade[];
@@ -10,18 +11,79 @@ export function OportunidadesList(props: OportunidadesListProps) {
   const { oportunidades } = props;
   return (
     <Grid container spacing={2}>
-      {oportunidades.map((oportunidade) => (
-        <Card
-          sx={{
-            width: "100%",
-          }}
-        >
-          <CardContent>
-            <Typography variant="body2">{oportunidade.titulo}</Typography>
-            <OportunidadesListActions oportunidade={oportunidade} />
-          </CardContent>
-        </Card>
-      ))}
+      {oportunidades.map((oportunidade, index) => {
+        const { id, titulo, createdAt, updatedAt } = oportunidade;
+        return (
+          <Grid item key={id} xs={12}>
+            <Card
+              sx={{
+                width: "100%",
+                borderLeft: "4px solid",
+                borderColor: "primary.main",
+              }}
+            >
+              <CardContent>
+                <Grid
+                  container
+                  direction={"row"}
+                  spacing={2}
+                  justifyContent={"space-around"}
+                >
+                  <Grid item>
+                    <ListOrderIdentifier index={index} />
+                  </Grid>
+                  <Grid container item spacing={1} direction={"column"} xs={10}>
+                    <Grid item>
+                      <Typography variant="caption">Título</Typography>
+                      <Typography variant="body1" fontWeight={"bold"}>
+                        {titulo}
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Divider />
+                    </Grid>
+                    <Grid
+                      item
+                      container
+                      direction={"row"}
+                      justifyContent={"space-between"}
+                    >
+                      <Grid container item direction={"row"} spacing={1} xs={4}>
+                        <Grid item>
+                          <Typography variant="caption">
+                            Data de criação
+                          </Typography>
+                        </Grid>
+                        <Grid item>
+                          <Typography variant="body1" fontWeight={"bold"}>
+                            {createdAt.toLocaleDateString()}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                      <Grid container item direction={"row"} spacing={1} xs>
+                        <Grid item>
+                          <Typography variant="caption">
+                            Data de atualização
+                          </Typography>
+                        </Grid>
+                        <Grid item>
+                          <Typography variant="body1" fontWeight={"bold"}>
+                            {updatedAt.toLocaleDateString()}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+
+                  <Grid item>
+                    <OportunidadesListActions oportunidade={oportunidade} />
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Card>
+          </Grid>
+        );
+      })}
     </Grid>
   );
 }

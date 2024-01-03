@@ -25,6 +25,11 @@ export default async function Page({ params }: { params: Params }) {
 
   const representantes = await getRepresentantes(clienteId);
 
+  representantes.forEach((representante) => {
+    representante.createdAt = new Date(representante.createdAt);
+    representante.updatedAt = new Date(representante.updatedAt);
+  });
+
   const content = representantes.length ? (
     <RepresentantesList representantes={representantes} />
   ) : (

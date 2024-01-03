@@ -15,6 +15,7 @@ export const CreateLeadForm = (props: CreateLeadFormProps) => {
       await createLead(data);
 
       router.refresh();
+      router.push("/leads");
     } catch (error) {
       console.log(error);
     }
