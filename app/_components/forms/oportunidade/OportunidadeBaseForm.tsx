@@ -20,6 +20,7 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/pt-br";
 import dayjs from "dayjs";
+import { useEffect } from "react";
 
 type OportunidadeFormBaseProps = {
   onSubmit: (data: OportunidadeCreate) => void;
@@ -38,12 +39,19 @@ export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<OportunidadeCreate>({
     defaultValues: {
       etapa: OportunidadeEtapa.NEGOCIACAO,
       ...defaultValues,
     },
   });
+
+  useEffect(() => {
+    if (defaultValues) {
+      reset(defaultValues);
+    }
+  }, [defaultValues]);
 
   const rules = {
     required: "Campo obrigatório",
