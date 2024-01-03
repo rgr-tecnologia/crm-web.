@@ -5,10 +5,11 @@ import { Controller } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { Lead } from "@/app/_types/lead/Lead";
+import { CreateLead } from "@/app/_types/lead/CreateLead";
 
 type LeadFormBaseProps = {
   onSubmit: (data: any) => void;
-  defaultValues?: Lead;
+  defaultValues?: CreateLead;
 };
 
 export const LeadFormBase = (props: LeadFormBaseProps) => {
@@ -29,6 +30,12 @@ export const LeadFormBase = (props: LeadFormBaseProps) => {
       ...defaultValues,
     },
   });
+
+  useEffect(() => {
+    if (defaultValues) {
+      reset(defaultValues);
+    }
+  }, [defaultValues]);
 
   const rules = {
     required: "Campo obrigatório",

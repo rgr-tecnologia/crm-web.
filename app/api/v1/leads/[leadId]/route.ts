@@ -19,3 +19,28 @@ export async function GET(req: Request, { params }: { params: Params }) {
     return fetchErrorHandler(error);
   }
 }
+
+export async function PUT(req: Request, { params }: { params: Params }) {
+  try {
+    const { leadId } = params;
+    const data = await req.json();
+
+    const res = await fetch(`${API_URL}/leads/${leadId}`, {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error("Erro ao atualizar lead");
+    }
+
+    const lead: Lead = await res.json();
+
+    return Response.json(lead);
+  } catch (error) {
+    return fetchErrorHandler(error);
+  }
+}

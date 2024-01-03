@@ -19,11 +19,9 @@ export function UpdateClienteForm(props: ClienteFormProps) {
   const router = useRouter();
   const { clienteId } = props;
 
-  const { data, isLoading: isLoadingdata } = useQuery("cliente", () =>
-    getCliente(clienteId)
-  );
+  const { data } = useQuery("cliente", () => getCliente(clienteId));
 
-  const { mutate, isLoading, isSuccess, isError, reset } = useMutation({
+  const { mutate, isLoading, isSuccess, isError } = useMutation({
     mutationFn: (data: CreateCliente) => {
       return updateCliente(clienteId, data);
     },
