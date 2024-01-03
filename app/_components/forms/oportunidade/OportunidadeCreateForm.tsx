@@ -16,6 +16,8 @@ export const OportunidadeCreateForm = (props: OportunidadeCreateFormProps) => {
   const router = useRouter();
 
   const onSubmit = async (data: OportunidadeCreate) => {
+    data.valor = Number(data.valor);
+
     const res = await fetch(`${BFF_URL}/clientes/${clienteId}/oportunidades`, {
       method: "POST",
       body: JSON.stringify(data),
@@ -29,6 +31,7 @@ export const OportunidadeCreateForm = (props: OportunidadeCreateFormProps) => {
 
     if (!res.ok) {
       router.refresh();
+      router.push(`/clientes/${clienteId}/oportunidades`);
     }
   };
 

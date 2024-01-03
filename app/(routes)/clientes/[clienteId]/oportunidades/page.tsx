@@ -1,4 +1,5 @@
 import { OportunidadesList } from "@/app/_components/lists/OportunidadesList/OportunidadesList";
+import { Oportunidade } from "@/app/_types/oportunidade/Oportunidade";
 import { Button, Container, Grid, Typography } from "@mui/material";
 import Link from "next/link";
 
@@ -17,6 +18,11 @@ async function getOportunidades(clienteId: string) {
 export default async function Page({ params }: { params: Params }) {
   const { clienteId } = params;
   const oportunidades = await getOportunidades(clienteId);
+
+  oportunidades.forEach((oportunidade: Oportunidade) => {
+    oportunidade.createdAt = new Date(oportunidade.createdAt);
+    oportunidade.updatedAt = new Date(oportunidade.updatedAt);
+  });
 
   const content = oportunidades.length ? (
     <OportunidadesList oportunidades={oportunidades} />

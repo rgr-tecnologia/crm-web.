@@ -21,3 +21,26 @@ export async function GET(req: Request, { params }: { params: Params }) {
     return fetchErrorHandler(error);
   }
 }
+
+export async function POST(req: Request, { params }: { params: Params }) {
+  try {
+    const { clienteId } = params;
+    const body = await req.json();
+
+    const res = await fetch(`${API_URL}/clientes/${clienteId}/oportunidades`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (res.status === 201) {
+      return Response.json(await res.json());
+    } else {
+      throw new Error("Erro ao criar oportunidade");
+    }
+  } catch (error) {
+    return fetchErrorHandler(error);
+  }
+}
