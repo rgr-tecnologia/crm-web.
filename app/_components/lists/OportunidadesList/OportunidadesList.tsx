@@ -12,7 +12,7 @@ export function OportunidadesList(props: OportunidadesListProps) {
   return (
     <Grid container spacing={2}>
       {oportunidades.map((oportunidade, index) => {
-        const { id, titulo, createdAt, updatedAt } = oportunidade;
+        const { id, titulo, createdAt, updatedAt, etapa } = oportunidade;
         return (
           <Grid item key={id} xs={12}>
             <Card
@@ -50,6 +50,16 @@ export function OportunidadesList(props: OportunidadesListProps) {
                     >
                       <Grid container item direction={"row"} spacing={1} xs={4}>
                         <Grid item>
+                          <Typography variant="caption">Etapa</Typography>
+                        </Grid>
+                        <Grid item>
+                          <Typography variant="body1" fontWeight={"bold"}>
+                            {etapa}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                      <Grid container item direction={"row"} spacing={1} xs={4}>
+                        <Grid item>
                           <Typography variant="caption">
                             Data de criação
                           </Typography>
@@ -75,7 +85,7 @@ export function OportunidadesList(props: OportunidadesListProps) {
                     </Grid>
                   </Grid>
 
-                  <Grid item>
+                  <Grid item xs>
                     <OportunidadesListActions oportunidade={oportunidade} />
                   </Grid>
                 </Grid>

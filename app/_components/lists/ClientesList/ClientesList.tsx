@@ -4,11 +4,19 @@ import { Cliente } from "@/app/_types/cliente/Cliente";
 import { Button, Grid, Typography } from "@mui/material";
 import { ClienteAutoComplete } from "../../autocomplete/ClienteAutoComplete";
 import { ClientesCardList } from "./ClientesCardList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 type ClientesListProps = {
   clientes: Cliente[];
+};
+
+const orderClientes = (clientes: Cliente[]) => {
+  return clientes.sort((a, b) => {
+    const aDate = new Date(a.createdAt);
+    const bDate = new Date(b.createdAt);
+    return aDate.getTime() - bDate.getTime();
+  });
 };
 
 export function ClientesList({ clientes }: ClientesListProps) {
@@ -22,8 +30,8 @@ export function ClientesList({ clientes }: ClientesListProps) {
     setFilteredClientes(clientes);
   };
 
-  const content = clientes.length ? (
-    <ClientesCardList clientes={filteredClientes} />
+  const content = filteredClientes.length ? (
+    <ClientesCardList clientes={orderClientes(filteredClientes)} />
   ) : (
     <Typography>Nenhum cliente cadastrado</Typography>
   );
