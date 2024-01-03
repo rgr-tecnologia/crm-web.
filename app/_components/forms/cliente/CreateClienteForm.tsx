@@ -6,8 +6,10 @@ import { useMutation } from "react-query";
 import { SuccessNotification } from "../../notifications/SuccessNotification";
 import { ErrorNotification } from "../../notifications/ErrorNotification";
 import { CreateCliente } from "@/app/_types/cliente/CreateCliente";
+import { useRouter } from "next/navigation";
 
 export function CreateClienteForm() {
+  const router = useRouter();
   const { mutate, isLoading, isSuccess, isError } = useMutation({
     mutationFn: (data: CreateCliente) => {
       return createCliente(data);
@@ -17,6 +19,7 @@ export function CreateClienteForm() {
   const onSubmit = async (formData: CreateCliente) => {
     try {
       await mutate(formData);
+      router.push("/clientes");
     } catch (error) {
       if (error instanceof Error) {
       }

@@ -9,17 +9,21 @@ import { ClienteFormBase } from "./ClienteFormBase";
 import { SuccessNotification } from "../../notifications/SuccessNotification";
 import { ErrorNotification } from "../../notifications/ErrorNotification";
 import { CreateCliente } from "@/app/_types/cliente/CreateCliente";
+import { useRouter } from "next/navigation";
 
 type ClienteFormProps = {
   clienteId: Cliente["id"];
 };
 
 export function UpdateClienteForm(props: ClienteFormProps) {
+  const router = useRouter();
   const { clienteId } = props;
 
-  const { data } = useQuery("cliente", () => getCliente(clienteId));
+  const { data, isLoading: isLoadingdata } = useQuery("cliente", () =>
+    getCliente(clienteId)
+  );
 
-  const { mutate, isLoading, isSuccess, isError } = useMutation({
+  const { mutate, isLoading, isSuccess, isError, reset } = useMutation({
     mutationFn: (data: CreateCliente) => {
       return updateCliente(clienteId, data);
     },
@@ -29,6 +33,7 @@ export function UpdateClienteForm(props: ClienteFormProps) {
     await mutate({
       ...formData,
     });
+    router.push("/clientes");
   };
 
   return (

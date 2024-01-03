@@ -23,12 +23,6 @@ export const isCnpjValid = (cnpj: string): boolean => {
   const firstDigit = calculateDigit(cnpjArray.slice(0, 12), weights1);
   const secondDigit = calculateDigit(cnpjArray.slice(0, 13), weights2);
 
-  console.log("First Digit:", firstDigit);
-  console.log("Second Digit:", secondDigit);
-
   const isValid = cnpjArray[12] === firstDigit && cnpjArray[13] === secondDigit;
-
-  console.log("Is Valid:", isValid);
-
   return isValid;
 };

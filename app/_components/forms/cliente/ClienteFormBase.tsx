@@ -6,6 +6,7 @@ import { LoadingButton } from "../../loadingButton/LoadingButton";
 import { CreateCliente } from "@/app/_types/cliente/CreateCliente";
 import { formatCnpj } from "@/app/_lib/utils/data/formatCnpj";
 import { isCnpjValid } from "@/app/_lib/utils/data/isCnpjValid";
+import { useEffect } from "react";
 
 type ClienteFormProps = {
   onSubmit: (formData: CreateCliente) => void;
@@ -33,6 +34,12 @@ export function ClienteFormBase(props: ClienteFormProps) {
   const rules = {
     required: "Campo obrigatório",
   };
+
+  useEffect(() => {
+    if (defaultValues) {
+      reset(defaultValues);
+    }
+  }, [defaultValues]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -65,14 +72,6 @@ export function ClienteFormBase(props: ClienteFormProps) {
             rules={{
               ...rules,
               validate: (value) => isCnpjValid(value) || "CNPJ inválido",
-              maxLength: {
-                value: 18,
-                message: "CNPJ deve ter 14 dígitos",
-              },
-              minLength: {
-                value: 18,
-                message: "CNPJ deve ter 14 dígitos",
-              },
             }}
             render={({ field }) => (
               <TextField
@@ -85,10 +84,6 @@ export function ClienteFormBase(props: ClienteFormProps) {
                 error={!!errors.cnpj}
                 InputLabelProps={{
                   shrink: true,
-                }}
-                inputProps={{
-                  maxLength: 18,
-                  minLength: 18,
                 }}
                 value={formatCnpj(String(field.value))}
               />
