@@ -10,7 +10,7 @@ import { useEffect } from "react";
 
 type ClienteFormProps = {
   onSubmit: (formData: CreateCliente) => void;
-  defaultValues?: Partial<CreateCliente>;
+  defaultValues?: CreateCliente;
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
@@ -26,8 +26,8 @@ export function ClienteFormBase(props: ClienteFormProps) {
     formState: { errors },
   } = useForm<CreateCliente>({
     defaultValues: {
-      ...defaultValues,
       ativo: true,
+      ...defaultValues,
     },
   });
 
