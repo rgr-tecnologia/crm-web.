@@ -2,23 +2,25 @@
 import { useRouter } from "next/navigation";
 
 import { Card, CardContent, Grid, Typography } from "@mui/material";
-import { OportunidadeFormBase } from "./OportunidadeBaseForm";
-import { OportunidadeCreate } from "@/app/_types/oportunidade/OportunidadeCreate";
+import { LeadOportunidadeFormBase } from "./LeadOportunidadeBaseForm";
+import { LeadOportunidadeCreate } from "@/app/_types/lead/oportunidade/OportunidadeCreate";
 
 const BFF_URL = process.env.NEXT_PUBLIC_BFF_URL;
 
-type OportunidadeCreateFormProps = {
-  clienteId: string;
+type LeadOportunidadeCreateFormProps = {
+  leadId: string;
 };
 
-export const OportunidadeCreateForm = (props: OportunidadeCreateFormProps) => {
-  const { clienteId } = props;
+export const LeadOportunidadeCreateForm = (
+  props: LeadOportunidadeCreateFormProps
+) => {
+  const { leadId } = props;
   const router = useRouter();
 
-  const onSubmit = async (data: OportunidadeCreate) => {
+  const onSubmit = async (data: LeadOportunidadeCreate) => {
     data.valor = Number(data.valor);
 
-    const res = await fetch(`${BFF_URL}/clientes/${clienteId}/oportunidades`, {
+    const res = await fetch(`${BFF_URL}/leads/${leadId}/oportunidades`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -31,7 +33,7 @@ export const OportunidadeCreateForm = (props: OportunidadeCreateFormProps) => {
 
     if (!res.ok) {
       router.refresh();
-      router.push(`/clientes/${clienteId}/oportunidades`);
+      router.push(`/leads/${leadId}/oportunidades`);
     }
   };
 
@@ -43,7 +45,7 @@ export const OportunidadeCreateForm = (props: OportunidadeCreateFormProps) => {
             <Typography variant="h6">Nova oportunidade</Typography>
           </Grid>
           <Grid item>
-            <OportunidadeFormBase onSubmit={onSubmit} clienteId={clienteId} />
+            <LeadOportunidadeFormBase onSubmit={onSubmit} leadId={leadId} />
           </Grid>
         </Grid>
       </CardContent>

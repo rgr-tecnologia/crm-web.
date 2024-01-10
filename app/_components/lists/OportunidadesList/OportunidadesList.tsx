@@ -1,17 +1,25 @@
-import { Oportunidade } from "@/app/_types/oportunidade/Oportunidade";
 import { Card, CardContent, Divider, Grid, Typography } from "@mui/material";
 import { OportunidadesListActions } from "./OportunidadesListActions";
 import { ListOrderIdentifier } from "../ListOrderIdentifier/ListOrderIdentifier";
+import { LeadOportunidade } from "@/app/_types/lead/oportunidade/Oportunidade";
 
 type OportunidadesListProps = {
-  oportunidades: Oportunidade[];
+  oportunidades: LeadOportunidade[];
+};
+
+const orderLeadOportunidades = (oportunidades: LeadOportunidade[]) => {
+  return oportunidades.sort((a, b) => {
+    const aDate = new Date(a.createdAt);
+    const bDate = new Date(b.createdAt);
+    return aDate.getTime() - bDate.getTime();
+  });
 };
 
 export function OportunidadesList(props: OportunidadesListProps) {
   const { oportunidades } = props;
   return (
     <Grid container spacing={2}>
-      {oportunidades.map((oportunidade, index) => {
+      {orderLeadOportunidades(oportunidades).map((oportunidade, index) => {
         const { id, titulo, createdAt, updatedAt, etapa } = oportunidade;
         return (
           <Grid item key={id} xs={12}>

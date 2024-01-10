@@ -1,13 +1,13 @@
-import { OportunidadeCreateForm } from "@/app/_components/forms/cliente/oportunidade/OportunidadeCreateForm";
+import { LeadOportunidadeCreateForm } from "@/app/_components/forms/lead/oportunidade/LeadOportunidadeCreateForm";
 import { RepresentanteQueryProvider } from "@/app/_components/queryProviders/RepresentanteQueryProvider";
 import { Container } from "@mui/material";
 
 type PageParams = {
-  clienteId: string;
+  leadId: string;
 };
 
 export default function Page({ params }: { params: PageParams }) {
-  const { clienteId } = params;
+  const { leadId } = params;
   return (
     <RepresentanteQueryProvider>
       <Container
@@ -15,7 +15,7 @@ export default function Page({ params }: { params: PageParams }) {
           marginTop: 2,
         }}
       >
-        <OportunidadeCreateForm clienteId={clienteId} />
+        <LeadOportunidadeCreateForm leadId={leadId} />
       </Container>
     </RepresentanteQueryProvider>
   );

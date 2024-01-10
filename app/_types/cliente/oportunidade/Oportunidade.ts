@@ -1,6 +1,6 @@
-import { AreaExecutora } from "../_enums/AreaExecutora";
-import { ContratoCaracteristica } from "../_enums/ContratoCaracteristica";
-import { OportunidadeEtapa } from "../_enums/OportunidadeEtapa";
+import { AreaExecutora } from "../../_enums/AreaExecutora";
+import { ContratoCaracteristica } from "../../_enums/ContratoCaracteristica";
+import { OportunidadeEtapa } from "../../_enums/OportunidadeEtapa";
 
 export type Oportunidade = {
   id: string;

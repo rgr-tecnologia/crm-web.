@@ -1,5 +1,5 @@
 export enum OportunidadeEtapa {
   NEGOCIACAO = "NEGOCIACAO",
   FECHADO = "FECHADO",
-  PERDIDO = "PERDIDO",
+  PERDIDO = "PERDIDA",
 }

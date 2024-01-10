@@ -4,7 +4,7 @@ import { Cliente } from "@/app/_types/cliente/Cliente";
 import { Button, Grid, Typography } from "@mui/material";
 import { ClienteAutoComplete } from "../../autocomplete/ClienteAutoComplete";
 import { ClientesCardList } from "./ClientesCardList";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 
 type ClientesListProps = {

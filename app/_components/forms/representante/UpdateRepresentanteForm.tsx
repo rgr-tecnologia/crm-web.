@@ -7,6 +7,7 @@ import { RepresentanteFormBase } from "./RepresentanteFormBase";
 import { Representate } from "@/app/_types/representante/Representante";
 import { getRepresentante } from "@/app/_lib/utils/representante/getRepresentante";
 import { updateRepresentante } from "@/app/_lib/utils/representante/updateRepresentante";
+import { CreateRepresentante } from "@/app/_types/representante/CreateRepresentante";
 
 type RepresentanteFormProps = {
   clienteId: Cliente["id"];
@@ -20,7 +21,7 @@ export function UpdateRepresentanteForm(props: RepresentanteFormProps) {
     getRepresentante(clienteId, representanteId)
   );
 
-  const onSubmit = async (formData: Representate) => {
+  const onSubmit = async (formData: CreateRepresentante) => {
     await updateRepresentante(clienteId, representanteId, formData);
   };
 

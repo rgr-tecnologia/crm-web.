@@ -1,23 +1,21 @@
-import { UpdateOportunidadeForm } from "@/app/_components/forms/cliente/oportunidade/OportunidadeUpdateForm";
+import { LeadUpdateOportunidadeForm } from "@/app/_components/forms/lead/oportunidade/LeadOportunidadeUpdateForm";
 import { RepresentanteQueryProvider } from "@/app/_components/queryProviders/RepresentanteQueryProvider";
-import { Oportunidade } from "@/app/_types/cliente/oportunidade/Oportunidade";
+import { LeadOportunidade } from "@/app/_types/lead/oportunidade/Oportunidade";
 import { Container } from "@mui/material";
 
 type PageParams = {
-  oportunidadeId: Oportunidade["id"];
-  clienteId: string;
+  oportunidadeId: LeadOportunidade["id"];
+  leadId: string;
 };
 
 const BFF_URL = process.env.BFF_URL;
 
 const getOportunidadeById = async (
-  clienteId: string,
-  id: Oportunidade["id"]
+  leadId: string,
+  id: LeadOportunidade["id"]
 ) => {
   try {
-    const res = await fetch(
-      `${BFF_URL}/clientes/${clienteId}/oportunidades/${id}`
-    );
+    const res = await fetch(`${BFF_URL}/leads/${leadId}/oportunidades/${id}`);
     if (!res.ok) throw new Error("Erro ao buscar oportunidade");
     const data = await res.json();
     return data;
@@ -27,8 +25,8 @@ const getOportunidadeById = async (
 };
 
 export default async function Page({ params }: { params: PageParams }) {
-  const { oportunidadeId, clienteId } = params;
-  const oportunidade = await getOportunidadeById(clienteId, oportunidadeId);
+  const { oportunidadeId, leadId } = params;
+  const oportunidade = await getOportunidadeById(leadId, oportunidadeId);
   return (
     <RepresentanteQueryProvider>
       <Container
@@ -36,8 +34,8 @@ export default async function Page({ params }: { params: PageParams }) {
           marginTop: 2,
         }}
       >
-        <UpdateOportunidadeForm
-          clienteId={clienteId}
+        <LeadUpdateOportunidadeForm
+          leadId={leadId}
           oportunidade={oportunidade}
         />
       </Container>

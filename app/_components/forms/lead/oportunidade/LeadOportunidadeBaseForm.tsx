@@ -9,10 +9,7 @@ import {
   TextField,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import { OportunidadeCreate } from "@/app/_types/oportunidade/OportunidadeCreate";
 import { OportunidadeEtapa } from "@/app/_types/_enums/OportunidadeEtapa";
-import { getRepresentantesByClienteId } from "@/app/_lib/utils/representante/getRepresentantesByClienteId";
-import { useQuery } from "react-query";
 import "dayjs/locale/pt-br";
 import { ContratoCaracteristica } from "@/app/_types/_enums/ContratoCaracteristica";
 import { AreaExecutora } from "@/app/_types/_enums/AreaExecutora";
@@ -21,26 +18,25 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/pt-br";
 import dayjs from "dayjs";
 import { useEffect } from "react";
+import { LeadOportunidadeCreate } from "@/app/_types/lead/oportunidade/OportunidadeCreate";
 
-type OportunidadeFormBaseProps = {
-  onSubmit: (data: OportunidadeCreate) => void;
-  defaultValues?: OportunidadeCreate;
-  clienteId: string;
+type LeadOportunidadeFormBaseProps = {
+  onSubmit: (data: LeadOportunidadeCreate) => void;
+  defaultValues?: LeadOportunidadeCreate;
+  leadId: string;
 };
 
-export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
-  const { defaultValues, onSubmit, clienteId } = props;
-
-  const representantes = useQuery("representantes", async () =>
-    getRepresentantesByClienteId(clienteId)
-  );
+export const LeadOportunidadeFormBase = (
+  props: LeadOportunidadeFormBaseProps
+) => {
+  const { defaultValues, onSubmit, leadId } = props;
 
   const {
     control,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<OportunidadeCreate>({
+  } = useForm<LeadOportunidadeCreate>({
     defaultValues: {
       etapa: OportunidadeEtapa.NEGOCIACAO,
       ...defaultValues,
@@ -76,7 +72,7 @@ export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
             )}
           />
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <Controller
             name="representanteId"
             control={control}
@@ -91,7 +87,7 @@ export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
               </Select>
             )}
           />
-        </Grid>
+        </Grid> */}
         <Grid item xs={12}>
           <Controller
             name="caracteristica"

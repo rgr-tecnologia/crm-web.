@@ -1,5 +1,6 @@
 import { Cliente } from "@/app/_types/cliente/Cliente";
 import { CreateCliente } from "@/app/_types/cliente/CreateCliente";
+import { LeadOportunidade } from "@/app/_types/lead/oportunidade/Oportunidade";
 import { CreateRepresentante } from "@/app/_types/representante/CreateRepresentante";
 import { Representate } from "@/app/_types/representante/Representante";
 
@@ -21,6 +22,7 @@ export async function promoteLead(
   const resJSON: {
     cliente: Cliente;
     representante: Representate;
+    oportunidade: LeadOportunidade;
   } = await res.json();
 
   return resJSON;

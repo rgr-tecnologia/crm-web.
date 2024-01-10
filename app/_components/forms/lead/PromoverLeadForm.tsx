@@ -11,6 +11,7 @@ import { promoteLead } from "@/app/_lib/utils/lead/promoteLead";
 import { CreateCliente } from "@/app/_types/cliente/CreateCliente";
 import { CreateRepresentante } from "@/app/_types/representante/CreateRepresentante";
 import * as navigation from "next/navigation";
+import { ContratoFormBase } from "../contrato/ContratoFormBase";
 
 type PromoverLeadFormProps = {
   leadId: string;
@@ -31,18 +32,29 @@ export default function PromoverLeadForm(props: PromoverLeadFormProps) {
   };
 
   const onSubmit = async (formData: CreateRepresentante) => {
-    console.log("fetching...");
     if (!cliente) {
       return;
     }
 
-    const { cliente: clienteResponse } = await promoteLead(
-      leadId,
-      cliente,
-      formData
-    );
+    try {
+      const res = await promoteLead(leadId, cliente, formData);
 
-    router.push(`/clientes/${clienteResponse.id}/oportunidades/novo`);
+      if (res) {
+        const { cliente, oportunidade } = res;
+
+        router.push(
+          `/clientes/${cliente.id}/oportunidades/${oportunidade.id}/gerar-contrato`
+        );
+      } else {
+        throw new Error("Erro ao promover lead");
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new Error(error.message);
+      } else {
+        throw new Error("Erro ao promover lead");
+      }
+    }
   };
 
   const { data: lead } = useQuery(
@@ -50,7 +62,12 @@ export default function PromoverLeadForm(props: PromoverLeadFormProps) {
     async () => await getLeadById(leadId)
   );
 
-  if (!lead) return null;
+  if (!lead)
+    return (
+      <>
+        <h1>Carregando...</h1>
+      </>
+    );
 
   const steps = [
     {
@@ -66,6 +83,7 @@ export default function PromoverLeadForm(props: PromoverLeadFormProps) {
               defaultValues={{
                 nomeFantasia: lead.nomeFantasia,
                 ativo: true,
+                cnpj: "",
               }}
             />
           </ClienteQueryProvider>
