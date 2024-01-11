@@ -29,30 +29,7 @@ export default async function Page() {
         marginTop: 2,
       }}
     >
-      <Grid
-        container
-        spacing={2}
-        justifyContent={"center"}
-        alignItems={"center"}
-        direction={"column"}
-      >
-        <Grid item>
-          <Link href={"/leads/novo"} passHref>
-            <Button variant={"contained"}>Novo Lead</Button>
-          </Link>
-        </Grid>
-        <Grid
-          item
-          container
-          sx={{
-            width: "100%",
-          }}
-          spacing={2}
-          direction={"column"}
-        >
-          <LeadsList leads={leads} />
-        </Grid>
-      </Grid>
+      <LeadsList leads={leads} />
     </Container>
   );
 }
