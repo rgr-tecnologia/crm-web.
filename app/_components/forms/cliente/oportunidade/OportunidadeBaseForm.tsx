@@ -40,9 +40,11 @@ export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
     handleSubmit,
     formState: { errors },
     reset,
+    getValues,
   } = useForm<OportunidadeCreate>({
     defaultValues: {
       etapa: OportunidadeEtapa.NEGOCIACAO,
+      dataFechamentoPrevista: new Date(),
       ...defaultValues,
     },
   });
@@ -122,19 +124,21 @@ export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
             control={control}
             rules={rules}
             render={({ field }) => (
-              <Select
-                {...field}
-                fullWidth
-                label="Área executora"
-                error={!!errors.areaExecutora}
-              >
-                {Object.values(AreaExecutora).map((areaExecutora) => (
-                  <MenuItem value={areaExecutora} key={areaExecutora}>
-                    {areaExecutora}
-                  </MenuItem>
-                ))}
+              <>
+                <Select
+                  {...field}
+                  fullWidth
+                  label="Área executora"
+                  error={!!errors.areaExecutora}
+                >
+                  {Object.values(AreaExecutora).map((areaExecutora) => (
+                    <MenuItem value={areaExecutora} key={areaExecutora}>
+                      {areaExecutora}
+                    </MenuItem>
+                  ))}
+                </Select>
                 <FormHelperText>{errors.areaExecutora?.message}</FormHelperText>
-              </Select>
+              </>
             )}
           />
         </Grid>
@@ -183,11 +187,13 @@ export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
           />
         </Grid>
 
-        <Grid item xs={12}>
-          <Button variant="contained" color="primary" type="submit">
-            Salvar
-          </Button>
-        </Grid>
+        {getValues("etapa") === OportunidadeEtapa.NEGOCIACAO && (
+          <Grid item xs={12}>
+            <Button variant="contained" color="primary" type="submit">
+              Salvar
+            </Button>
+          </Grid>
+        )}
       </Grid>
     </form>
   );

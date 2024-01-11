@@ -9,13 +9,15 @@ const BFF_URL = process.env.NEXT_PUBLIC_BFF_URL;
 
 type CreateContratoFormProps = {
   clienteId: string;
+  oportunidadeId: string;
 };
 
 export const CreateContratoForm = (props: CreateContratoFormProps) => {
-  const { clienteId } = props;
+  const { clienteId, oportunidadeId } = props;
   const router = useRouter();
 
   const onSubmit = async (data: Contrato) => {
+    console.log(data);
     const res = await fetch(`${BFF_URL}/clientes/${clienteId}/contratos`, {
       method: "POST",
       body: JSON.stringify(data),
@@ -27,8 +29,8 @@ export const CreateContratoForm = (props: CreateContratoFormProps) => {
       },
     });
 
-    if (!res.ok) {
-      router.refresh();
+    if (res.ok) {
+      router.push(`/clientes/${clienteId}/contratos`);
     }
   };
 
@@ -40,7 +42,13 @@ export const CreateContratoForm = (props: CreateContratoFormProps) => {
             <Typography variant="h6">Novo contrato</Typography>
           </Grid>
           <Grid item>
-            <ContratoFormBase onSubmit={onSubmit} clienteId={clienteId} />
+            <ContratoFormBase
+              onSubmit={onSubmit}
+              clienteId={clienteId}
+              defaultValues={{
+                oportunidadeId,
+              }}
+            />
           </Grid>
         </Grid>
       </CardContent>

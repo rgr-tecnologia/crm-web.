@@ -72,22 +72,6 @@ export const LeadOportunidadeFormBase = (
             )}
           />
         </Grid>
-        {/* <Grid item xs={12}>
-          <Controller
-            name="representanteId"
-            control={control}
-            rules={rules}
-            render={({ field }) => (
-              <Select fullWidth {...field} label="Representante">
-                {representantes.data?.map((representante) => (
-                  <MenuItem value={representante.id} key={representante.id}>
-                    {representante.nome}
-                  </MenuItem>
-                ))}
-              </Select>
-            )}
-          />
-        </Grid> */}
         <Grid item xs={12}>
           <Controller
             name="caracteristica"

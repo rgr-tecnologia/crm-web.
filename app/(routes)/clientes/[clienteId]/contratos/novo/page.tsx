@@ -6,8 +6,19 @@ type PageParams = {
   clienteId: string;
 };
 
-export default function Page({ params }: { params: PageParams }) {
+type PageSearchParams = {
+  oportunidadeId: string;
+};
+
+type PageProps = {
+  params: PageParams;
+  searchParams: PageSearchParams;
+};
+
+export default function Page({ params, searchParams }: PageProps) {
   const { clienteId } = params;
+  const { oportunidadeId } = searchParams;
+
   return (
     <RepresentanteQueryProvider>
       <Container
@@ -15,7 +26,10 @@ export default function Page({ params }: { params: PageParams }) {
           marginTop: 2,
         }}
       >
-        <CreateContratoForm clienteId={clienteId} />
+        <CreateContratoForm
+          clienteId={clienteId}
+          oportunidadeId={oportunidadeId}
+        />
       </Container>
     </RepresentanteQueryProvider>
   );

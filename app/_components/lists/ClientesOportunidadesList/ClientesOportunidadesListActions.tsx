@@ -71,10 +71,17 @@ export function ClientesOportunidadesListActions(
             <Button variant="text">Detalhes</Button>
           </Link>
         </MenuItem>
-        {oportunidade.etapa !== OportunidadeEtapa.PERDIDO && (
+        {oportunidade.etapa == OportunidadeEtapa.NEGOCIACAO && (
           <>
             <MenuItem onClick={() => encerrarOportunidade(oportunidade)}>
               Encerrar oportunidade
+            </MenuItem>
+            <MenuItem>
+              <Link
+                href={`/clientes/${clienteId}/contratos/novo?oportunidadeId=${oportunidade.id}`}
+              >
+                <Button variant="text">Gerar contrato</Button>
+              </Link>
             </MenuItem>
           </>
         )}

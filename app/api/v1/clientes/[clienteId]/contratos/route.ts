@@ -1,3 +1,4 @@
+import { fetchErrorHandler } from "@/app/_lib/errors/fetchErrorHandler";
 import { Contrato } from "@/app/_types/contrato/Contrato";
 
 const API_URL = process.env.API_URL;
@@ -37,16 +38,14 @@ export async function POST(req: Request, { params }: { params: Params }) {
       },
     });
 
+    if (!res.ok) {
+      throw new Error("Erro ao criar contrato");
+    }
+
     const contrato: Contrato = await res.json();
 
     return Response.json(contrato);
   } catch (error) {
-    if (error instanceof Error)
-      return Response.json(
-        { error: error.message },
-        {
-          status: 500,
-        }
-      );
+    fetchErrorHandler(error);
   }
 }
