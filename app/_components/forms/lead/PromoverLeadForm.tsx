@@ -1,6 +1,6 @@
 "use client";
 
-import { Grid, Step, StepLabel, Stepper } from "@mui/material";
+import { Grid, Step, StepLabel, Stepper, Typography } from "@mui/material";
 import { ClienteQueryProvider } from "@/app/_components/queryProviders/ClienteQueryProvider";
 import { useState } from "react";
 import { ClienteFormBase } from "@/app/_components/forms/cliente/ClienteFormBase";
@@ -14,11 +14,10 @@ import * as navigation from "next/navigation";
 
 type PromoverLeadFormProps = {
   leadId: string;
-  oportunidadeId: string;
 };
 
 export default function PromoverLeadForm(props: PromoverLeadFormProps) {
-  const { leadId, oportunidadeId } = props;
+  const { leadId } = props;
 
   const [activeStep, setActiveStep] = useState(0);
 
@@ -37,17 +36,12 @@ export default function PromoverLeadForm(props: PromoverLeadFormProps) {
     }
 
     try {
-      const res = await promoteLead(leadId, cliente, formData, oportunidadeId);
+      const res = await promoteLead(leadId, cliente, formData);
 
-      if (res) {
-        const { cliente, oportunidade } = res;
-
-        router.push(
-          `/clientes/${cliente.id}/oportunidades/${oportunidade.id}/gerar-contrato`
-        );
-      } else {
+      if (!res.ok) {
         throw new Error("Erro ao promover lead");
       }
+      router.push(`/clientes`);
     } catch (error) {
       if (error instanceof Error) {
         throw new Error(error.message);
@@ -62,32 +56,25 @@ export default function PromoverLeadForm(props: PromoverLeadFormProps) {
     async () => await getLeadById(leadId)
   );
 
-  if (!lead)
-    return (
-      <>
-        <h1>Carregando...</h1>
-      </>
-    );
+  if (!lead) return <Typography variant={"h6"}>Carregando...</Typography>;
 
   const steps = [
     {
       label: "Dados do cliente",
       content: (
-        <>
-          <ClienteQueryProvider>
-            <ClienteFormBase
-              onSubmit={handleNext}
-              isError={false}
-              isLoading={false}
-              isSuccess={false}
-              defaultValues={{
-                nomeFantasia: lead.nomeFantasia,
-                ativo: true,
-                cnpj: "",
-              }}
-            />
-          </ClienteQueryProvider>
-        </>
+        <ClienteQueryProvider>
+          <ClienteFormBase
+            onSubmit={handleNext}
+            isError={false}
+            isLoading={false}
+            isSuccess={false}
+            defaultValues={{
+              nomeFantasia: lead.nomeFantasia,
+              ativo: true,
+              cnpj: "",
+            }}
+          />
+        </ClienteQueryProvider>
       ),
     },
     {
@@ -109,7 +96,7 @@ export default function PromoverLeadForm(props: PromoverLeadFormProps) {
   ];
 
   return (
-    <Grid container direction={"column"} spacing={4} marginTop={2}>
+    <Grid container direction={"column"} spacing={4} marginTop={1}>
       <Grid item>
         <Stepper activeStep={activeStep}>
           {steps.map((step) => {

@@ -31,7 +31,7 @@ export const LeadOportunidadeCreateForm = (
       },
     });
 
-    if (!res.ok) {
+    if (res.ok) {
       router.refresh();
       router.push(`/leads/${leadId}/oportunidades`);
     }

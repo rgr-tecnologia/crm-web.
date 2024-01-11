@@ -44,6 +44,11 @@ export function LeadsListActions(props: LeadsListActionsProps) {
             <Button variant="text">Ver oportunidades</Button>
           </Link>
         </MenuItem>
+        <MenuItem>
+          <Link href={`/leads/${id}/promote`}>
+            <Button variant="text">Tornar cliente</Button>
+          </Link>
+        </MenuItem>
       </Menu>
     </Box>
   );

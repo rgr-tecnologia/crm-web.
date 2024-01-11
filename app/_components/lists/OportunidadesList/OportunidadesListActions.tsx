@@ -74,13 +74,6 @@ export function OportunidadesListActions(props: OportunidadesListActionsProps) {
             <MenuItem onClick={() => encerrarOportunidade(oportunidade)}>
               Encerrar oportunidade
             </MenuItem>
-            <MenuItem>
-              <Link
-                href={`/leads/${leadId}/oportunidades/${id}/gerar-contrato`}
-              >
-                <Button variant="text">Gerar contrato</Button>
-              </Link>
-            </MenuItem>
           </>
         )}
       </Menu>
