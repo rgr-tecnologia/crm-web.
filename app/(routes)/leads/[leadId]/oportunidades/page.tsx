@@ -1,4 +1,4 @@
-import { OportunidadesList } from "@/app/_components/lists/OportunidadesList/OportunidadesList";
+import { LeadsOportunidadesList } from "@/app/_components/lists/LeadsOportunidadesList/LeadsOportunidadesList";
 import { LeadOportunidade } from "@/app/_types/lead/oportunidade/Oportunidade";
 import { Button, Container, Grid, Typography } from "@mui/material";
 import Link from "next/link";
@@ -25,7 +25,7 @@ export default async function Page({ params }: { params: Params }) {
   });
 
   const content = oportunidades.length ? (
-    <OportunidadesList oportunidades={oportunidades} />
+    <LeadsOportunidadesList oportunidades={oportunidades} />
   ) : (
     <Typography>Nenhuma oportunidade cadastrada</Typography>
   );

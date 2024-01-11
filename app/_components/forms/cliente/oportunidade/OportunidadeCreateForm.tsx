@@ -40,7 +40,7 @@ export const OportunidadeCreateForm = (props: OportunidadeCreateFormProps) => {
       <CardContent>
         <Grid container spacing={2} direction={"column"}>
           <Grid item>
-            <Typography variant="h6">Nova oportunidade</Typography>
+            <Typography variant="h6">Criar oportunidade</Typography>
           </Grid>
           <Grid item>
             <OportunidadeFormBase onSubmit={onSubmit} clienteId={clienteId} />

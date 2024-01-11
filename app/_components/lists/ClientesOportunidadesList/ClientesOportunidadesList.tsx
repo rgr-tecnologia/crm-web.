@@ -1,13 +1,13 @@
 import { Card, CardContent, Divider, Grid, Typography } from "@mui/material";
-import { OportunidadesListActions } from "./OportunidadesListActions";
+import { ClientesOportunidadesListActions } from "./ClientesOportunidadesListActions";
 import { ListOrderIdentifier } from "../ListOrderIdentifier/ListOrderIdentifier";
-import { LeadOportunidade } from "@/app/_types/lead/oportunidade/Oportunidade";
+import { Oportunidade } from "@/app/_types/cliente/oportunidade/Oportunidade";
 
-type OportunidadesListProps = {
-  oportunidades: LeadOportunidade[];
+type ClientesOportunidadesListListProps = {
+  oportunidades: Oportunidade[];
 };
 
-const orderLeadOportunidades = (oportunidades: LeadOportunidade[]) => {
+const orderLeadOportunidades = (oportunidades: Oportunidade[]) => {
   return oportunidades.sort((a, b) => {
     const aDate = new Date(a.createdAt);
     const bDate = new Date(b.createdAt);
@@ -15,7 +15,9 @@ const orderLeadOportunidades = (oportunidades: LeadOportunidade[]) => {
   });
 };
 
-export function OportunidadesList(props: OportunidadesListProps) {
+export function ClientesOportunidadesList(
+  props: ClientesOportunidadesListListProps
+) {
   const { oportunidades } = props;
   return (
     <Grid container spacing={2}>
@@ -94,7 +96,9 @@ export function OportunidadesList(props: OportunidadesListProps) {
                   </Grid>
 
                   <Grid item xs>
-                    <OportunidadesListActions oportunidade={oportunidade} />
+                    <ClientesOportunidadesListActions
+                      oportunidade={oportunidade}
+                    />
                   </Grid>
                 </Grid>
               </CardContent>

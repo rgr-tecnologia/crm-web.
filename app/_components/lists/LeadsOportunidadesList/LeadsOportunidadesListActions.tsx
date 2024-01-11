@@ -7,13 +7,15 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-type OportunidadesListActionsProps = {
+type LeadsOportunidadesListActionsProps = {
   oportunidade: LeadOportunidade;
 };
 
 const BFF_URL = process.env.NEXT_PUBLIC_BFF_URL;
 
-export function OportunidadesListActions(props: OportunidadesListActionsProps) {
+export function LeadsOportunidadesListActions(
+  props: LeadsOportunidadesListActionsProps
+) {
   const { oportunidade } = props;
   const { id, leadId } = oportunidade;
   const router = useRouter();

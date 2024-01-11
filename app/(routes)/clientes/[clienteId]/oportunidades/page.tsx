@@ -1,4 +1,4 @@
-import { OportunidadesList } from "@/app/_components/lists/OportunidadesList/OportunidadesList";
+import { ClientesOportunidadesList } from "@/app/_components/lists/ClientesOportunidadesList/ClientesOportunidadesList";
 import { Oportunidade } from "@/app/_types/cliente/oportunidade/Oportunidade";
 import { Button, Container, Grid, Typography } from "@mui/material";
 import Link from "next/link";
@@ -25,7 +25,7 @@ export default async function Page({ params }: { params: Params }) {
   });
 
   const content = oportunidades.length ? (
-    <OportunidadesList oportunidades={oportunidades} />
+    <ClientesOportunidadesList oportunidades={oportunidades} />
   ) : (
     <Typography>Nenhuma oportunidade cadastrada</Typography>
   );

@@ -45,7 +45,7 @@ export const UpdateOportunidadeForm = (props: UpdateOportunidadeFormProps) => {
       <CardContent>
         <Grid container spacing={2} direction={"column"}>
           <Grid item>
-            <Typography variant="h6">Novo lead</Typography>
+            <Typography variant="h6">Atualizar oportunidade</Typography>
           </Grid>
           <Grid item>
             <OportunidadeFormBase
