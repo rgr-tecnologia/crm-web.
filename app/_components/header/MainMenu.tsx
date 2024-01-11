@@ -4,17 +4,6 @@ import Link from "next/link";
 export function MainMenu() {
   return (
     <Toolbar>
-      <Link href={"/"} passHref>
-        <Button
-          variant="text"
-          sx={{
-            color: "#fff",
-          }}
-        >
-          Home
-        </Button>
-      </Link>
-
       <Link href={"/leads"} passHref={true}>
         <Button
           variant="text"

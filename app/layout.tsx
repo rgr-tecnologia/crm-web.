@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Box } from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
 import { Header } from "./_components/header/Header";
+import { SideMenu } from "./_components/SideMenu/SideMenu";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,8 +19,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        <Box>{children}</Box>
+        <Box sx={{ display: "flex" }}>
+          <CssBaseline />
+          <Header />
+          <SideMenu />
+
+          <Box component={"main"} sx={{ flexGrow: 1, p: 8 }}>
+            {children}
+          </Box>
+        </Box>
       </body>
     </html>
   );
