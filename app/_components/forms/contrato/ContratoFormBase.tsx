@@ -23,6 +23,7 @@ import { useQuery } from "react-query";
 import { getRepresentantesByClienteId } from "@/app/_lib/utils/representante/getRepresentantesByClienteId";
 import { ContratoCaracteristica } from "@/app/_types/_enums/ContratoCaracteristica";
 import { Oportunidade } from "@/app/_types/cliente/oportunidade/Oportunidade";
+import { useEffect } from "react";
 
 type ContratoFormBaseProps = {
   onSubmit: (data: any) => void;
@@ -48,6 +49,7 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<Contrato>({
     defaultValues: {
       dataInicio: new Date(),
@@ -61,6 +63,12 @@ export const ContratoFormBase = (props: ContratoFormBaseProps) => {
       ...defaultValues,
     },
   });
+
+  useEffect(() => {
+    if (defaultValues) {
+      reset(defaultValues);
+    }
+  }, [defaultValues]);
 
   const rules = {
     required: "Campo obrigatório",
