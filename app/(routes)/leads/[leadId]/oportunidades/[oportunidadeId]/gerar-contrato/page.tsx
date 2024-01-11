@@ -6,15 +6,16 @@ import { LeadQueryProvider } from "@/app/_components/queryProviders/LeadQueryPro
 
 type PageParams = {
   leadId: string;
+  oportunidadeId: string;
 };
 
 export default function Page({ params }: { params: PageParams }) {
-  const { leadId } = params;
+  const { leadId, oportunidadeId } = params;
 
   return (
     <Container>
       <LeadQueryProvider>
-        <PromoverLeadForm leadId={leadId} />
+        <PromoverLeadForm leadId={leadId} oportunidadeId={oportunidadeId} />
       </LeadQueryProvider>
     </Container>
   );

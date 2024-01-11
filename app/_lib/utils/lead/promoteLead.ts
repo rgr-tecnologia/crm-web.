@@ -9,14 +9,15 @@ const BFF_URL = process.env.NEXT_PUBLIC_BFF_URL;
 export async function promoteLead(
   id: string,
   cliente: CreateCliente,
-  representante: CreateRepresentante
+  representante: CreateRepresentante,
+  oportunidadeId: string
 ) {
   const res = await fetch(`${BFF_URL}/leads/${id}/promote`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ cliente, representante }),
+    body: JSON.stringify({ cliente, representante, oportunidadeId }),
   });
 
   const resJSON: {

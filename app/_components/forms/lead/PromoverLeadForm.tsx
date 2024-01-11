@@ -11,14 +11,14 @@ import { promoteLead } from "@/app/_lib/utils/lead/promoteLead";
 import { CreateCliente } from "@/app/_types/cliente/CreateCliente";
 import { CreateRepresentante } from "@/app/_types/representante/CreateRepresentante";
 import * as navigation from "next/navigation";
-import { ContratoFormBase } from "../contrato/ContratoFormBase";
 
 type PromoverLeadFormProps = {
   leadId: string;
+  oportunidadeId: string;
 };
 
 export default function PromoverLeadForm(props: PromoverLeadFormProps) {
-  const { leadId } = props;
+  const { leadId, oportunidadeId } = props;
 
   const [activeStep, setActiveStep] = useState(0);
 
@@ -37,7 +37,7 @@ export default function PromoverLeadForm(props: PromoverLeadFormProps) {
     }
 
     try {
-      const res = await promoteLead(leadId, cliente, formData);
+      const res = await promoteLead(leadId, cliente, formData, oportunidadeId);
 
       if (res) {
         const { cliente, oportunidade } = res;
