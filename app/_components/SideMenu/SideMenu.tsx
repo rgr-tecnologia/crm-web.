@@ -13,29 +13,35 @@ import {
 import Link from "next/link";
 import PersonIcon from "@mui/icons-material/Person";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import CalculateIcon from "@mui/icons-material/Calculate";
 
-const options = {
-  leads: {
+const options = [
+  {
     name: "Leads",
     path: "/leads",
     icon: <></>,
   },
-  clientes: {
+  {
     name: "Clientes",
     path: "/clientes",
     icon: <></>,
   },
-  usuarios: {
+  {
     name: "Usuários",
     path: "/usuarios",
     icon: <PersonIcon />,
   },
-  calculadora: {
-    name: "Calculadora",
-    path: "/calculadora",
+  {
+    name: "Contratos",
+    path: "/contratos",
     icon: <AttachMoneyIcon />,
   },
-};
+  {
+    name: "Calculadora",
+    path: "/calculadora",
+    icon: <CalculateIcon />,
+  },
+];
 
 export function SideMenu() {
   return (
