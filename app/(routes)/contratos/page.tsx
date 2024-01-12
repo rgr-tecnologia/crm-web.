@@ -2,15 +2,10 @@ import { ContratosList } from "@/app/_components/lists/ContratosList/ContratosLi
 import { Contrato } from "@/app/_types/contrato/Contrato";
 import { Container } from "@mui/material";
 
-type PageParams = {
-  clienteId: string;
-  contratoId: string;
-};
-
 const BFF_URL = process.env.BFF_URL;
 
-async function getContratos(clienteId: string): Promise<Contrato[]> {
-  const res = await fetch(`${BFF_URL}/clientes/${clienteId}/contratos`, {
+async function getContratos(): Promise<Contrato[]> {
+  const res = await fetch(`${BFF_URL}/contratos`, {
     next: {
       revalidate: 0,
     },
@@ -18,9 +13,8 @@ async function getContratos(clienteId: string): Promise<Contrato[]> {
   return res.json();
 }
 
-export default async function Page({ params }: { params: PageParams }) {
-  const { clienteId } = params;
-  const contratos = await getContratos(clienteId);
+export default async function Contratos() {
+  const contratos = await getContratos();
 
   contratos.forEach((contrato) => {
     contrato.createdAt = new Date(contrato.createdAt);
@@ -36,7 +30,7 @@ export default async function Page({ params }: { params: PageParams }) {
         marginTop: 2,
       }}
     >
-      <ContratosList contratos={contratos} viewMode={true} />
+      <ContratosList contratos={contratos} />
     </Container>
   );
 }

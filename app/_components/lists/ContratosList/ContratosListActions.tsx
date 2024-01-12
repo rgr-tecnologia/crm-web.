@@ -24,7 +24,9 @@ export function ContratosListActions({ contrato }: { contrato: Contrato }) {
       </Button>
       <Menu onClose={onClose} anchorEl={anchorEl} open={open}>
         <MenuItem>
-          <Link href={`contratos/${contrato.id}`}>
+          <Link
+            href={`clientes/${contrato.clienteId}/contratos/${contrato.id}`}
+          >
             <Button variant="text">Ver detalhes</Button>
           </Link>
         </MenuItem>
