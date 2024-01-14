@@ -4,7 +4,6 @@ import {
   Box,
   Drawer,
   List,
-  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
@@ -57,7 +56,11 @@ export function SideMenu() {
       <Box sx={{ overflow: "auto" }}>
         <List>
           {Object.values(options).map((option) => (
-            <ListItemButton href={option.path} LinkComponent={Link}>
+            <ListItemButton
+              href={option.path}
+              LinkComponent={Link}
+              key={option.name}
+            >
               <ListItemIcon>{option.icon}</ListItemIcon>
               <ListItemText primary={option.name} />
             </ListItemButton>

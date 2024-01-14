@@ -1,5 +1,13 @@
-import { TextField } from "@mui/material";
+import { Container } from "@mui/material";
 
 export default function Page() {
-  return <form></form>;
+  return (
+    <Container
+      sx={{
+        marginTop: 2,
+      }}
+    >
+      <h1>Usuarios</h1>
+    </Container>
+  );
 }
