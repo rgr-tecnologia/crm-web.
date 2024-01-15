@@ -1,8 +1,8 @@
-import { RepresentateEndereco } from "../RepresentanteEndereco";
+import { RepresentateEndereco } from "../../RepresentanteEndereco";
 
-export type Representate = {
+export type RepresentanteProspeccao = {
   id: string;
-  clienteId: string;
+  clienteProspeccaoId: string;
   nome: string;
   departamento: string;
   cargo: string;

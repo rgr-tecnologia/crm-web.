@@ -1,7 +1,7 @@
 import { fetchErrorHandler } from "@/app/_lib/errors/fetchErrorHandler";
 
 type Params = {
-  leadId: string;
+  prospeccaoId: string;
   oportunidadeId: string;
 };
 
@@ -9,9 +9,9 @@ const API_URL = process.env.API_URL;
 
 export async function GET(req: Request, { params }: { params: Params }) {
   try {
-    const { leadId, oportunidadeId } = params;
+    const { prospeccaoId, oportunidadeId } = params;
     const res = await fetch(
-      `${API_URL}/leads/${leadId}/oportunidades/${oportunidadeId}`,
+      `${API_URL}/prospeccoes/${prospeccaoId}/oportunidades/${oportunidadeId}`,
       {
         method: "GET",
         headers: {
@@ -28,11 +28,11 @@ export async function GET(req: Request, { params }: { params: Params }) {
 
 export async function PUT(req: Request, { params }: { params: Params }) {
   try {
-    const { leadId, oportunidadeId } = params;
+    const { prospeccaoId, oportunidadeId } = params;
     const body = await req.json();
 
     const res = await fetch(
-      `${API_URL}/leads/${leadId}/oportunidades/${oportunidadeId}`,
+      `${API_URL}/prospeccoes/${prospeccaoId}/oportunidades/${oportunidadeId}`,
       {
         method: "PUT",
         headers: {

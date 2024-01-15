@@ -4,7 +4,8 @@ import { OportunidadeEtapa } from "../../_enums/OportunidadeEtapa";
 
 export type LeadOportunidade = {
   id: string;
-  leadId: string;
+  clienteProspeccaoId: string;
+  representanteProspeccaoId: string;
   titulo: string;
   caracteristica: ContratoCaracteristica;
   areaExecutora: AreaExecutora;

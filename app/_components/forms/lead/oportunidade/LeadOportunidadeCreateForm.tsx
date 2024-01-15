@@ -3,37 +3,40 @@ import { useRouter } from "next/navigation";
 
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { LeadOportunidadeFormBase } from "./LeadOportunidadeBaseForm";
-import { LeadOportunidadeCreate } from "@/app/_types/lead/oportunidade/OportunidadeCreate";
+import { LeadOportunidadeCreate } from "@/app/_types/prospeccao/oportunidade/OportunidadeCreate";
 
 const BFF_URL = process.env.NEXT_PUBLIC_BFF_URL;
 
 type LeadOportunidadeCreateFormProps = {
-  leadId: string;
+  prospeccaoId: string;
 };
 
 export const LeadOportunidadeCreateForm = (
   props: LeadOportunidadeCreateFormProps
 ) => {
-  const { leadId } = props;
+  const { prospeccaoId } = props;
   const router = useRouter();
 
   const onSubmit = async (data: LeadOportunidadeCreate) => {
     data.valor = Number(data.valor);
 
-    const res = await fetch(`${BFF_URL}/leads/${leadId}/oportunidades`, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      next: {
-        revalidate: 0,
-      },
-    });
+    const res = await fetch(
+      `${BFF_URL}/prospeccoes/${prospeccaoId}/oportunidades`,
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        next: {
+          revalidate: 0,
+        },
+      }
+    );
 
     if (res.ok) {
       router.refresh();
-      router.push(`/leads/${leadId}/oportunidades`);
+      router.push(`/prospeccoes/${prospeccaoId}/oportunidades`);
     }
   };
 
@@ -45,7 +48,10 @@ export const LeadOportunidadeCreateForm = (
             <Typography variant="h6">Criar oportunidade</Typography>
           </Grid>
           <Grid item>
-            <LeadOportunidadeFormBase onSubmit={onSubmit} leadId={leadId} />
+            <LeadOportunidadeFormBase
+              onSubmit={onSubmit}
+              clienteProspeccaoId={prospeccaoId}
+            />
           </Grid>
         </Grid>
       </CardContent>

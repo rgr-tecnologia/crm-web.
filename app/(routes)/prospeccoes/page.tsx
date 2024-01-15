@@ -1,4 +1,5 @@
 import { ProspeccoesList } from "@/app/_components/lists/prospeccoes/ProspeccoesList";
+import { LeadQueryProvider } from "@/app/_components/queryProviders/LeadQueryProvider";
 import { fetchErrorHandler } from "@/app/_lib/errors/fetchErrorHandler";
 import { Prospeccao } from "@/app/_types/prospeccao/Prospeccao";
 import { Container, Typography } from "@mui/material";
@@ -33,12 +34,14 @@ export default async function page() {
   });
 
   return (
-    <Container
-      sx={{
-        marginTop: 2,
-      }}
-    >
-      <ProspeccoesList prospeccoes={prospeccoes || []} />
-    </Container>
+    <LeadQueryProvider>
+      <Container
+        sx={{
+          marginTop: 2,
+        }}
+      >
+        <ProspeccoesList prospeccoes={prospeccoes || []} />
+      </Container>
+    </LeadQueryProvider>
   );
 }

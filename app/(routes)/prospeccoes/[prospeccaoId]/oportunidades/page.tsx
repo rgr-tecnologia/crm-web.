@@ -1,23 +1,23 @@
 import { LeadsOportunidadesList } from "@/app/_components/lists/LeadsOportunidadesList/LeadsOportunidadesList";
-import { LeadOportunidade } from "@/app/_types/lead/oportunidade/Oportunidade";
+import { LeadOportunidade } from "@/app/_types/prospeccao/oportunidade/Oportunidade";
 import { Button, Container, Grid, Typography } from "@mui/material";
 import Link from "next/link";
 
 type Params = {
-  leadId: string;
+  prospeccaoId: string;
 };
 
 const BFF_URL = process.env.BFF_URL;
 
-async function getLeadOportunidades(leadId: string) {
-  const urlToFetch = `${BFF_URL}/leads/${leadId}/oportunidades`;
+async function getProspeccoes(prospeccaoId: string) {
+  const urlToFetch = `${BFF_URL}/prospeccoes/${prospeccaoId}/oportunidades`;
   const response = await fetch(urlToFetch);
   return response.json();
 }
 
 export default async function Page({ params }: { params: Params }) {
-  const { leadId } = params;
-  const oportunidades = await getLeadOportunidades(leadId);
+  const { prospeccaoId } = params;
+  const oportunidades = await getProspeccoes(prospeccaoId);
 
   oportunidades.forEach((oportunidade: LeadOportunidade) => {
     oportunidade.createdAt = new Date(oportunidade.createdAt);

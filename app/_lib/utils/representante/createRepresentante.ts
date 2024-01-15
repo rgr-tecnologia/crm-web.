@@ -1,5 +1,5 @@
-import { CreateRepresentante } from "@/app/_types/representante/CreateRepresentante";
-import { Representate } from "@/app/_types/representante/Representante";
+import { CreateRepresentante } from "@/app/_types/cliente/representante/CreateRepresentante";
+import { Representate } from "@/app/_types/cliente/representante/Representante";
 
 const BFF_URL = process.env.NEXT_PUBLIC_BFF_URL;
 

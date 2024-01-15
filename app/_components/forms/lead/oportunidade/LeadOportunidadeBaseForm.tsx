@@ -17,23 +17,33 @@ import "dayjs/locale/pt-br";
 import { OportunidadeEtapa } from "@/app/_types/_enums/OportunidadeEtapa";
 import { ContratoCaracteristica } from "@/app/_types/_enums/ContratoCaracteristica";
 import { AreaExecutora } from "@/app/_types/_enums/AreaExecutora";
-import { LeadOportunidadeCreate } from "@/app/_types/lead/oportunidade/OportunidadeCreate";
+import { LeadOportunidadeCreate } from "@/app/_types/prospeccao/oportunidade/OportunidadeCreate";
+import { getRepresentantesProspeccao } from "@/app/_lib/utils/representante/getRepresententantesProspeccao";
+import { useQuery } from "react-query";
 
 type LeadOportunidadeFormBaseProps = {
   onSubmit: (data: LeadOportunidadeCreate) => void;
   defaultValues?: LeadOportunidadeCreate;
+  clienteProspeccaoId: string;
 };
 
 export const LeadOportunidadeFormBase = (
   props: LeadOportunidadeFormBaseProps
 ) => {
-  const { defaultValues, onSubmit } = props;
+  const { defaultValues, onSubmit, clienteProspeccaoId } = props;
+
+  const representantes = useQuery("representantes", async () =>
+    getRepresentantesProspeccao({
+      clienteProspeccaoId,
+    })
+  );
 
   const {
     control,
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm<LeadOportunidadeCreate>({
     defaultValues: {
       etapa: OportunidadeEtapa.NEGOCIACAO,
@@ -68,6 +78,22 @@ export const LeadOportunidadeFormBase = (
                 error={!!errors.titulo}
                 helperText={errors.titulo?.message}
               />
+            )}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Controller
+            name="representanteProspeccaoId"
+            control={control}
+            rules={rules}
+            render={({ field }) => (
+              <Select fullWidth {...field} label="Representante">
+                {representantes.data?.map((representante) => (
+                  <MenuItem value={representante.id} key={representante.id}>
+                    {representante.nome}
+                  </MenuItem>
+                ))}
+              </Select>
             )}
           />
         </Grid>
@@ -159,11 +185,14 @@ export const LeadOportunidadeFormBase = (
             )}
           />
         </Grid>
-        <Grid item xs={12}>
-          <Button variant="contained" color="primary" type="submit">
-            Salvar
-          </Button>
-        </Grid>
+        {watch("etapa") !== OportunidadeEtapa.PERDIDO &&
+          OportunidadeEtapa.CONLUIDO && (
+            <Grid item xs={12}>
+              <Button variant="contained" color="primary" type="submit">
+                Salvar
+              </Button>
+            </Grid>
+          )}
       </Grid>
     </form>
   );

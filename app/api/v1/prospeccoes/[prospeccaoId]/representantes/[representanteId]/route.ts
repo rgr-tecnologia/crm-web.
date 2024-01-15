@@ -3,14 +3,14 @@ import { Representate } from "@/app/_types/cliente/representante/Representante";
 const API_URL = process.env.API_URL;
 
 type Params = {
-  clienteId: string;
+  prospeccaoId: string;
   representanteId: string;
 };
 
 export async function GET(req: Request, { params }: { params: Params }) {
-  const { clienteId, representanteId } = params;
+  const { prospeccaoId, representanteId } = params;
   const res = await fetch(
-    `${API_URL}/clientes/${clienteId}/representantes/${representanteId}`
+    `${API_URL}/prospeccoes/${prospeccaoId}/representantes/${representanteId}`
   );
   const representante: Representate = await res.json();
 
@@ -18,11 +18,11 @@ export async function GET(req: Request, { params }: { params: Params }) {
 }
 
 export async function PUT(req: Request, { params }: { params: Params }) {
-  const { clienteId, representanteId } = params;
+  const { prospeccaoId, representanteId } = params;
 
   const body = await req.json();
   const res = await fetch(
-    `${API_URL}/clientes/${clienteId}/representantes/${representanteId}`,
+    `${API_URL}/prospeccoes/${prospeccaoId}/representantes/${representanteId}`,
     {
       method: "PUT",
       headers: {

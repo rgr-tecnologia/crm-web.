@@ -6,10 +6,10 @@ import { useQuery } from "react-query";
 import { getLeadById } from "@/app/_lib/utils/lead/getLeadById";
 import { RepresentanteFormBase } from "../representante/RepresentanteFormBase";
 import { promoteLead } from "@/app/_lib/utils/lead/promoteLead";
-import { CreateRepresentante } from "@/app/_types/representante/CreateRepresentante";
+import { CreateRepresentante } from "@/app/_types/cliente/representante/CreateRepresentante";
 import * as navigation from "next/navigation";
 import { LeadOportunidadeFormBase } from "./oportunidade/LeadOportunidadeBaseForm";
-import { LeadOportunidadeCreate } from "@/app/_types/lead/oportunidade/OportunidadeCreate";
+import { LeadOportunidadeCreate } from "@/app/_types/prospeccao/oportunidade/OportunidadeCreate";
 
 type PromoverLeadFormProps = {
   leadId: string;

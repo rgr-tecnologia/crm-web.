@@ -1,6 +1,6 @@
 "use client";
 
-import { CreateRepresentante } from "@/app/_types/representante/CreateRepresentante";
+import { CreateRepresentante } from "@/app/_types/cliente/representante/CreateRepresentante";
 import {
   Divider,
   FormHelperText,

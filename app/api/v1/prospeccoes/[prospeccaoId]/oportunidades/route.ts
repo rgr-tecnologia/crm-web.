@@ -1,16 +1,18 @@
 import { fetchErrorHandler } from "@/app/_lib/errors/fetchErrorHandler";
-import { LeadOportunidade } from "@/app/_types/lead/oportunidade/Oportunidade";
+import { LeadOportunidade } from "@/app/_types/prospeccao/oportunidade/Oportunidade";
 
 type Params = {
-  leadId: string;
+  prospeccaoId: string;
 };
 
 const API_URL = process.env.API_URL;
 
 export async function GET(req: Request, { params }: { params: Params }) {
   try {
-    const { leadId } = params;
-    const res = await fetch(`${API_URL}/leads/${leadId}/oportunidades/`);
+    const { prospeccaoId } = params;
+    const res = await fetch(
+      `${API_URL}/prospeccoes/${prospeccaoId}/oportunidades/`
+    );
     const clientes: LeadOportunidade[] = await res.json();
 
     return Response.json(clientes);
@@ -21,15 +23,18 @@ export async function GET(req: Request, { params }: { params: Params }) {
 
 export async function POST(req: Request, { params }: { params: Params }) {
   try {
-    const { leadId } = params;
+    const { prospeccaoId } = params;
     const body = await req.json();
-    const res = await fetch(`${API_URL}/leads/${leadId}/oportunidades/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
+    const res = await fetch(
+      `${API_URL}/prospeccoes/${prospeccaoId}/oportunidades/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
     const cliente: LeadOportunidade = await res.json();
 
     return Response.json(cliente);
