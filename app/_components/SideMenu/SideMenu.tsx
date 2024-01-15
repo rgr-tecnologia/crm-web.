@@ -21,6 +21,11 @@ const options = [
     icon: <></>,
   },
   {
+    name: "Prospecções",
+    path: "/prospeccoes",
+    icon: <></>,
+  },
+  {
     name: "Clientes",
     path: "/clientes",
     icon: <></>,

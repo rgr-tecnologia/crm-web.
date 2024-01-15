@@ -20,12 +20,21 @@ export async function POST(req: Request, { params }: { params: Params }) {
       body: JSON.stringify(data),
     });
 
-    const resJSON: {
-      cliente: Cliente;
-      representante: Representate;
-    } = await res.json();
+    if (res.ok) {
+      const { cliente, representante } = (await res.json()) as {
+        cliente: Cliente;
+        representante: Representate;
+      };
+      return {
+        status: 200,
+        body: {
+          cliente,
+          representante,
+        },
+      };
+    }
 
-    return Response.json(resJSON);
+    throw new Error("Erro ao promover lead");
   } catch (error) {
     return fetchErrorHandler(error);
   }

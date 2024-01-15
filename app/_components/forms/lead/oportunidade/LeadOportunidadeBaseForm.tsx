@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import {
   Button,
   FormHelperText,
@@ -9,27 +10,24 @@ import {
   TextField,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import { OportunidadeEtapa } from "@/app/_types/_enums/OportunidadeEtapa";
-import "dayjs/locale/pt-br";
-import { ContratoCaracteristica } from "@/app/_types/_enums/ContratoCaracteristica";
-import { AreaExecutora } from "@/app/_types/_enums/AreaExecutora";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import "dayjs/locale/pt-br";
 import dayjs from "dayjs";
-import { useEffect } from "react";
+import "dayjs/locale/pt-br";
+import { OportunidadeEtapa } from "@/app/_types/_enums/OportunidadeEtapa";
+import { ContratoCaracteristica } from "@/app/_types/_enums/ContratoCaracteristica";
+import { AreaExecutora } from "@/app/_types/_enums/AreaExecutora";
 import { LeadOportunidadeCreate } from "@/app/_types/lead/oportunidade/OportunidadeCreate";
 
 type LeadOportunidadeFormBaseProps = {
   onSubmit: (data: LeadOportunidadeCreate) => void;
   defaultValues?: LeadOportunidadeCreate;
-  leadId: string;
 };
 
 export const LeadOportunidadeFormBase = (
   props: LeadOportunidadeFormBaseProps
 ) => {
-  const { defaultValues, onSubmit, leadId } = props;
+  const { defaultValues, onSubmit } = props;
 
   const {
     control,
@@ -39,6 +37,7 @@ export const LeadOportunidadeFormBase = (
   } = useForm<LeadOportunidadeCreate>({
     defaultValues: {
       etapa: OportunidadeEtapa.NEGOCIACAO,
+      dataFechamentoPrevista: new Date(),
       ...defaultValues,
     },
   });
@@ -118,7 +117,6 @@ export const LeadOportunidadeFormBase = (
             )}
           />
         </Grid>
-
         <Grid item>
           <Controller
             name="dataFechamentoPrevista"
@@ -144,7 +142,6 @@ export const LeadOportunidadeFormBase = (
             )}
           />
         </Grid>
-
         <Grid item xs={12}>
           <Controller
             name="valor"
@@ -162,7 +159,6 @@ export const LeadOportunidadeFormBase = (
             )}
           />
         </Grid>
-
         <Grid item xs={12}>
           <Button variant="contained" color="primary" type="submit">
             Salvar

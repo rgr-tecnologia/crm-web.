@@ -1,16 +1,15 @@
 "use client";
 
 import { Grid, Step, StepLabel, Stepper, Typography } from "@mui/material";
-import { ClienteQueryProvider } from "@/app/_components/queryProviders/ClienteQueryProvider";
 import { useState } from "react";
-import { ClienteFormBase } from "@/app/_components/forms/cliente/ClienteFormBase";
 import { useQuery } from "react-query";
 import { getLeadById } from "@/app/_lib/utils/lead/getLeadById";
 import { RepresentanteFormBase } from "../representante/RepresentanteFormBase";
 import { promoteLead } from "@/app/_lib/utils/lead/promoteLead";
-import { CreateCliente } from "@/app/_types/cliente/CreateCliente";
 import { CreateRepresentante } from "@/app/_types/representante/CreateRepresentante";
 import * as navigation from "next/navigation";
+import { LeadOportunidadeFormBase } from "./oportunidade/LeadOportunidadeBaseForm";
+import { LeadOportunidadeCreate } from "@/app/_types/lead/oportunidade/OportunidadeCreate";
 
 type PromoverLeadFormProps = {
   leadId: string;
@@ -21,22 +20,23 @@ export default function PromoverLeadForm(props: PromoverLeadFormProps) {
 
   const [activeStep, setActiveStep] = useState(0);
 
-  const [cliente, setCliente] = useState<CreateCliente>();
+  const [representante, setRepresentante] = useState<CreateRepresentante>();
 
   const router = navigation.useRouter();
 
-  const handleNext = (formData: CreateCliente) => {
-    setCliente(formData);
+  const handleNext = (formData: CreateRepresentante) => {
+    setRepresentante(formData);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
-  const onSubmit = async (formData: CreateRepresentante) => {
-    if (!cliente) {
-      return;
-    }
-
+  const onSubmit = async (formData: LeadOportunidadeCreate) => {
     try {
-      const res = await promoteLead(leadId, cliente, formData);
+      formData.valor = Number(formData.valor);
+      if (!representante) {
+        throw new Error("Erro ao gerar oportunidade");
+      }
+
+      const res = await promoteLead(leadId, representante, formData);
 
       if (!res.ok) {
         throw new Error("Erro ao promover lead");
@@ -60,28 +60,10 @@ export default function PromoverLeadForm(props: PromoverLeadFormProps) {
 
   const steps = [
     {
-      label: "Dados do cliente",
-      content: (
-        <ClienteQueryProvider>
-          <ClienteFormBase
-            onSubmit={handleNext}
-            isError={false}
-            isLoading={false}
-            isSuccess={false}
-            defaultValues={{
-              nomeFantasia: lead.nomeFantasia,
-              ativo: true,
-              cnpj: "",
-            }}
-          />
-        </ClienteQueryProvider>
-      ),
-    },
-    {
       label: "Dados do representante",
       content: (
         <RepresentanteFormBase
-          onSubmit={onSubmit}
+          onSubmit={handleNext}
           isError={false}
           isLoading={false}
           isSuccess={false}
@@ -92,6 +74,10 @@ export default function PromoverLeadForm(props: PromoverLeadFormProps) {
           }}
         />
       ),
+    },
+    {
+      label: "Dados da oportunidade",
+      content: <LeadOportunidadeFormBase onSubmit={onSubmit} />,
     },
   ];
 
