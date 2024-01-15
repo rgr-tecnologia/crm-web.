@@ -1,7 +1,10 @@
-import { Card, CardContent, Divider, Grid, Typography } from "@mui/material";
-import { LeadsOportunidadesListActions } from "./LeadsOportunidadesListActions";
-import { ListOrderIdentifier } from "../ListOrderIdentifier/ListOrderIdentifier";
+"use client";
+import { Button, Grid, Typography } from "@mui/material";
 import { LeadOportunidade } from "@/app/_types/prospeccao/oportunidade/Oportunidade";
+import { AttachmentsModal } from "../../modals/prospeccaoOportunidades/attachmentsModal";
+import { useState } from "react";
+import Link from "next/link";
+import { LeadsOportunidadesCardList } from "./LeadsOportunidadesCardList";
 
 type OportunidadesListProps = {
   oportunidades: LeadOportunidade[];
@@ -17,93 +20,49 @@ const orderLeadOportunidades = (oportunidades: LeadOportunidade[]) => {
 
 export function LeadsOportunidadesList(props: OportunidadesListProps) {
   const { oportunidades } = props;
-  return (
-    <Grid container spacing={2}>
-      {orderLeadOportunidades(oportunidades).map((oportunidade, index) => {
-        const { id, titulo, createdAt, updatedAt, etapa } = oportunidade;
-        return (
-          <Grid item key={id} xs={12}>
-            <Card
-              sx={{
-                width: "100%",
-                borderLeft: "4px solid",
-                borderColor: "primary.main",
-              }}
-            >
-              <CardContent>
-                <Grid
-                  container
-                  direction={"row"}
-                  spacing={2}
-                  justifyContent={"space-around"}
-                >
-                  <Grid item>
-                    <ListOrderIdentifier index={index} />
-                  </Grid>
-                  <Grid container item spacing={1} direction={"column"} xs={10}>
-                    <Grid item>
-                      <Typography variant="caption">Título</Typography>
-                      <Typography variant="body1" fontWeight={"bold"}>
-                        {titulo}
-                      </Typography>
-                    </Grid>
-                    <Grid item>
-                      <Divider />
-                    </Grid>
-                    <Grid
-                      item
-                      container
-                      direction={"row"}
-                      justifyContent={"space-between"}
-                    >
-                      <Grid container item direction={"row"} spacing={1} xs={4}>
-                        <Grid item>
-                          <Typography variant="caption">Etapa</Typography>
-                        </Grid>
-                        <Grid item>
-                          <Typography variant="body1" fontWeight={"bold"}>
-                            {etapa}
-                          </Typography>
-                        </Grid>
-                      </Grid>
-                      <Grid container item direction={"row"} spacing={1} xs={4}>
-                        <Grid item>
-                          <Typography variant="caption">
-                            Data de criação
-                          </Typography>
-                        </Grid>
-                        <Grid item>
-                          <Typography variant="body1" fontWeight={"bold"}>
-                            {createdAt.toLocaleDateString()}
-                          </Typography>
-                        </Grid>
-                      </Grid>
-                      <Grid container item direction={"row"} spacing={1} xs>
-                        <Grid item>
-                          <Typography variant="caption">
-                            Data de atualização
-                          </Typography>
-                        </Grid>
-                        <Grid item>
-                          <Typography variant="body1" fontWeight={"bold"}>
-                            {updatedAt.toLocaleDateString()}
-                          </Typography>
-                        </Grid>
-                      </Grid>
-                    </Grid>
-                  </Grid>
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-                  <Grid item xs>
-                    <LeadsOportunidadesListActions
-                      oportunidade={oportunidade}
-                    />
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-          </Grid>
-        );
-      })}
-    </Grid>
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const content = oportunidades.length ? (
+    <LeadsOportunidadesCardList
+      oportunidades={orderLeadOportunidades(oportunidades)}
+      handleModalOpen={handleModalOpen}
+    />
+  ) : (
+    <Typography>Nenhuma oportunidade cadastrada</Typography>
+  );
+
+  return (
+    <>
+      <Grid
+        container
+        justifyContent={"center"}
+        alignItems={"center"}
+        direction={"column"}
+        spacing={2}
+      >
+        <Grid item>
+          <Link href={"oportunidades/novo"} passHref>
+            <Button variant={"contained"}>Nova oportunidade</Button>
+          </Link>
+        </Grid>
+        <Grid
+          item
+          sx={{
+            width: "100%",
+          }}
+        >
+          {content}
+        </Grid>
+      </Grid>
+      <AttachmentsModal isOpen={isModalOpen} onClose={handleModalClose} />
+    </>
   );
 }

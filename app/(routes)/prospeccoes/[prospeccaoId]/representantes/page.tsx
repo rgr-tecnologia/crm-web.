@@ -4,14 +4,14 @@ import Link from "next/link";
 import { Representate } from "@/app/_types/cliente/representante/Representante";
 
 type Params = {
-  clienteId: string;
+  prospeccaoId: string;
 };
 
 const BFF_URL = process.env.BFF_URL;
 
 const getRepresentantes = async (clienteId: string) => {
   const response = await fetch(
-    `${BFF_URL}/clientes/${clienteId}/representantes`,
+    `${BFF_URL}/prospeccoes/${clienteId}/representantes`,
     {
       cache: "no-store",
     }
@@ -21,9 +21,9 @@ const getRepresentantes = async (clienteId: string) => {
 };
 
 export default async function Page({ params }: { params: Params }) {
-  const { clienteId } = params;
+  const { prospeccaoId } = params;
 
-  const representantes = await getRepresentantes(clienteId);
+  const representantes = await getRepresentantes(prospeccaoId);
 
   representantes.forEach((representante) => {
     representante.createdAt = new Date(representante.createdAt);

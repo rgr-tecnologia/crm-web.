@@ -24,7 +24,7 @@ import { useQuery } from "react-query";
 type LeadOportunidadeFormBaseProps = {
   onSubmit: (data: LeadOportunidadeCreate) => void;
   defaultValues?: LeadOportunidadeCreate;
-  clienteProspeccaoId: string;
+  clienteProspeccaoId?: string;
 };
 
 export const LeadOportunidadeFormBase = (
@@ -32,11 +32,14 @@ export const LeadOportunidadeFormBase = (
 ) => {
   const { defaultValues, onSubmit, clienteProspeccaoId } = props;
 
-  const representantes = useQuery("representantes", async () =>
-    getRepresentantesProspeccao({
-      clienteProspeccaoId,
-    })
-  );
+  const representantes = useQuery("representantes", async () => {
+    if (clienteProspeccaoId) {
+      return await getRepresentantesProspeccao({
+        clienteProspeccaoId,
+      });
+    }
+    return [];
+  });
 
   const {
     control,
@@ -81,22 +84,24 @@ export const LeadOportunidadeFormBase = (
             )}
           />
         </Grid>
-        <Grid item xs={12}>
-          <Controller
-            name="representanteProspeccaoId"
-            control={control}
-            rules={rules}
-            render={({ field }) => (
-              <Select fullWidth {...field} label="Representante">
-                {representantes.data?.map((representante) => (
-                  <MenuItem value={representante.id} key={representante.id}>
-                    {representante.nome}
-                  </MenuItem>
-                ))}
-              </Select>
-            )}
-          />
-        </Grid>
+        {clienteProspeccaoId && (
+          <Grid item xs={12}>
+            <Controller
+              name="representanteProspeccaoId"
+              control={control}
+              rules={rules}
+              render={({ field }) => (
+                <Select fullWidth {...field} label="Representante">
+                  {representantes.data?.map((representante) => (
+                    <MenuItem value={representante.id} key={representante.id}>
+                      {representante.nome}
+                    </MenuItem>
+                  ))}
+                </Select>
+              )}
+            />
+          </Grid>
+        )}
         <Grid item xs={12}>
           <Controller
             name="caracteristica"

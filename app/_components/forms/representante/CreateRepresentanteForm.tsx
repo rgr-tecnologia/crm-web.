@@ -2,7 +2,6 @@
 import { useRouter } from "next/navigation";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { RepresentanteFormBase } from "./RepresentanteFormBase";
-import { Representate } from "@/app/_types/cliente/representante/Representante";
 import { createRepresentante } from "@/app/_lib/utils/representante/createRepresentante";
 import { CreateRepresentante } from "@/app/_types/cliente/representante/CreateRepresentante";
 

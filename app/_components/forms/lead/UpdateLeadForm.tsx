@@ -23,7 +23,7 @@ export const UpdateLeadForm = (props: UpdateLeadFormProps) => {
       router.refresh();
       router.push("/leads");
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 

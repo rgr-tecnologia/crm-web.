@@ -30,7 +30,7 @@ export function UpdateRepresentanteForm(props: RepresentanteFormProps) {
       <CardContent>
         <Grid container spacing={2} direction={"column"}>
           <Grid item>
-            <Typography variant="h6">Editar cliente</Typography>
+            <Typography variant="h6">Editar representante</Typography>
           </Grid>
           <Grid item>
             <RepresentanteFormBase onSubmit={onSubmit} defaultValues={data} />
