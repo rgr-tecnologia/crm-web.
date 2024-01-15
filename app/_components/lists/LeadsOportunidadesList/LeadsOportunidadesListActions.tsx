@@ -6,6 +6,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import RedoIcon from "@mui/icons-material/Redo";
 import DeleteIcon from "@mui/icons-material/Delete";
+import DescriptionIcon from "@mui/icons-material/Description";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { OportunidadeEtapa } from "@/app/_types/_enums/OportunidadeEtapa";
@@ -125,18 +126,19 @@ export function LeadsOportunidadesListActions(
         </Link>
       </Grid>
       <Grid item>
-        <Tooltip title="Excluir">
-          <IconButton>
-            <DeleteIcon />
+        <Tooltip title="Gerar contrato">
+          <IconButton
+            disabled={oportunidade.etapa !== OportunidadeEtapa.CONTRATO_ENVIADO}
+          >
+            <DescriptionIcon />
           </IconButton>
         </Tooltip>
       </Grid>
-
       <Grid item>
         <Tooltip title="Encerrar oportunidade">
           <IconButton
             onClick={() => _encerrarOportunidade(oportunidade)}
-            disabled={oportunidade.etapa === OportunidadeEtapa.PERDIDO}
+            disabled={!(oportunidade.etapa === OportunidadeEtapa.NEGOCIACAO)}
           >
             <RemoveCircleOutlineIcon />
           </IconButton>
@@ -149,6 +151,13 @@ export function LeadsOportunidadesListActions(
             disabled={oportunidade.etapa !== OportunidadeEtapa.PERDIDO}
           >
             <RedoIcon />
+          </IconButton>
+        </Tooltip>
+      </Grid>
+      <Grid item>
+        <Tooltip title="Excluir">
+          <IconButton>
+            <DeleteIcon />
           </IconButton>
         </Tooltip>
       </Grid>

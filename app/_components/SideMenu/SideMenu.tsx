@@ -31,9 +31,9 @@ const options = [
     icon: <></>,
   },
   {
-    name: "Usuários",
-    path: "/usuarios",
-    icon: <PersonIcon />,
+    name: "Oportunidades",
+    path: "/oportunidades",
+    icon: <></>,
   },
   {
     name: "Contratos",
@@ -44,6 +44,11 @@ const options = [
     name: "Calculadora",
     path: "/calculadora",
     icon: <CalculateIcon />,
+  },
+  {
+    name: "Usuários",
+    path: "/usuarios",
+    icon: <PersonIcon />,
   },
 ];
 
