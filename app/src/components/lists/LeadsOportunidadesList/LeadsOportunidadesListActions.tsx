@@ -128,7 +128,8 @@ export function LeadsOportunidadesListActions(
       <Grid item>
         <Tooltip title="Gerar contrato">
           <IconButton
-            disabled={oportunidade.etapa !== OportunidadeEtapa.CONTRATO_ENVIADO}
+            disabled={oportunidade.etapa === OportunidadeEtapa.NEGOCIACAO}
+            href={`/prospeccoes/${clienteProspeccaoId}/oportunidades/${id}/gerar-contrato`}
           >
             <DescriptionIcon />
           </IconButton>
@@ -148,7 +149,7 @@ export function LeadsOportunidadesListActions(
         <Tooltip title="Reabrir oportunidade">
           <IconButton
             onClick={() => _reabrirOportunidade(oportunidade)}
-            disabled={oportunidade.etapa !== OportunidadeEtapa.PERDIDO}
+            disabled={!(oportunidade.etapa === OportunidadeEtapa.PERDIDO)}
           >
             <RedoIcon />
           </IconButton>
