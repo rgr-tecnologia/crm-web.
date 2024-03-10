@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Box, CssBaseline } from "@mui/material";
-import { Header } from "./_components/header/Header";
-import { SideMenu } from "./_components/SideMenu/SideMenu";
+import { Header } from "@/src/components/Header/Header";
+import { SideMenu } from "@/src/components/SideMenu/SideMenu";
 
 const inter = Inter({ subsets: ["latin"] });
 

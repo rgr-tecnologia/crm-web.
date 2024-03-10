@@ -16,6 +16,11 @@ import CalculateIcon from "@mui/icons-material/Calculate";
 
 const options = [
   {
+    name: "Clientes",
+    path: "/clientes",
+    icon: <></>,
+  },
+  {
     name: "Leads",
     path: "/leads",
     icon: <></>,
@@ -23,11 +28,6 @@ const options = [
   {
     name: "Prospecções",
     path: "/prospeccoes",
-    icon: <></>,
-  },
-  {
-    name: "Clientes",
-    path: "/clientes",
     icon: <></>,
   },
   {
