@@ -66,31 +66,6 @@ export function ClienteFormBase(props: ClienteFormProps) {
           />
         </Grid>
         <Grid item>
-          <Controller
-            name="cnpj"
-            control={control}
-            rules={{
-              ...rules,
-              validate: (value) => isCnpjValid(value) || "CNPJ inválido",
-            }}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="CNPJ"
-                variant="outlined"
-                type="text"
-                fullWidth
-                helperText={errors.cnpj?.message}
-                error={!!errors.cnpj}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                value={formatCnpj(String(field.value))}
-              />
-            )}
-          />
-        </Grid>
-        <Grid item>
           <LoadingButton
             type="submit"
             variant="contained"
