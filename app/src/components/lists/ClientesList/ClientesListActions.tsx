@@ -1,6 +1,6 @@
 "use client";
 
-import { Cliente } from "@/app/_types/cliente/Cliente";
+import { Cliente } from "@/src/types/cliente/Cliente";
 import { Box, Button, Menu, MenuItem } from "@mui/material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -34,11 +34,6 @@ export function ClientesListActions(props: ClientesListActionsProps) {
         <MenuItem>
           <Link href={`${currentPath}/${cliente.id}`}>
             <Button variant="text">Detalhes</Button>
-          </Link>
-        </MenuItem>
-        <MenuItem>
-          <Link href={`${currentPath}/${cliente.id}/contratos`}>
-            <Button variant="text">Contratos</Button>
           </Link>
         </MenuItem>
         <MenuItem>

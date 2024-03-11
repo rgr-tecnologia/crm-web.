@@ -1,6 +1,6 @@
 "use client";
 
-import { Cliente } from "@/app/_types/cliente/Cliente";
+import { Cliente } from "@/src/types/cliente/Cliente";
 import { Button, Grid, Typography } from "@mui/material";
 import { ClienteAutoComplete } from "../../autocomplete/ClienteAutoComplete";
 import { ClientesCardList } from "./ClientesCardList";

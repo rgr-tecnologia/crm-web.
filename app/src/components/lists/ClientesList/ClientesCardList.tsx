@@ -1,5 +1,5 @@
 import { Card, CardContent, Divider, Grid, Typography } from "@mui/material";
-import { Cliente } from "@/app/_types/cliente/Cliente";
+import { Cliente } from "@/src/types/cliente/Cliente";
 import { ClientesListActions } from "./ClientesListActions";
 import { ListOrderIdentifier } from "../ListOrderIdentifier/ListOrderIdentifier";
 

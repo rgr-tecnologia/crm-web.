@@ -1,5 +1,5 @@
-import { ContratosList } from "@/app/_components/lists/ContratosList/ContratosList";
-import { Contrato } from "@/app/_types/contrato/Contrato";
+import { ContratosList } from "@/src/components/lists/ContratosList/ContratosList";
+import { Contrato } from "@/src/types/contrato/Contrato";
 import { Container } from "@mui/material";
 
 const BFF_URL = process.env.BFF_URL;
