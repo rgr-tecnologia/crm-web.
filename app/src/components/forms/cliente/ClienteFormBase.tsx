@@ -3,9 +3,9 @@
 import { Grid, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { LoadingButton } from "../../loadingButton/LoadingButton";
-import { CreateCliente } from "@/app/_types/cliente/CreateCliente";
-import { formatCnpj } from "@/app/_lib/utils/data/formatCnpj";
-import { isCnpjValid } from "@/app/_lib/utils/data/isCnpjValid";
+import { CreateCliente } from "@/src/types/cliente/CreateCliente";
+import { formatCnpj } from "@/src/lib/utils/data/formatCnpj";
+import { isCnpjValid } from "@/src/lib/utils/data/isCnpjValid";
 import { useEffect } from "react";
 
 type ClienteFormProps = {

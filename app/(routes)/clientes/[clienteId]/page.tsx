@@ -1,5 +1,5 @@
-import { ClienteQueryProvider } from "@/app/_components/queryProviders/ClienteQueryProvider";
-import { UpdateClienteForm } from "@/app/_components/forms/cliente/UpdateClienteForm";
+import { ClienteQueryProvider } from "@/src/components/queryProviders/ClienteQueryProvider";
+import { UpdateClienteForm } from "@/src/components/forms/cliente/UpdateClienteForm";
 import { Container } from "@mui/material";
 
 type PageParams = {

@@ -1,14 +1,14 @@
 "use client";
 
-import { Cliente } from "@/app/_types/cliente/Cliente";
+import { Cliente } from "@/src/types/cliente/Cliente";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
-import { updateCliente } from "../../../_lib/utils/cliente/updateCliente";
+import { updateCliente } from "@/src/lib/utils/cliente/updateCliente";
 import { useMutation, useQuery } from "react-query";
-import { getCliente } from "@/app/_lib/utils/cliente/getCliente";
+import { getCliente } from "@/src/lib/utils/cliente/getCliente";
 import { ClienteFormBase } from "./ClienteFormBase";
-import { SuccessNotification } from "../../notifications/SuccessNotification";
-import { ErrorNotification } from "../../notifications/ErrorNotification";
-import { CreateCliente } from "@/app/_types/cliente/CreateCliente";
+import { SuccessNotification } from "@/src/components/notifications/SuccessNotification";
+import { ErrorNotification } from "@/src/components/notifications/ErrorNotification";
+import { CreateCliente } from "@/src/types/cliente/CreateCliente";
 import { useRouter } from "next/navigation";
 
 type ClienteFormProps = {

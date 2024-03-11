@@ -1,11 +1,11 @@
 "use client";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
-import { createCliente } from "../../../_lib/utils/cliente/createCliente";
+import { createCliente } from "@/src/lib/utils/cliente/createCliente";
 import { ClienteFormBase } from "./ClienteFormBase";
 import { useMutation } from "react-query";
-import { SuccessNotification } from "../../notifications/SuccessNotification";
-import { ErrorNotification } from "../../notifications/ErrorNotification";
-import { CreateCliente } from "@/app/_types/cliente/CreateCliente";
+import { SuccessNotification } from "@/src/components/notifications/SuccessNotification";
+import { ErrorNotification } from "@/src/components/notifications/ErrorNotification";
+import { CreateCliente } from "@/src/types/cliente/CreateCliente";
 import { useRouter } from "next/navigation";
 
 export function CreateClienteForm() {
