@@ -1,5 +1,5 @@
-import { CreateContratoForm } from "@/app/_components/forms/contrato/CreateContratoForm";
-import { RepresentanteQueryProvider } from "@/app/_components/queryProviders/RepresentanteQueryProvider";
+import { CreateContratoForm } from "@/src/components/forms/contrato/CreateContratoForm";
+import { RepresentanteQueryProvider } from "@/src/components/queryProviders/RepresentanteQueryProvider";
 import { Container } from "@mui/material";
 
 type PageParams = {

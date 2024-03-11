@@ -1,6 +1,6 @@
 "use client";
 
-import { Cliente } from "@/app/_types/cliente/Cliente";
+import { Cliente } from "@/src/types/cliente/Cliente";
 import { Autocomplete, TextField } from "@mui/material";
 
 type ClienteAutoCompleteProps = {

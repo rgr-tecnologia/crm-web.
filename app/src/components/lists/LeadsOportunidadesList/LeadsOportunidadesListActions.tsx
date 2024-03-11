@@ -9,8 +9,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import DescriptionIcon from "@mui/icons-material/Description";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { OportunidadeEtapa } from "@/app/_types/_enums/OportunidadeEtapa";
-import { LeadOportunidade } from "@/app/_types/prospeccao/oportunidade/Oportunidade";
+import { OportunidadeEtapa } from "@/src/types/enums/OportunidadeEtapa";
+import { LeadOportunidade } from "@/src/types/prospeccao/oportunidade/Oportunidade";
 
 type LeadsOportunidadesListActionsProps = {
   oportunidade: LeadOportunidade;

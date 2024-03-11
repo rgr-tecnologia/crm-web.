@@ -1,5 +1,5 @@
-import { fetchErrorHandler } from "@/app/_lib/errors/fetchErrorHandler";
-import { LeadOportunidade } from "@/app/_types/prospeccao/oportunidade/Oportunidade";
+import { fetchErrorHandler } from "@/src/lib/errors/fetchErrorHandler";
+import { LeadOportunidade } from "@/src/types/prospeccao/oportunidade/Oportunidade";
 
 type Params = {
   prospeccaoId: string;

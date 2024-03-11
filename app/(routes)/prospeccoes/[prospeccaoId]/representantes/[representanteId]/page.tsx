@@ -1,5 +1,5 @@
-import { UpdateRepresentanteForm } from "@/app/_components/forms/representante/UpdateRepresentanteForm";
-import { RepresentanteQueryProvider } from "@/app/_components/queryProviders/RepresentanteQueryProvider";
+import { UpdateRepresentanteForm } from "@/src/components/forms/representante/UpdateRepresentanteForm";
+import { RepresentanteQueryProvider } from "@/src/components/queryProviders/RepresentanteQueryProvider";
 import { Container } from "@mui/material";
 
 type PageParams = {

@@ -1,4 +1,4 @@
-import { LoginForm } from "@/app/_components/forms/auth/LoginForm";
+import { LoginForm } from "@/src/components/forms/auth/LoginForm";
 import { Grid } from "@mui/material";
 
 export default function Page() {

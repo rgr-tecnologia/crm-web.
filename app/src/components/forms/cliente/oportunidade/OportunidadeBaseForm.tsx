@@ -9,13 +9,13 @@ import {
   TextField,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import { OportunidadeCreate } from "@/app/_types/cliente/oportunidade/OportunidadeCreate";
-import { OportunidadeEtapa } from "@/app/_types/_enums/OportunidadeEtapa";
-import { getRepresentantesByClienteId } from "@/app/_lib/utils/representante/getRepresentantesByClienteId";
+import { OportunidadeCreate } from "@/src/types/cliente/oportunidade/OportunidadeCreate";
+import { OportunidadeEtapa } from "@/src/types/enums/OportunidadeEtapa";
+import { getRepresentantesByClienteId } from "@/src/lib/utils/representante/getRepresentantesByClienteId";
 import { useQuery } from "react-query";
 import "dayjs/locale/pt-br";
-import { ContratoCaracteristica } from "@/app/_types/_enums/ContratoCaracteristica";
-import { AreaExecutora } from "@/app/_types/_enums/AreaExecutora";
+import { ContratoCaracteristica } from "@/src/types/enums/ContratoCaracteristica";
+import { AreaExecutora } from "@/src/types/enums/AreaExecutora";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/pt-br";

@@ -1,4 +1,4 @@
-import { fetchErrorHandler } from "@/app/_lib/errors/fetchErrorHandler";
+import { fetchErrorHandler } from "@/src/lib/errors/fetchErrorHandler";
 
 const API_URL = process.env.API_URL;
 

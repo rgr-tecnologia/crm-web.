@@ -1,5 +1,5 @@
 "use client";
-import { Contrato } from "@/app/_types/contrato/Contrato";
+import { Contrato } from "@/src/types/contrato/Contrato";
 import { useRouter } from "next/navigation";
 
 import { Card, CardContent, Grid, Typography } from "@mui/material";

@@ -2,9 +2,9 @@
 import { useRouter } from "next/navigation";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { LeadFormBase } from "./LeadFormBase";
-import { CreateLead } from "@/app/_types/lead/CreateLead";
-import { updateLead } from "@/app/_lib/utils/lead/updateLead";
-import { Lead } from "@/app/_types/lead/Lead";
+import { CreateLead } from "@/src/types/lead/CreateLead";
+import { updateLead } from "@/src/lib/utils/lead/updateLead";
+import { Lead } from "@/src/types/lead/Lead";
 
 type UpdateLeadFormProps = {
   lead: Lead;

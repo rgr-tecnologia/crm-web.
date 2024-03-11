@@ -1,4 +1,4 @@
-import { CreateRepresentanteForm } from "@/app/_components/forms/representante/CreateRepresentanteForm";
+import { CreateRepresentanteForm } from "@/src/components/forms/representante/CreateRepresentanteForm";
 import { Container, Grid } from "@mui/material";
 
 type Params = {

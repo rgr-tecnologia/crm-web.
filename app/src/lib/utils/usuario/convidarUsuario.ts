@@ -1,5 +1,5 @@
-import { Usuario } from "@/app/_types/usuario/Usuario";
-import { UsuarioCreate } from "@/app/_types/usuario/UsuarioCreate";
+import { Usuario } from "@/src/types/usuario/Usuario";
+import { UsuarioCreate } from "@/src/types/usuario/UsuarioCreate";
 
 const BFF_URL = process.env.NEXT_PUBLIC_BFF_URL;
 

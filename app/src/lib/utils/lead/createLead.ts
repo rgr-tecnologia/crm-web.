@@ -1,5 +1,5 @@
-import { CreateLead } from "@/app/_types/lead/CreateLead";
-import { Lead } from "@/app/_types/lead/Lead";
+import { CreateLead } from "@/src/types/lead/CreateLead";
+import { Lead } from "@/src/types/lead/Lead";
 
 const BFF_URL = process.env.NEXT_PUBLIC_BFF_URL;
 

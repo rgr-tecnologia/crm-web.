@@ -1,5 +1,5 @@
-import { LeadsOportunidadesList } from "@/app/_components/lists/LeadsOportunidadesList/LeadsOportunidadesList";
-import { LeadOportunidade } from "@/app/_types/prospeccao/oportunidade/Oportunidade";
+import { LeadsOportunidadesList } from "@/src/components/lists/LeadsOportunidadesList/LeadsOportunidadesList";
+import { LeadOportunidade } from "@/src/types/prospeccao/oportunidade/Oportunidade";
 import { Container } from "@mui/material";
 
 type Params = {

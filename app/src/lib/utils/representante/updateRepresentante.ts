@@ -1,6 +1,6 @@
-import { Cliente } from "@/app/_types/cliente/Cliente";
-import { Representate } from "@/app/_types/cliente/representante/Representante";
-import { UpdateRepresentante } from "@/app/_types/cliente/representante/UpdateRepresentante";
+import { Cliente } from "@/src/types/cliente/Cliente";
+import { Representate } from "@/src/types/cliente/representante/Representante";
+import { UpdateRepresentante } from "@/src/types/cliente/representante/UpdateRepresentante";
 
 const BFF_URL = process.env.NEXT_PUBLIC_BFF_URL;
 

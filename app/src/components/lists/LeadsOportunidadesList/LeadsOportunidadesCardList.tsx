@@ -1,7 +1,7 @@
 import { Card, CardContent, Divider, Grid, Typography } from "@mui/material";
 
 import { ListOrderIdentifier } from "../ListOrderIdentifier/ListOrderIdentifier";
-import { LeadOportunidade } from "@/app/_types/prospeccao/oportunidade/Oportunidade";
+import { LeadOportunidade } from "@/src/types/prospeccao/oportunidade/Oportunidade";
 import { LeadsOportunidadesListActions } from "./LeadsOportunidadesListActions";
 
 type Props = {

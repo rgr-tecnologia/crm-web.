@@ -1,5 +1,5 @@
 "use client";
-import { Prospeccao } from "@/app/_types/prospeccao/Prospeccao";
+import { Prospeccao } from "@/src/types/prospeccao/Prospeccao";
 import { Box, Button, Menu, MenuItem } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";

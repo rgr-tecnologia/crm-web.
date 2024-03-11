@@ -1,5 +1,5 @@
-import { ClientesOportunidadesList } from "@/app/_components/lists/ClientesOportunidadesList/ClientesOportunidadesList";
-import { Oportunidade } from "@/app/_types/cliente/oportunidade/Oportunidade";
+import { ClientesOportunidadesList } from "@/src/components/lists/ClientesOportunidadesList/ClientesOportunidadesList";
+import { Oportunidade } from "@/src/types/cliente/oportunidade/Oportunidade";
 import { Button, Container, Grid, Typography } from "@mui/material";
 import Link from "next/link";
 

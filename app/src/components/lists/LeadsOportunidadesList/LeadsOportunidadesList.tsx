@@ -1,6 +1,6 @@
 "use client";
 import { Button, Grid, Typography } from "@mui/material";
-import { LeadOportunidade } from "@/app/_types/prospeccao/oportunidade/Oportunidade";
+import { LeadOportunidade } from "@/src/types/prospeccao/oportunidade/Oportunidade";
 import { AttachmentsModal } from "../../modals/prospeccaoOportunidades/attachmentsModal";
 import { useState } from "react";
 import Link from "next/link";

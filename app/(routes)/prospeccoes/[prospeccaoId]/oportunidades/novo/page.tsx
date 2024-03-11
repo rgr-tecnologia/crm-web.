@@ -1,5 +1,5 @@
-import { LeadOportunidadeCreateForm } from "@/app/_components/forms/lead/oportunidade/LeadOportunidadeCreateForm";
-import { RepresentanteQueryProvider } from "@/app/_components/queryProviders/RepresentanteQueryProvider";
+import { LeadOportunidadeCreateForm } from "@/src/components/forms/lead/oportunidade/LeadOportunidadeCreateForm";
+import { RepresentanteQueryProvider } from "@/src/components/queryProviders/RepresentanteQueryProvider";
 import { Container } from "@mui/material";
 
 type PageParams = {

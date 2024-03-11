@@ -1,5 +1,5 @@
-import { fetchErrorHandler } from "@/app/_lib/errors/fetchErrorHandler";
-import { Contrato } from "@/app/_types/contrato/Contrato";
+import { fetchErrorHandler } from "@/src/lib/errors/fetchErrorHandler";
+import { Contrato } from "@/src/types/contrato/Contrato";
 
 const API_URL = process.env.API_URL;
 

@@ -6,7 +6,7 @@ import { Button, Grid, Typography } from "@mui/material";
 
 import { ProspeccoesAutoComplete } from "../../autocomplete/ProspeccoesAutoComplete";
 import { ProspeccoesCardList } from "./ProspeccoesCardList";
-import { Prospeccao } from "@/app/_types/prospeccao/Prospeccao";
+import { Prospeccao } from "@/src/types/prospeccao/Prospeccao";
 
 type ProspeccoesListProps = {
   prospeccoes: Prospeccao[];

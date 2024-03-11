@@ -2,8 +2,8 @@
 import { useRouter } from "next/navigation";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { OportunidadeFormBase } from "./OportunidadeBaseForm";
-import { OportunidadeCreate } from "@/app/_types/cliente/oportunidade/OportunidadeCreate";
-import { Oportunidade } from "@/app/_types/cliente/oportunidade/Oportunidade";
+import { OportunidadeCreate } from "@/src/types/cliente/oportunidade/OportunidadeCreate";
+import { Oportunidade } from "@/src/types/cliente/oportunidade/Oportunidade";
 
 type UpdateOportunidadeFormProps = {
   clienteId: string;

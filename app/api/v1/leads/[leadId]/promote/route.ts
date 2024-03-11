@@ -1,6 +1,6 @@
-import { fetchErrorHandler } from "@/app/_lib/errors/fetchErrorHandler";
-import { Cliente } from "@/app/_types/cliente/Cliente";
-import { Representate } from "@/app/_types/cliente/representante/Representante";
+import { fetchErrorHandler } from "@/src/lib/errors/fetchErrorHandler";
+import { Cliente } from "@/src/types/cliente/Cliente";
+import { Representate } from "@/src/types/cliente/representante/Representante";
 
 type Params = {
   leadId: string;

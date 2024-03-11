@@ -1,4 +1,4 @@
-import { fetchErrorHandler } from "@/app/_lib/errors/fetchErrorHandler";
+import { fetchErrorHandler } from "@/src/lib/errors/fetchErrorHandler";
 
 type Params = {
   clienteId: string;

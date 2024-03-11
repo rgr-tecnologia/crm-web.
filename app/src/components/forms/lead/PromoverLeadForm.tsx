@@ -3,13 +3,13 @@
 import { Grid, Step, StepLabel, Stepper, Typography } from "@mui/material";
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { getLeadById } from "@/app/_lib/utils/lead/getLeadById";
+import { getLeadById } from "@/src/lib/utils/lead/getLeadById";
 import { RepresentanteFormBase } from "../representante/RepresentanteFormBase";
-import { promoteLead } from "@/app/_lib/utils/lead/promoteLead";
-import { CreateRepresentante } from "@/app/_types/cliente/representante/CreateRepresentante";
+import { promoteLead } from "@/src/lib/utils/lead/promoteLead";
+import { CreateRepresentante } from "@/src/types/cliente/representante/CreateRepresentante";
 import * as navigation from "next/navigation";
 import { LeadOportunidadeFormBase } from "./oportunidade/LeadOportunidadeBaseForm";
-import { LeadOportunidadeCreate } from "@/app/_types/prospeccao/oportunidade/OportunidadeCreate";
+import { LeadOportunidadeCreate } from "@/src/types/prospeccao/oportunidade/OportunidadeCreate";
 
 type PromoverLeadFormProps = {
   leadId: string;

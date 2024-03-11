@@ -1,6 +1,6 @@
 "use client";
 
-import { Contrato } from "@/app/_types/contrato/Contrato";
+import { Contrato } from "@/src/types/contrato/Contrato";
 import { Button, Box, Menu, MenuItem } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";

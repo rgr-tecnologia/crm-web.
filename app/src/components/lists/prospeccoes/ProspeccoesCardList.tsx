@@ -1,7 +1,7 @@
 import { Card, CardContent, Divider, Grid, Typography } from "@mui/material";
 import { ProspeccoesListActions } from "./ProspeccoesListActions";
 import { ListOrderIdentifier } from "../ListOrderIdentifier/ListOrderIdentifier";
-import { Prospeccao } from "@/app/_types/prospeccao/Prospeccao";
+import { Prospeccao } from "@/src/types/prospeccao/Prospeccao";
 
 type ProspeccoesCardListProps = {
   prospeccoes: Prospeccao[];

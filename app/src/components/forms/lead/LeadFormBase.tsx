@@ -4,8 +4,8 @@ import { Button, Grid, TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
-import { Lead } from "@/app/_types/lead/Lead";
-import { CreateLead } from "@/app/_types/lead/CreateLead";
+import { Lead } from "@/src/types/lead/Lead";
+import { CreateLead } from "@/src/types/lead/CreateLead";
 
 type LeadFormBaseProps = {
   onSubmit: (data: any) => void;

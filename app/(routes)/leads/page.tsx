@@ -1,6 +1,6 @@
-import { LeadsList } from "@/app/_components/lists/LeadsList/LeadsList";
-import { fetchErrorHandler } from "@/app/_lib/errors/fetchErrorHandler";
-import { Lead } from "@/app/_types/lead/Lead";
+import { LeadsList } from "@/src/components/lists/LeadsList/LeadsList";
+import { fetchErrorHandler } from "@/src/lib/errors/fetchErrorHandler";
+import { Lead } from "@/src/types/lead/Lead";
 import { Container, Typography } from "@mui/material";
 
 const BFF_URL = process.env.BFF_URL;

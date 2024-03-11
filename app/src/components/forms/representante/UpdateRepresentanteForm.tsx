@@ -1,13 +1,13 @@
 "use client";
 
-import { Cliente } from "@/app/_types/cliente/Cliente";
+import { Cliente } from "@/src/types/cliente/Cliente";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { useQuery } from "react-query";
 import { RepresentanteFormBase } from "./RepresentanteFormBase";
-import { Representate } from "@/app/_types/cliente/representante/Representante";
-import { getRepresentante } from "@/app/_lib/utils/representante/getRepresentante";
-import { updateRepresentante } from "@/app/_lib/utils/representante/updateRepresentante";
-import { CreateRepresentante } from "@/app/_types/cliente/representante/CreateRepresentante";
+import { Representate } from "@/src/types/cliente/representante/Representante";
+import { getRepresentante } from "@/src/lib/utils/representante/getRepresentante";
+import { updateRepresentante } from "@/src/lib/utils/representante/updateRepresentante";
+import { CreateRepresentante } from "@/src/types/cliente/representante/CreateRepresentante";
 
 type RepresentanteFormProps = {
   clienteId: Cliente["id"];

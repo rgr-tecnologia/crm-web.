@@ -1,10 +1,10 @@
 "use client";
 
-import { Contrato } from "@/app/_types/contrato/Contrato";
+import { Contrato } from "@/src/types/contrato/Contrato";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { useQuery } from "react-query";
 import { ContratoFormBase } from "./ContratoFormBase";
-import { Cliente } from "@/app/_types/cliente/Cliente";
+import { Cliente } from "@/src/types/cliente/Cliente";
 import { useRouter } from "next/navigation";
 
 type UpdateContratoFormProps = {

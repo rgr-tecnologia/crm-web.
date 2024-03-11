@@ -1,7 +1,7 @@
 "use client";
 
-import { OportunidadeEtapa } from "@/app/_types/_enums/OportunidadeEtapa";
-import { Oportunidade } from "@/app/_types/cliente/oportunidade/Oportunidade";
+import { OportunidadeEtapa } from "@/src/types/enums/OportunidadeEtapa";
+import { Oportunidade } from "@/src/types/cliente/oportunidade/Oportunidade";
 import { Button, MenuItem, Menu, Box } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

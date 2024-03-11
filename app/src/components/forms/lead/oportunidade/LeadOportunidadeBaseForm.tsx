@@ -14,11 +14,11 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
-import { OportunidadeEtapa } from "@/app/_types/_enums/OportunidadeEtapa";
-import { ContratoCaracteristica } from "@/app/_types/_enums/ContratoCaracteristica";
-import { AreaExecutora } from "@/app/_types/_enums/AreaExecutora";
-import { LeadOportunidadeCreate } from "@/app/_types/prospeccao/oportunidade/OportunidadeCreate";
-import { getRepresentantesProspeccao } from "@/app/_lib/utils/representante/getRepresententantesProspeccao";
+import { OportunidadeEtapa } from "@/src/types/enums/OportunidadeEtapa";
+import { ContratoCaracteristica } from "@/src/types/enums/ContratoCaracteristica";
+import { AreaExecutora } from "@/src/types/enums/AreaExecutora";
+import { LeadOportunidadeCreate } from "@/src/types/prospeccao/oportunidade/OportunidadeCreate";
+import { getRepresentantesProspeccao } from "@/src/lib/utils/representante/getRepresententantesProspeccao";
 import { useQuery } from "react-query";
 
 type LeadOportunidadeFormBaseProps = {

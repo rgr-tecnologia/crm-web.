@@ -1,5 +1,5 @@
 import { fetchErrorHandler } from "../../errors/fetchErrorHandler";
-import { RepresentanteProspeccao } from "@/app/_types/prospeccao/representante/RepresentanteProspeccao";
+import { RepresentanteProspeccao } from "@/src/types/prospeccao/representante/RepresentanteProspeccao";
 
 const BFF_URL = process.env.NEXT_PUBLIC_BFF_URL;
 

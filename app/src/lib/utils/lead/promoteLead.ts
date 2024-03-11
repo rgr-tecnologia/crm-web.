@@ -1,5 +1,5 @@
-import { LeadOportunidadeCreate } from "@/app/_types/prospeccao/oportunidade/OportunidadeCreate";
-import { CreateRepresentante } from "@/app/_types/cliente/representante/CreateRepresentante";
+import { LeadOportunidadeCreate } from "@/src/types/prospeccao/oportunidade/OportunidadeCreate";
+import { CreateRepresentante } from "@/src/types/cliente/representante/CreateRepresentante";
 
 const BFF_URL = process.env.NEXT_PUBLIC_BFF_URL;
 

@@ -1,5 +1,5 @@
-import { UpdateLeadForm } from "@/app/_components/forms/lead/UpdateLeadForm";
-import { getLeadById } from "@/app/_lib/utils/lead/getLeadById";
+import { UpdateLeadForm } from "@/src/components/forms/lead/UpdateLeadForm";
+import { getLeadById } from "@/src/lib/utils/lead/getLeadById";
 import { Container } from "@mui/material";
 
 type PageParams = {

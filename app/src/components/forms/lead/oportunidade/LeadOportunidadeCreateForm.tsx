@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { LeadOportunidadeFormBase } from "./LeadOportunidadeBaseForm";
-import { LeadOportunidadeCreate } from "@/app/_types/prospeccao/oportunidade/OportunidadeCreate";
+import { LeadOportunidadeCreate } from "@/src/types/prospeccao/oportunidade/OportunidadeCreate";
 
 const BFF_URL = process.env.NEXT_PUBLIC_BFF_URL;
 

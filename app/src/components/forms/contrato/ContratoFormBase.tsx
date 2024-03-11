@@ -11,7 +11,7 @@ import {
   Button,
 } from "@mui/material";
 import { Controller } from "react-hook-form";
-import { Contrato } from "@/app/_types/contrato/Contrato";
+import { Contrato } from "@/src/types/contrato/Contrato";
 import { useForm } from "react-hook-form";
 
 import { DatePicker } from "@mui/x-date-pickers";
@@ -20,9 +20,9 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import { useQuery } from "react-query";
-import { getRepresentantesByClienteId } from "@/app/_lib/utils/representante/getRepresentantesByClienteId";
-import { ContratoCaracteristica } from "@/app/_types/_enums/ContratoCaracteristica";
-import { Oportunidade } from "@/app/_types/cliente/oportunidade/Oportunidade";
+import { getRepresentantesByClienteId } from "@/src/lib/utils/representante/getRepresentantesByClienteId";
+import { ContratoCaracteristica } from "@/src/types/enums/ContratoCaracteristica";
+import { Oportunidade } from "@/src/types/cliente/oportunidade/Oportunidade";
 import { useEffect } from "react";
 
 type ContratoFormBaseProps = {

@@ -1,5 +1,5 @@
-import { fetchErrorHandler } from "@/app/_lib/errors/fetchErrorHandler";
-import { Prospeccao } from "@/app/_types/prospeccao/Prospeccao";
+import { fetchErrorHandler } from "@/src/lib/errors/fetchErrorHandler";
+import { Prospeccao } from "@/src/types/prospeccao/Prospeccao";
 import { Container } from "@mui/material";
 
 type Params = {

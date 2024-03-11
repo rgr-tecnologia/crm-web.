@@ -1,6 +1,6 @@
 "use client";
 
-import { Prospeccao } from "@/app/_types/prospeccao/Prospeccao";
+import { Prospeccao } from "@/src/types/prospeccao/Prospeccao";
 import { Autocomplete, TextField } from "@mui/material";
 
 type ProspeccoesAutoCompleteProps = {

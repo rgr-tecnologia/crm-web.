@@ -1,7 +1,7 @@
-import { ProspeccoesList } from "@/app/_components/lists/prospeccoes/ProspeccoesList";
-import { LeadQueryProvider } from "@/app/_components/queryProviders/LeadQueryProvider";
-import { fetchErrorHandler } from "@/app/_lib/errors/fetchErrorHandler";
-import { Prospeccao } from "@/app/_types/prospeccao/Prospeccao";
+import { ProspeccoesList } from "@/src/components/lists/prospeccoes/ProspeccoesList";
+import { LeadQueryProvider } from "@/src/components/queryProviders/LeadQueryProvider";
+import { fetchErrorHandler } from "@/src/lib/errors/fetchErrorHandler";
+import { Prospeccao } from "@/src/types/prospeccao/Prospeccao";
 import { Container, Typography } from "@mui/material";
 
 const BFF_URL = process.env.BFF_URL;

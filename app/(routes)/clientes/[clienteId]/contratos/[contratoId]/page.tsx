@@ -1,5 +1,5 @@
-import { UpdateContratoForm } from "@/app/_components/forms/contrato/UpdateContratoForm";
-import { ContratoQueryProvider } from "@/app/_components/queryProviders/ContratoQueryProvider";
+import { UpdateContratoForm } from "@/src/components/forms/contrato/UpdateContratoForm";
+import { ContratoQueryProvider } from "@/src/components/queryProviders/ContratoQueryProvider";
 import { Container } from "@mui/material";
 
 type PageParams = {

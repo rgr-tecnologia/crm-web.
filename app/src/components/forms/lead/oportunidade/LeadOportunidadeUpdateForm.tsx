@@ -2,8 +2,8 @@
 import { useRouter } from "next/navigation";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { LeadOportunidadeFormBase } from "./LeadOportunidadeBaseForm";
-import { LeadOportunidade } from "@/app/_types/prospeccao/oportunidade/Oportunidade";
-import { LeadOportunidadeCreate } from "@/app/_types/prospeccao/oportunidade/OportunidadeCreate";
+import { LeadOportunidade } from "@/src/types/prospeccao/oportunidade/Oportunidade";
+import { LeadOportunidadeCreate } from "@/src/types/prospeccao/oportunidade/OportunidadeCreate";
 
 type LeadUpdateOportunidadeFormProps = {
   oportunidade: LeadOportunidade;

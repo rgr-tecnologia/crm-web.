@@ -1,4 +1,4 @@
-import { Representate } from "@/app/_types/cliente/representante/Representante";
+import { Representate } from "@/src/types/cliente/representante/Representante";
 
 type Params = {
   clienteId: string;

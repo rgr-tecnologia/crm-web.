@@ -1,6 +1,6 @@
-import { UpdateOportunidadeForm } from "@/app/_components/forms/cliente/oportunidade/OportunidadeUpdateForm";
-import { RepresentanteQueryProvider } from "@/app/_components/queryProviders/RepresentanteQueryProvider";
-import { Oportunidade } from "@/app/_types/cliente/oportunidade/Oportunidade";
+import { UpdateOportunidadeForm } from "@/src/components/forms/cliente/oportunidade/OportunidadeUpdateForm";
+import { RepresentanteQueryProvider } from "@/src/components/queryProviders/RepresentanteQueryProvider";
+import { Oportunidade } from "@/src/types/cliente/oportunidade/Oportunidade";
 import { Container } from "@mui/material";
 
 type PageParams = {

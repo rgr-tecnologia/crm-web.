@@ -1,4 +1,4 @@
-import { SignUpForm } from "@/app/_components/forms/auth/SignUpForm";
+import { SignUpForm } from "@/src/components/forms/auth/SignUpForm";
 import { Container, Grid } from "@mui/material";
 
 export default function Page() {

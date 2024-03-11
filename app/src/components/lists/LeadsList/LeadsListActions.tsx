@@ -1,6 +1,6 @@
 "use client";
 
-import { Lead } from "@/app/_types/lead/Lead";
+import { Lead } from "@/src/types/lead/Lead";
 import {
   Grid,
   Button,

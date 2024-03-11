@@ -1,11 +1,11 @@
 "use client";
 
-import { UsuarioCreate } from "@/app/_types/usuario/UsuarioCreate";
+import { UsuarioCreate } from "@/src/types/usuario/UsuarioCreate";
 import { Grid, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { LoadingButton } from "../../loadingButton/LoadingButton";
 import { useState } from "react";
-import { convidarUsuario } from "@/app/_lib/utils/usuario/convidarUsuario";
+import { convidarUsuario } from "@/src/lib/utils/usuario/convidarUsuario";
 
 type ConvidarUsuarioProps = {};
 

@@ -1,7 +1,7 @@
 import { Button, Container, Grid, Typography } from "@mui/material";
-import { RepresentantesList } from "@/app/_components/lists/RepresentantesList/RepresentantesList";
+import { RepresentantesList } from "@/src/components/lists/RepresentantesList/RepresentantesList";
 import Link from "next/link";
-import { Representate } from "@/app/_types/cliente/representante/Representante";
+import { Representate } from "@/src/types/cliente/representante/Representante";
 
 type Params = {
   prospeccaoId: string;

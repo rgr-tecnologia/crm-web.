@@ -1,6 +1,6 @@
 import { Card, CardContent, Divider, Grid, Typography } from "@mui/material";
 import { ListOrderIdentifier } from "../ListOrderIdentifier/ListOrderIdentifier";
-import { Contrato } from "@/app/_types/contrato/Contrato";
+import { Contrato } from "@/src/types/contrato/Contrato";
 import { ContratosListActions } from "./ContratosListActions";
 import Link from "next/link";
 
