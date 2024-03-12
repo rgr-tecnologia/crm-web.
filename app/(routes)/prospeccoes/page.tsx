@@ -1,4 +1,4 @@
-import { ProspeccoesList } from "@/src/components/lists/prospeccoes/ProspeccoesList";
+import { ProspeccoesList } from "@/src/components/lists/ProspeccoesList/ProspeccoesList";
 import { LeadQueryProvider } from "@/src/components/queryProviders/LeadQueryProvider";
 import { fetchErrorHandler } from "@/src/lib/errors/fetchErrorHandler";
 import { Prospeccao } from "@/src/types/prospeccao/Prospeccao";
