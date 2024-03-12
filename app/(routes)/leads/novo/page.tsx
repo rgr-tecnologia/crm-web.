@@ -1,5 +1,6 @@
 import { Container } from "@mui/material";
 import { CreateLeadForm } from "@/src/components/forms/lead/CreateLeadForm";
+import { ClienteQueryProvider } from "@/src/components/queryProviders/ClienteQueryProvider";
 
 export default function Page() {
   return (
@@ -8,7 +9,9 @@ export default function Page() {
         marginTop: 2,
       }}
     >
-      <CreateLeadForm />
+      <ClienteQueryProvider>
+        <CreateLeadForm />
+      </ClienteQueryProvider>
     </Container>
   );
 }

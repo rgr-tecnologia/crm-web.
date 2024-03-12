@@ -1,11 +1,19 @@
 "use client";
 
-import { Button, Grid, TextField } from "@mui/material";
+import {
+  Button,
+  FormHelperText,
+  Grid,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import { Controller } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { Lead } from "@/src/types/lead/Lead";
 import { CreateLead } from "@/src/types/lead/CreateLead";
+import { useClientes } from "@/src/hooks/useClientes";
 
 type LeadFormBaseProps = {
   onSubmit: (data: any) => void;
@@ -14,6 +22,8 @@ type LeadFormBaseProps = {
 
 export const LeadFormBase = (props: LeadFormBaseProps) => {
   const { defaultValues, onSubmit } = props;
+
+  const { data: clientes } = useClientes();
 
   const {
     control,
@@ -46,17 +56,20 @@ export const LeadFormBase = (props: LeadFormBaseProps) => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Controller
-            name="nomeFantasia"
+            name="clienteId"
             control={control}
             rules={rules}
             render={({ field }) => (
-              <TextField
-                {...field}
-                fullWidth
-                label="Nome Fantasia"
-                error={!!errors.nomeFantasia}
-                helperText={errors.nomeFantasia?.message}
-              />
+              <>
+                <Select fullWidth {...field} label="Representante responsável">
+                  {clientes?.map((cliente) => (
+                    <MenuItem value={cliente.id} key={cliente.id}>
+                      {cliente.nomeFantasia}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <FormHelperText>{errors.clienteId?.message}</FormHelperText>
+              </>
             )}
           />
         </Grid>
