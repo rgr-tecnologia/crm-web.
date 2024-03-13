@@ -1,6 +1,6 @@
 import { UpdateLeadForm } from "@/src/components/forms/lead/UpdateLeadForm";
 import { ClienteQueryProvider } from "@/src/components/queryProviders/ClienteQueryProvider";
-import { getLeadById } from "@/src/lib/utils/lead/getLeadById";
+import { getLeadById } from "@/src/lib/utils/leads/getLeadById";
 import { Container } from "@mui/material";
 
 type PageParams = {

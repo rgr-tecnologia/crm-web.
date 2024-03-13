@@ -2,9 +2,9 @@
 
 import { Cliente } from "@/src/types/cliente/Cliente";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
-import { updateCliente } from "@/src/lib/utils/cliente/updateCliente";
+import { updateCliente } from "@/src/lib/utils/clientes/updateCliente";
 import { useMutation, useQuery } from "react-query";
-import { getCliente } from "@/src/lib/utils/cliente/getCliente";
+import { getCliente } from "@/src/lib/utils/clientes/getCliente";
 import { ClienteFormBase } from "./ClienteFormBase";
 import { SuccessNotification } from "@/src/components/notifications/SuccessNotification";
 import { ErrorNotification } from "@/src/components/notifications/ErrorNotification";

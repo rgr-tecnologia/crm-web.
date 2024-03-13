@@ -5,8 +5,8 @@ import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { useQuery } from "react-query";
 import { RepresentanteFormBase } from "./RepresentanteFormBase";
 import { Representate } from "@/src/types/cliente/representante/Representante";
-import { getRepresentante } from "@/src/lib/utils/representante/getRepresentante";
-import { updateRepresentante } from "@/src/lib/utils/representante/updateRepresentante";
+import { getRepresentante } from "@/src/lib/utils/representantes/getRepresentante";
+import { updateRepresentante } from "@/src/lib/utils/representantes/updateRepresentante";
 import { CreateRepresentante } from "@/src/types/cliente/representante/CreateRepresentante";
 
 type RepresentanteFormProps = {

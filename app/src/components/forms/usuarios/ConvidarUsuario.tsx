@@ -5,7 +5,7 @@ import { Grid, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { LoadingButton } from "../../loadingButton/LoadingButton";
 import { useState } from "react";
-import { convidarUsuario } from "@/src/lib/utils/usuario/convidarUsuario";
+import { convidarUsuario } from "@/src/lib/utils/usuarios/convidarUsuario";
 
 type ConvidarUsuarioProps = {};
 

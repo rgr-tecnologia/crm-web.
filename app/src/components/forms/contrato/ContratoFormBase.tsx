@@ -20,7 +20,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import { useQuery } from "react-query";
-import { getRepresentantesByClienteId } from "@/src/lib/utils/representante/getRepresentantesByClienteId";
+import { getRepresentantesByClienteId } from "@/src/lib/utils/representantes/getRepresentantesByClienteId";
 import { ContratoCaracteristica } from "@/src/types/enums/ContratoCaracteristica";
 import { Oportunidade } from "@/src/types/cliente/oportunidade/Oportunidade";
 import { useEffect } from "react";

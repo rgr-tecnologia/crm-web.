@@ -1,7 +1,7 @@
 import { ClientesOportunidadesList } from "@/src/components/lists/ClientesOportunidadesList/ClientesOportunidadesList";
+import { OportunidadesList } from "@/src/components/lists/OportunidadesList/OportunidadesList";
 import { Oportunidade } from "@/src/types/cliente/oportunidade/Oportunidade";
-import { Button, Container, Grid, Typography } from "@mui/material";
-import Link from "next/link";
+import { Container, Typography } from "@mui/material";
 
 const BFF_URL = process.env.BFF_URL;
 
@@ -31,30 +31,7 @@ export default async function Page() {
         marginTop: 2,
       }}
     >
-      <Grid
-        container
-        spacing={2}
-        justifyContent={"center"}
-        alignItems={"center"}
-        direction={"column"}
-      >
-        <Grid item>
-          <Link href={"oportunidades/novo"} passHref>
-            <Button variant={"contained"}>Nova oportunidade</Button>
-          </Link>
-        </Grid>
-        <Grid
-          item
-          container
-          sx={{
-            width: "100%",
-          }}
-          spacing={2}
-          direction={"column"}
-        >
-          {content}
-        </Grid>
-      </Grid>
+      <OportunidadesList oportunidades={oportunidades} />
     </Container>
   );
 }

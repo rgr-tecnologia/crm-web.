@@ -18,7 +18,7 @@ import { OportunidadeEtapa } from "@/src/types/enums/OportunidadeEtapa";
 import { ContratoCaracteristica } from "@/src/types/enums/ContratoCaracteristica";
 import { AreaExecutora } from "@/src/types/enums/AreaExecutora";
 import { LeadOportunidadeCreate } from "@/src/types/prospeccao/oportunidade/OportunidadeCreate";
-import { getRepresentantesProspeccao } from "@/src/lib/utils/representante/getRepresententantesProspeccao";
+import { getRepresentantesProspeccao } from "@/src/lib/utils/representantes/getRepresententantesProspeccao";
 import { useQuery } from "react-query";
 
 type LeadOportunidadeFormBaseProps = {

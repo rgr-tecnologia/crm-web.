@@ -11,7 +11,7 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import { OportunidadeCreate } from "@/src/types/cliente/oportunidade/OportunidadeCreate";
 import { OportunidadeEtapa } from "@/src/types/enums/OportunidadeEtapa";
-import { getRepresentantesByClienteId } from "@/src/lib/utils/representante/getRepresentantesByClienteId";
+import { getRepresentantesByClienteId } from "@/src/lib/utils/representantes/getRepresentantesByClienteId";
 import { useQuery } from "react-query";
 import "dayjs/locale/pt-br";
 import { ContratoCaracteristica } from "@/src/types/enums/ContratoCaracteristica";

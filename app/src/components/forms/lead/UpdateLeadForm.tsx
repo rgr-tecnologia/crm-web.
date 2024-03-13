@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { LeadFormBase } from "./LeadFormBase";
 import { CreateLead } from "@/src/types/lead/CreateLead";
-import { updateLead } from "@/src/lib/utils/lead/updateLead";
+import { updateLead } from "@/src/lib/utils/leads/updateLead";
 import { Lead } from "@/src/types/lead/Lead";
 
 type UpdateLeadFormProps = {
