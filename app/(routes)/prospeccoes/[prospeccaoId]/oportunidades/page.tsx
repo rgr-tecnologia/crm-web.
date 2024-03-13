@@ -1,4 +1,4 @@
-import { LeadsOportunidadesList } from "@/src/components/lists/LeadsOportunidadesList/LeadsOportunidadesList";
+import { OportunidadesList } from "@/src/components/lists/OportunidadesList/OportunidadesList";
 import { LeadOportunidade } from "@/src/types/prospeccao/oportunidade/Oportunidade";
 import { Container } from "@mui/material";
 
@@ -33,7 +33,7 @@ export default async function Page({ params }: { params: Params }) {
         marginTop: 2,
       }}
     >
-      <LeadsOportunidadesList oportunidades={oportunidades} />
+      <OportunidadesList oportunidades={oportunidades} />
     </Container>
   );
 }

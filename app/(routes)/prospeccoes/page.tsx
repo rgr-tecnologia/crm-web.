@@ -2,7 +2,7 @@ import { ProspeccoesList } from "@/src/components/lists/ProspeccoesList/Prospecc
 import { LeadQueryProvider } from "@/src/components/queryProviders/LeadQueryProvider";
 import { fetchErrorHandler } from "@/src/lib/errors/fetchErrorHandler";
 import { Prospeccao } from "@/src/types/prospeccao/Prospeccao";
-import { Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 
 const BFF_URL = process.env.BFF_URL;
 

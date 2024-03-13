@@ -10,18 +10,20 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { OportunidadeEtapa } from "@/src/types/enums/OportunidadeEtapa";
-import { LeadOportunidade } from "@/src/types/prospeccao/oportunidade/Oportunidade";
+import { Oportunidade } from "@/src/types/cliente/oportunidade/Oportunidade";
 
-type LeadsOportunidadesListActionsProps = {
-  oportunidade: LeadOportunidade;
+type OportunidadesListActionsProps = {
+  oportunidade: Oportunidade;
   onClickAttachment?: () => void;
 };
 
 const BFF_URL = process.env.NEXT_PUBLIC_BFF_URL;
 
-async function encerrarOportunidade(oportunidade: LeadOportunidade) {
+async function encerrarOportunidade(oportunidade: Oportunidade) {
   try {
-    const urlToFetch = `${BFF_URL}/prospeccoes/${oportunidade.clienteProspeccaoId}/oportunidades/${oportunidade.id}`;
+    const { clienteId, id } = oportunidade;
+    const urlToFetch = `${BFF_URL}/prospeccoes/${clienteId}/oportunidades/${id}`;
+
     const data = {
       ...oportunidade,
       etapa: OportunidadeEtapa.PERDIDO,
@@ -46,9 +48,10 @@ async function encerrarOportunidade(oportunidade: LeadOportunidade) {
   }
 }
 
-async function reabrirOportunidade(oportunidade: LeadOportunidade) {
+async function reabrirOportunidade(oportunidade: Oportunidade) {
+  const { clienteId, id } = oportunidade;
   try {
-    const urlToFetch = `${BFF_URL}/prospeccoes/${oportunidade.clienteProspeccaoId}/oportunidades/${oportunidade.id}`;
+    const urlToFetch = `${BFF_URL}/clientes/${clienteId}/oportunidades/${id}`;
     const data = {
       ...oportunidade,
       etapa: OportunidadeEtapa.NEGOCIACAO,
@@ -73,14 +76,12 @@ async function reabrirOportunidade(oportunidade: LeadOportunidade) {
   }
 }
 
-export function LeadsOportunidadesListActions(
-  props: LeadsOportunidadesListActionsProps
-) {
+export function OportunidadesListActions(props: OportunidadesListActionsProps) {
   const { oportunidade, onClickAttachment } = props;
-  const { id, clienteProspeccaoId } = oportunidade;
+  const { id, clienteId } = oportunidade;
   const router = useRouter();
 
-  const _encerrarOportunidade = async (oportunidade: LeadOportunidade) => {
+  const _encerrarOportunidade = async (oportunidade: Oportunidade) => {
     try {
       const res = await encerrarOportunidade(oportunidade);
       if (res) {
@@ -92,7 +93,7 @@ export function LeadsOportunidadesListActions(
     }
   };
 
-  const _reabrirOportunidade = async (oportunidade: LeadOportunidade) => {
+  const _reabrirOportunidade = async (oportunidade: Oportunidade) => {
     try {
       const res = await reabrirOportunidade(oportunidade);
       if (res) {
@@ -114,10 +115,7 @@ export function LeadsOportunidadesListActions(
         </Tooltip>
       </Grid>
       <Grid item>
-        <Link
-          href={`/prospeccoes/${clienteProspeccaoId}/oportunidades/${id}`}
-          passHref
-        >
+        <Link href={`/clientes/${clienteId}/oportunidades/${id}`} passHref>
           <Tooltip title="Editar">
             <IconButton>
               <EditIcon />
@@ -129,7 +127,7 @@ export function LeadsOportunidadesListActions(
         <Tooltip title="Gerar contrato">
           <IconButton
             disabled={oportunidade.etapa === OportunidadeEtapa.NEGOCIACAO}
-            href={`/prospeccoes/${clienteProspeccaoId}/oportunidades/${id}/gerar-contrato`}
+            href={`/prospeccoes/${clienteId}/oportunidades/${id}/gerar-contrato`}
           >
             <DescriptionIcon />
           </IconButton>

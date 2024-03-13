@@ -1,16 +1,16 @@
 "use client";
 import { Button, Grid, Typography } from "@mui/material";
-import { LeadOportunidade } from "@/src/types/prospeccao/oportunidade/Oportunidade";
 import { AttachmentsModal } from "../../modals/prospeccaoOportunidades/attachmentsModal";
 import { useState } from "react";
 import Link from "next/link";
-import { LeadsOportunidadesCardList } from "./LeadsOportunidadesCardList";
+import { OportunidadesCardList } from "./OportunidadesCardList";
+import { Oportunidade } from "@/src/types/cliente/oportunidade/Oportunidade";
 
 type OportunidadesListProps = {
-  oportunidades: LeadOportunidade[];
+  oportunidades: Oportunidade[];
 };
 
-const orderLeadOportunidades = (oportunidades: LeadOportunidade[]) => {
+const orderOportunidades = (oportunidades: Oportunidade[]) => {
   return oportunidades.sort((a, b) => {
     const aDate = new Date(a.createdAt);
     const bDate = new Date(b.createdAt);
@@ -18,7 +18,7 @@ const orderLeadOportunidades = (oportunidades: LeadOportunidade[]) => {
   });
 };
 
-export function LeadsOportunidadesList(props: OportunidadesListProps) {
+export function OportunidadesList(props: OportunidadesListProps) {
   const { oportunidades } = props;
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -31,8 +31,8 @@ export function LeadsOportunidadesList(props: OportunidadesListProps) {
   };
 
   const content = oportunidades.length ? (
-    <LeadsOportunidadesCardList
-      oportunidades={orderLeadOportunidades(oportunidades)}
+    <OportunidadesCardList
+      oportunidades={orderOportunidades(oportunidades)}
       handleModalOpen={handleModalOpen}
     />
   ) : (

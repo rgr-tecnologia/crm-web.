@@ -1,15 +1,15 @@
 import { Card, CardContent, Divider, Grid, Typography } from "@mui/material";
 
 import { ListOrderIdentifier } from "../ListOrderIdentifier/ListOrderIdentifier";
-import { LeadOportunidade } from "@/src/types/prospeccao/oportunidade/Oportunidade";
-import { LeadsOportunidadesListActions } from "./LeadsOportunidadesListActions";
+import { OportunidadesListActions } from "./OportunidadesListActions";
+import { Oportunidade } from "@/src/types/cliente/oportunidade/Oportunidade";
 
 type Props = {
-  oportunidades: LeadOportunidade[];
+  oportunidades: Oportunidade[];
   handleModalOpen: () => void;
 };
 
-export function LeadsOportunidadesCardList(props: Props) {
+export function OportunidadesCardList(props: Props) {
   const { oportunidades, handleModalOpen } = props;
   return (
     <Grid container spacing={2}>
@@ -88,7 +88,7 @@ export function LeadsOportunidadesCardList(props: Props) {
                   </Grid>
 
                   <Grid item xs>
-                    <LeadsOportunidadesListActions
+                    <OportunidadesListActions
                       oportunidade={oportunidade}
                       onClickAttachment={handleModalOpen}
                     />
