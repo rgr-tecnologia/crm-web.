@@ -11,70 +11,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { OportunidadeEtapa } from "@/src/types/enums/OportunidadeEtapa";
 import { Oportunidade } from "@/src/types/cliente/oportunidade/Oportunidade";
+import { encerrarOportunidade } from "@/src/lib/utils/oportunidades/encerrarOportunidade";
+import { reabrirOportunidade } from "@/src/lib/utils/oportunidades/reabrirOportunidade";
 
 type OportunidadesListActionsProps = {
   oportunidade: Oportunidade;
   onClickAttachment?: () => void;
 };
-
-const BFF_URL = process.env.NEXT_PUBLIC_BFF_URL;
-
-async function encerrarOportunidade(oportunidade: Oportunidade) {
-  try {
-    const { clienteId, id } = oportunidade;
-    const urlToFetch = `${BFF_URL}/prospeccoes/${clienteId}/oportunidades/${id}`;
-
-    const data = {
-      ...oportunidade,
-      etapa: OportunidadeEtapa.PERDIDO,
-    };
-
-    const response = await fetch(urlToFetch, {
-      method: "PUT",
-      body: JSON.stringify(data),
-    });
-
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error("Erro ao encerrar oportunidade");
-    }
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message);
-    } else {
-      throw new Error("Erro ao encerrar oportunidade");
-    }
-  }
-}
-
-async function reabrirOportunidade(oportunidade: Oportunidade) {
-  const { clienteId, id } = oportunidade;
-  try {
-    const urlToFetch = `${BFF_URL}/clientes/${clienteId}/oportunidades/${id}`;
-    const data = {
-      ...oportunidade,
-      etapa: OportunidadeEtapa.NEGOCIACAO,
-    };
-
-    const response = await fetch(urlToFetch, {
-      method: "PUT",
-      body: JSON.stringify(data),
-    });
-
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error("Erro ao reabrir oportunidade");
-    }
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message);
-    } else {
-      throw new Error("Erro ao reabrir oportunidade");
-    }
-  }
-}
 
 export function OportunidadesListActions(props: OportunidadesListActionsProps) {
   const { oportunidade, onClickAttachment } = props;
