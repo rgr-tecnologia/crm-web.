@@ -3,7 +3,7 @@
 import { UsuarioCreate } from "@/src/types/usuario/UsuarioCreate";
 import { Grid, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import { LoadingButton } from "../../loadingButton/LoadingButton";
+import { LoadingButton } from "../../ui/LoadingButton/LoadingButton";
 import { useState } from "react";
 import { convidarUsuario } from "@/src/lib/utils/usuarios/convidarUsuario";
 

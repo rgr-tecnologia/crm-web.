@@ -7,7 +7,6 @@ import { RepresentanteFormBase } from "./RepresentanteFormBase";
 import { Representate } from "@/src/types/cliente/representante/Representante";
 import { getRepresentante } from "@/src/lib/utils/representantes/getRepresentante";
 import { updateRepresentante } from "@/src/lib/utils/representantes/updateRepresentante";
-import { CreateRepresentante } from "@/src/types/cliente/representante/CreateRepresentante";
 
 type RepresentanteFormProps = {
   clienteId: Cliente["id"];
@@ -21,7 +20,7 @@ export function UpdateRepresentanteForm(props: RepresentanteFormProps) {
     getRepresentante(clienteId, representanteId)
   );
 
-  const onSubmit = async (formData: CreateRepresentante) => {
+  const onSubmit = async (formData: Representate) => {
     await updateRepresentante(clienteId, representanteId, formData);
   };
 
@@ -33,7 +32,13 @@ export function UpdateRepresentanteForm(props: RepresentanteFormProps) {
             <Typography variant="h6">Editar representante</Typography>
           </Grid>
           <Grid item>
-            <RepresentanteFormBase onSubmit={onSubmit} defaultValues={data} />
+            <RepresentanteFormBase
+              onSubmit={onSubmit}
+              defaultValues={data}
+              isLoading={false}
+              isError={false}
+              isSuccess={false}
+            />
           </Grid>
         </Grid>
       </CardContent>

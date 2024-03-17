@@ -1,4 +1,3 @@
-import { SnackbarProps } from "@mui/material";
 import { BaseNotification } from "./BaseNotification";
 
 type SuccessNotificationProps = {

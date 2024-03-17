@@ -1,4 +1,4 @@
-import { ClientesList } from "@/src/components/lists/ClientesList/ClientesList";
+import { ClientesList } from "@/(routes)/clientes/components/ClientesList";
 import { Cliente } from "@/src/types/cliente/Cliente";
 import { Container } from "@mui/material";
 

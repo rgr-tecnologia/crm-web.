@@ -1,4 +1,4 @@
-import { UpdateLeadForm } from "@/src/components/forms/lead/UpdateLeadForm";
+import { UpdateLeadForm } from "@/(routes)/leads/components/UpdateLeadForm";
 import { ClienteQueryProvider } from "@/src/components/queryProviders/ClienteQueryProvider";
 import { getLeadById } from "@/src/lib/utils/leads/getLeadById";
 import { Container } from "@mui/material";

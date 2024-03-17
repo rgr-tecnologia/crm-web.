@@ -1,6 +1,6 @@
 "use client";
 import { Button, Grid, Typography } from "@mui/material";
-import { AttachmentsModal } from "../../modals/prospeccaoOportunidades/attachmentsModal";
+import { AttachmentsModal } from "@/(routes)/oportunidades/components/AttachmentsModal";
 import { useState } from "react";
 import Link from "next/link";
 import { OportunidadesCardList } from "./OportunidadesCardList";

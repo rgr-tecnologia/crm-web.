@@ -1,22 +1,19 @@
 import { Card, CardContent, Divider, Grid, Typography } from "@mui/material";
+import { ProspeccoesListActions } from "./ProspeccoesListActions";
+import { ListOrderIdentifier } from "@/src/components/lists/ListOrderIdentifier/ListOrderIdentifier";
+import { Prospeccao } from "@/src/types/prospeccao/Prospeccao";
 
-import { ListOrderIdentifier } from "../ListOrderIdentifier/ListOrderIdentifier";
-import { OportunidadesListActions } from "./OportunidadesListActions";
-import { Oportunidade } from "@/src/types/cliente/oportunidade/Oportunidade";
-
-type Props = {
-  oportunidades: Oportunidade[];
-  handleModalOpen: () => void;
+type ProspeccoesCardListProps = {
+  prospeccoes: Prospeccao[];
 };
 
-export function OportunidadesCardList(props: Props) {
-  const { oportunidades, handleModalOpen } = props;
+export function ProspeccoesCardList({ prospeccoes }: ProspeccoesCardListProps) {
   return (
     <Grid container spacing={2}>
-      {oportunidades.map((oportunidade, index) => {
-        const { id, titulo, createdAt, updatedAt, etapa } = oportunidade;
+      {prospeccoes.map((prospeccao, index) => {
+        const { nomeFantasia, createdAt, updatedAt, ativo } = prospeccao;
         return (
-          <Grid item key={id} xs={12}>
+          <Grid item key={prospeccao.id} xs={12}>
             <Card
               sx={{
                 width: "100%",
@@ -36,9 +33,9 @@ export function OportunidadesCardList(props: Props) {
                   </Grid>
                   <Grid container item spacing={1} direction={"column"} xs={10}>
                     <Grid item>
-                      <Typography variant="caption">Título</Typography>
+                      <Typography variant="caption">Nome Fantasia</Typography>
                       <Typography variant="body1" fontWeight={"bold"}>
-                        {titulo}
+                        {nomeFantasia}
                       </Typography>
                     </Grid>
                     <Grid item>
@@ -50,13 +47,19 @@ export function OportunidadesCardList(props: Props) {
                       direction={"row"}
                       justifyContent={"space-between"}
                     >
-                      <Grid container item direction={"row"} spacing={1} xs={4}>
+                      <Grid item container direction={"row"} spacing={1} xs>
                         <Grid item>
-                          <Typography variant="caption">Etapa</Typography>
+                          <Typography variant="caption">Status</Typography>
                         </Grid>
                         <Grid item>
-                          <Typography variant="body1" fontWeight={"bold"}>
-                            {etapa}
+                          <Typography
+                            variant="body2"
+                            color={
+                              prospeccao?.ativo ? "success.main" : "error.main"
+                            }
+                            fontWeight={"bold"}
+                          >
+                            {ativo ? "ATIVO" : "INATIVO"}
                           </Typography>
                         </Grid>
                       </Grid>
@@ -87,11 +90,8 @@ export function OportunidadesCardList(props: Props) {
                     </Grid>
                   </Grid>
 
-                  <Grid item xs>
-                    <OportunidadesListActions
-                      oportunidade={oportunidade}
-                      onClickAttachment={handleModalOpen}
-                    />
+                  <Grid item>
+                    <ProspeccoesListActions prospeccao={prospeccao} />
                   </Grid>
                 </Grid>
               </CardContent>

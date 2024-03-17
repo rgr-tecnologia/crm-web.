@@ -1,19 +1,19 @@
 import { Card, CardContent, Divider, Grid, Typography } from "@mui/material";
-import { Cliente } from "@/src/types/cliente/Cliente";
-import { ClientesListActions } from "./ClientesListActions";
-import { ListOrderIdentifier } from "../ListOrderIdentifier/ListOrderIdentifier";
+import { LeadsListActions } from "./LeadsListActions";
+import { ListOrderIdentifier } from "@/src/components/lists/ListOrderIdentifier/ListOrderIdentifier";
+import { Lead } from "@/src/types/lead/Lead";
 
-type ClientesCardListProps = {
-  clientes: Cliente[];
+type LeadsCardListProps = {
+  leads: Lead[];
 };
 
-export function ClientesCardList({ clientes }: ClientesCardListProps) {
+export function LeadsCardList({ leads }: LeadsCardListProps) {
   return (
     <Grid container spacing={2}>
-      {clientes.map((cliente, index) => {
-        const { nomeFantasia, createdAt, updatedAt, ativo } = cliente;
+      {leads.map((lead, index) => {
+        const { nomeFantasia, createdAt, updatedAt } = lead;
         return (
-          <Grid item key={cliente.id} xs={12}>
+          <Grid item key={lead.id} xs={12}>
             <Card
               sx={{
                 width: "100%",
@@ -47,22 +47,6 @@ export function ClientesCardList({ clientes }: ClientesCardListProps) {
                       direction={"row"}
                       justifyContent={"space-between"}
                     >
-                      <Grid item container direction={"row"} spacing={1} xs>
-                        <Grid item>
-                          <Typography variant="caption">Status</Typography>
-                        </Grid>
-                        <Grid item>
-                          <Typography
-                            variant="body2"
-                            color={
-                              cliente?.ativo ? "success.main" : "error.main"
-                            }
-                            fontWeight={"bold"}
-                          >
-                            {ativo ? "ATIVO" : "INATIVO"}
-                          </Typography>
-                        </Grid>
-                      </Grid>
                       <Grid container item direction={"row"} spacing={1} xs={4}>
                         <Grid item>
                           <Typography variant="caption">
@@ -91,7 +75,7 @@ export function ClientesCardList({ clientes }: ClientesCardListProps) {
                   </Grid>
 
                   <Grid item>
-                    <ClientesListActions cliente={cliente} />
+                    <LeadsListActions lead={lead} />
                   </Grid>
                 </Grid>
               </CardContent>

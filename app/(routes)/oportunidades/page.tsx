@@ -1,5 +1,5 @@
 import { ClientesOportunidadesList } from "@/src/components/lists/ClientesOportunidadesList/ClientesOportunidadesList";
-import { OportunidadesList } from "@/src/components/lists/OportunidadesList/OportunidadesList";
+import { OportunidadesList } from "@/(routes)/oportunidades/components/OportunidadesList";
 import { Oportunidade } from "@/src/types/cliente/oportunidade/Oportunidade";
 import { Container, Typography } from "@mui/material";
 

@@ -1,5 +1,5 @@
 import { ClienteQueryProvider } from "@/src/components/queryProviders/ClienteQueryProvider";
-import { CreateClienteForm } from "@/src/components/forms/cliente/CreateClienteForm";
+import { CreateClienteForm } from "@/(routes)/clientes/components/CreateClienteForm";
 import { Container } from "@mui/material";
 
 export default function Page() {

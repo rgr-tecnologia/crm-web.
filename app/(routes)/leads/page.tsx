@@ -1,4 +1,4 @@
-import { LeadsList } from "@/src/components/lists/LeadsList/LeadsList";
+import { LeadsList } from "@/(routes)/leads/components/LeadsList";
 import { fetchErrorHandler } from "@/src/lib/errors/fetchErrorHandler";
 import { Lead } from "@/src/types/lead/Lead";
 import { Container, Typography } from "@mui/material";
@@ -27,7 +27,15 @@ async function fetchLeads() {
 export default async function Page() {
   const leads = await fetchLeads();
 
-  leads?.forEach((lead) => {
+  if (!leads?.length) {
+    return (
+      <Container>
+        <Typography variant="h6">Nenhum lead cadastrado</Typography>
+      </Container>
+    );
+  }
+
+  leads.forEach((lead) => {
     lead.createdAt = new Date(lead.createdAt);
     lead.updatedAt = new Date(lead.updatedAt);
   });

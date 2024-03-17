@@ -4,7 +4,7 @@ import { Lead } from "@/src/types/lead/Lead";
 import { Button, Grid, Typography } from "@mui/material";
 
 import { useState } from "react";
-import { LeadsAutoComplete } from "../../autocomplete/LeadsAutoComplete";
+import { LeadsAutoComplete } from "@/src/components/autocomplete/LeadsAutoComplete";
 import Link from "next/link";
 import { LeadsCardList } from "./LeadsCardList";
 

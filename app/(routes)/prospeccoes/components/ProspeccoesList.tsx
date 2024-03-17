@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { Button, Grid, Typography } from "@mui/material";
 
-import { ProspeccoesAutoComplete } from "../../autocomplete/ProspeccoesAutoComplete";
+import { ProspeccoesAutoComplete } from "@/src/components/autocomplete/ProspeccoesAutoComplete";
 import { ProspeccoesCardList } from "./ProspeccoesCardList";
 import { Prospeccao } from "@/src/types/prospeccao/Prospeccao";
 

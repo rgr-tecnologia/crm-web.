@@ -2,7 +2,7 @@
 
 import { Cliente } from "@/src/types/cliente/Cliente";
 import { Button, Grid, Typography } from "@mui/material";
-import { ClienteAutoComplete } from "../../autocomplete/ClienteAutoComplete";
+import { ClienteAutoComplete } from "../../../src/components/autocomplete/ClienteAutoComplete";
 import { ClientesCardList } from "./ClientesCardList";
 import { useState } from "react";
 import Link from "next/link";

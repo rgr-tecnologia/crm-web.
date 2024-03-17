@@ -1,5 +1,5 @@
 import { Container } from "@mui/material";
-import { CreateLeadForm } from "@/src/components/forms/lead/CreateLeadForm";
+import { CreateLeadForm } from "@/(routes)/leads/components/CreateLeadForm";
 import { ClienteQueryProvider } from "@/src/components/queryProviders/ClienteQueryProvider";
 
 export default function Page() {

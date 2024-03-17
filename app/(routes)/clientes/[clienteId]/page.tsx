@@ -1,5 +1,5 @@
 import { ClienteQueryProvider } from "@/src/components/queryProviders/ClienteQueryProvider";
-import { UpdateClienteForm } from "@/src/components/forms/cliente/UpdateClienteForm";
+import { UpdateClienteForm } from "@/(routes)/clientes/components/UpdateClienteForm";
 import { Container } from "@mui/material";
 
 type PageParams = {

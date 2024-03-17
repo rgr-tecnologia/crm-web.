@@ -1,6 +1,4 @@
 "use client";
-
-import { CreateRepresentante } from "@/src/types/cliente/representante/CreateRepresentante";
 import {
   Divider,
   FormHelperText,
@@ -15,11 +13,12 @@ import "dayjs/locale/pt-br";
 import dayjs from "dayjs";
 import { Controller } from "react-hook-form";
 import { useForm } from "react-hook-form";
-import { LoadingButton } from "../../loadingButton/LoadingButton";
+import { LoadingButton } from "../../ui/LoadingButton/LoadingButton";
+import { Representate } from "@/src/types/cliente/representante/Representante";
 
 type RepresentanteFormBaseProps = {
-  onSubmit: (formData: CreateRepresentante) => void;
-  defaultValues?: Partial<CreateRepresentante>;
+  onSubmit: (formData: Representate) => void;
+  defaultValues?: Partial<Representate>;
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
@@ -32,7 +31,7 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<CreateRepresentante>({
+  } = useForm<Representate>({
     defaultValues: {
       ...defaultValues,
       ativo: true,

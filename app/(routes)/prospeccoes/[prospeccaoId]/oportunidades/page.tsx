@@ -1,4 +1,4 @@
-import { OportunidadesList } from "@/src/components/lists/OportunidadesList/OportunidadesList";
+import { OportunidadesList } from "@/(routes)/oportunidades/components/OportunidadesList";
 import { LeadOportunidade } from "@/src/types/prospeccao/oportunidade/Oportunidade";
 import { Container } from "@mui/material";
 

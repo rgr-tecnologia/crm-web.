@@ -1,7 +1,7 @@
 "use client";
 
 import { Container } from "@mui/material";
-import PromoverLeadForm from "@/src/components/forms/lead/PromoverLeadForm";
+import PromoverLeadForm from "@/(routes)/leads/components/PromoverLeadForm";
 import { LeadQueryProvider } from "@/src/components/queryProviders/LeadQueryProvider";
 
 type PageParams = {

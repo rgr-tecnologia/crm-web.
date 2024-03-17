@@ -4,11 +4,11 @@ import { Grid, Step, StepLabel, Stepper, Typography } from "@mui/material";
 import { useState } from "react";
 import { useQuery } from "react-query";
 import { getLeadById } from "@/src/lib/utils/leads/getLeadById";
-import { RepresentanteFormBase } from "../representante/RepresentanteFormBase";
+import { RepresentanteFormBase } from "../../../src/components/forms/representante/RepresentanteFormBase";
 import { promoteLead } from "@/src/lib/utils/leads/promoteLead";
 import { CreateRepresentante } from "@/src/types/cliente/representante/CreateRepresentante";
 import * as navigation from "next/navigation";
-import { LeadOportunidadeFormBase } from "./oportunidade/LeadOportunidadeBaseForm";
+import { LeadOportunidadeFormBase } from "../../../src/components/forms/lead/oportunidade/LeadOportunidadeBaseForm";
 import { LeadOportunidadeCreate } from "@/src/types/prospeccao/oportunidade/OportunidadeCreate";
 
 type PromoverLeadFormProps = {
