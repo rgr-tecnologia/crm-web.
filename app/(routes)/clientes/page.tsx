@@ -8,8 +8,8 @@ const endpoint = `${process.env.API_URL}/clientes`;
 export default async function Page() {
   const clientes = await get<Cliente[]>(endpoint);
 
-  if (!clientes.length) {
-    return <Container>Nenhum cliente cadastrado</Container>;
+  if (!clientes) {
+    return <p>Erro ao buscar clientes</p>;
   }
 
   clientes.forEach((cliente) => {

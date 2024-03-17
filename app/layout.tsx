@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Box, CssBaseline } from "@mui/material";
+import { Box, Container, CssBaseline } from "@mui/material";
 import { Header } from "@/src/components/ui/Header/Header";
 import { SideMenu } from "@/src/components/ui/SideMenu/SideMenu";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +28,9 @@ export default function RootLayout({
             <SideMenu />
 
             <Box component={"main"} sx={{ flexGrow: 1, p: 8 }}>
-              {children}
+              <Suspense fallback={<Container>Loading...</Container>}>
+                {children}
+              </Suspense>
             </Box>
           </Box>
         </body>
