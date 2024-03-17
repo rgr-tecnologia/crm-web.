@@ -27,7 +27,7 @@ export async function get<T>(url: string) {
   }
 }
 
-export async function post<T>(url: string, data: T) {
+export async function post<T, K>(url: string, data: T) {
   try {
     const { accessToken } = await getAccessToken(accessTokenConfig);
     const response = await fetch(url, {
@@ -39,13 +39,13 @@ export async function post<T>(url: string, data: T) {
       body: JSON.stringify(data),
     });
     await fetchSuccessHandler(response);
-    return response.json() as Promise<T>;
+    return response.json() as Promise<K>;
   } catch (error) {
     fetchErrorHandler(error);
   }
 }
 
-export async function put<T>(url: string, data: T) {
+export async function put<T, K>(url: string, data: T) {
   try {
     const { accessToken } = await getAccessToken(accessTokenConfig);
     const response = await fetch(url, {
@@ -57,7 +57,7 @@ export async function put<T>(url: string, data: T) {
       body: JSON.stringify(data),
     });
     await fetchSuccessHandler(response);
-    return response.json() as Promise<T>;
+    return response.json() as Promise<K>;
   } catch (error) {
     fetchErrorHandler(error);
   }

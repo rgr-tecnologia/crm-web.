@@ -1,28 +1,22 @@
 "use client";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
-import { createCliente } from "@/src/lib/utils/clientes/createCliente";
 import { ClienteFormBase } from "./ClienteFormBase";
-import { useMutation } from "react-query";
-import { SuccessNotification } from "@/src/components/notifications/SuccessNotification";
 import { ErrorNotification } from "@/src/components/notifications/ErrorNotification";
 import { CreateCliente } from "@/src/types/cliente/CreateCliente";
 import { useRouter } from "next/navigation";
+import { createCliente } from "../actions";
+import { useState } from "react";
 
 export function CreateClienteForm() {
+  const [isError, setIsError] = useState(false);
   const router = useRouter();
-  const { mutate, isLoading, isSuccess, isError } = useMutation({
-    mutationFn: (data: CreateCliente) => {
-      return createCliente(data);
-    },
-  });
 
   const onSubmit = async (formData: CreateCliente) => {
     try {
-      await mutate(formData);
+      await createCliente(formData);
       router.push("/clientes");
     } catch (error) {
-      if (error instanceof Error) {
-      }
+      setIsError(true);
     }
   };
 
@@ -35,25 +29,14 @@ export function CreateClienteForm() {
               <Typography variant="h6">Novo cliente</Typography>
             </Grid>
             <Grid item>
-              <ClienteFormBase
-                onSubmit={onSubmit}
-                isLoading={isLoading}
-                isError={isError}
-                isSuccess={isSuccess}
-              />
+              <ClienteFormBase onSubmit={onSubmit} isLoading={false} />
             </Grid>
           </Grid>
         </CardContent>
       </Card>
-      {isSuccess && (
-        <SuccessNotification
-          message="Cliente atualizado com sucesso!"
-          open={isSuccess}
-        />
-      )}
       {isError && (
         <ErrorNotification
-          message="Erro ao atualizar cliente!"
+          message="Erro ao cadastrar cliente!"
           open={isError}
         />
       )}

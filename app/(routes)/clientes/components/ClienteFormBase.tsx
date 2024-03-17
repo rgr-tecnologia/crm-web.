@@ -2,18 +2,14 @@
 
 import { Grid, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import { LoadingButton } from "../../../src/components/ui/LoadingButton/LoadingButton";
-import { CreateCliente } from "@/src/types/cliente/CreateCliente";
-import { formatCnpj } from "@/src/lib/utils/formatters/formatCnpj";
-import { isCnpjValid } from "@/src/lib/utils/validators/isCnpjValid";
+import { LoadingButton } from "@/src/components/ui/LoadingButton/LoadingButton";
 import { useEffect } from "react";
+import { Cliente } from "@/src/types/cliente/Cliente";
 
 type ClienteFormProps = {
-  onSubmit: (formData: CreateCliente) => void;
-  defaultValues?: CreateCliente;
+  onSubmit: (formData: Cliente) => void;
+  defaultValues?: Cliente;
   isLoading: boolean;
-  isError: boolean;
-  isSuccess: boolean;
 };
 
 export function ClienteFormBase(props: ClienteFormProps) {
@@ -24,7 +20,7 @@ export function ClienteFormBase(props: ClienteFormProps) {
     control,
     reset,
     formState: { errors },
-  } = useForm<CreateCliente>({
+  } = useForm<Cliente>({
     defaultValues: {
       ativo: true,
       ...defaultValues,
