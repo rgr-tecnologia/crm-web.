@@ -1,20 +1,12 @@
 import { ClientesList } from "@/(routes)/clientes/components/ClientesList";
-import { Cliente } from "@/src/types/cliente/Cliente";
 import { Container } from "@mui/material";
+import { get } from "@/src/lib/useFetch";
+import { Cliente } from "@/src/types/cliente/Cliente";
 
-const BFF_URL = process.env.BFF_URL;
-
-async function fetchClientes(): Promise<Cliente[]> {
-  const response = await fetch(`${BFF_URL}/clientes`, {
-    next: {
-      revalidate: 0,
-    },
-  });
-  return response.json();
-}
+const endpoint = `${process.env.API_URL}/clientes`;
 
 export default async function Page() {
-  const clientes = await fetchClientes();
+  const clientes = await get<Cliente[]>(endpoint);
 
   if (!clientes.length) {
     return <Container>Nenhum cliente cadastrado</Container>;
