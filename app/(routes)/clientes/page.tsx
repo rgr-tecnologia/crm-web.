@@ -16,6 +16,10 @@ async function fetchClientes(): Promise<Cliente[]> {
 export default async function Page() {
   const clientes = await fetchClientes();
 
+  if (!clientes.length) {
+    return <Container>Nenhum cliente cadastrado</Container>;
+  }
+
   clientes.forEach((cliente) => {
     cliente.createdAt = new Date(cliente.createdAt);
     cliente.updatedAt = new Date(cliente.updatedAt);
