@@ -50,6 +50,11 @@ const options = [
     path: "/usuarios",
     icon: <PersonIcon />,
   },
+  {
+    name: "Configurações",
+    path: "/configuracoes",
+    icon: <></>,
+  },
 ];
 
 export function SideMenu() {
@@ -75,6 +80,10 @@ export function SideMenu() {
               <ListItemText primary={option.name} />
             </ListItemButton>
           ))}
+          <ListItemButton href={"/api/auth/logout"}>
+            <ListItemIcon>{<></>}</ListItemIcon>
+            <ListItemText primary={"Sair"} />
+          </ListItemButton>
         </List>
       </Box>
     </Drawer>
