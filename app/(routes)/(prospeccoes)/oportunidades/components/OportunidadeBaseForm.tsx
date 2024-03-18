@@ -4,7 +4,6 @@ import { Button, FormHelperText, Grid, MenuItem, Select } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { OportunidadeEtapa } from "@/src/types/enums/OportunidadeEtapa";
 import "dayjs/locale/pt-br";
-import { ContratoCaracteristica } from "@/src/types/enums/ContratoCaracteristica";
 import { AreaExecutora } from "@/src/types/enums/AreaExecutora";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -18,15 +17,17 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormTextField } from "@/src/components/FormTextField";
 import { Representate } from "@/src/types/Representante";
+import { OportunidadeCaracteristica } from "@/src/types/enums/OportunidadeCaracteristica";
 
 type OportunidadeFormBaseProps = {
+  clienteId: string;
   representantes: Representate[];
   onSubmit: (data: CreateOportunidade) => void;
   defaultValues?: CreateOportunidade;
 };
 
 export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
-  const { representantes, onSubmit, defaultValues } = props;
+  const { clienteId, representantes, onSubmit, defaultValues } = props;
 
   const {
     control,
@@ -37,6 +38,12 @@ export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
   } = useForm<CreateOportunidade>({
     resolver: zodResolver(CreateOportunidadeSchema),
     defaultValues: {
+      clienteId,
+      titulo: "",
+      valor: 0,
+      representanteId: representantes[0]?.id,
+      caracteristica: OportunidadeCaracteristica.MENSALIDADE,
+      areaExecutora: AreaExecutora.ALOCACAO_DE_RECURSOS,
       etapa: OportunidadeEtapa.NEGOCIACAO,
       dataFechamentoPrevista: new Date(),
       ...defaultValues,
@@ -81,11 +88,13 @@ export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
                 label="Característica"
                 error={!!errors.caracteristica}
               >
-                {Object.values(ContratoCaracteristica).map((caracteristica) => (
-                  <MenuItem value={caracteristica} key={caracteristica}>
-                    {caracteristica}
-                  </MenuItem>
-                ))}
+                {Object.values(OportunidadeCaracteristica).map(
+                  (caracteristica) => (
+                    <MenuItem value={caracteristica} key={caracteristica}>
+                      {caracteristica}
+                    </MenuItem>
+                  )
+                )}
                 <FormHelperText>
                   {errors.caracteristica?.message}
                 </FormHelperText>
@@ -143,18 +152,12 @@ export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
         </Grid>
 
         <Grid item xs={12}>
-          <Controller
-            name="valor"
-            control={control}
-            render={({ field }) => (
-              <FormTextField name="valor" label="Valor" control={control} />
-            )}
-          />
+          <FormTextField name="valor" label="Valor" control={control} />
         </Grid>
 
         {getValues("etapa") === OportunidadeEtapa.NEGOCIACAO && (
           <Grid item xs={12}>
-            <Button variant="contained" color="primary" type="submit">
+            <Button variant="contained" color="primary" type="submit" fullWidth>
               Salvar
             </Button>
           </Grid>

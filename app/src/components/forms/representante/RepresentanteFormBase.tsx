@@ -1,11 +1,5 @@
 "use client";
-import {
-  Divider,
-  FormHelperText,
-  Grid,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Divider, FormHelperText, Grid, Typography } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -14,34 +8,42 @@ import dayjs from "dayjs";
 import { Controller } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { LoadingButton } from "../../ui/LoadingButton/LoadingButton";
-import { Representate } from "@/src/types/Representante";
+import {
+  CreateRepresentante,
+  CreateRepresentanteSchema,
+} from "@/src/types/Representante";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormTextField } from "../../FormTextField";
 
 type RepresentanteFormBaseProps = {
-  onSubmit: (formData: Representate) => void;
-  defaultValues?: Partial<Representate>;
+  clienteId: string;
+  onSubmit: (formData: CreateRepresentante) => void;
   isLoading: boolean;
-  isError: boolean;
-  isSuccess: boolean;
+  defaultValues?: Partial<CreateRepresentante>;
+  buttonText?: string;
 };
 
 export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
-  const { onSubmit, defaultValues, isLoading } = props;
+  const { onSubmit, clienteId, isLoading, defaultValues } = props;
 
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<Representate>({
+  } = useForm<CreateRepresentante>({
+    resolver: zodResolver(CreateRepresentanteSchema),
     defaultValues: {
-      ...defaultValues,
+      clienteId,
+      nome: "",
+      departamento: "",
+      cargo: "",
+      telefone: "",
+      email: "",
       ativo: true,
       dataNascimento: new Date(),
+      ...defaultValues,
     },
   });
-
-  const rules = {
-    required: "Campo obrigatório",
-  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -51,61 +53,22 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
           <Divider />
         </Grid>
         <Grid item>
-          <Controller
-            name="nome"
-            control={control}
-            rules={rules}
-            render={({ field }) => (
-              <TextField
-                label="Nome"
-                variant="outlined"
-                {...field}
-                fullWidth
-                error={!!errors.nome}
-                helperText={errors.nome?.message}
-              />
-            )}
-          />
+          <FormTextField name="nome" label="Nome" control={control} />
         </Grid>
         <Grid item>
-          <Controller
+          <FormTextField
             name="departamento"
+            label="Departamento"
             control={control}
-            rules={rules}
-            render={({ field }) => (
-              <TextField
-                label="Departamento"
-                variant="outlined"
-                {...field}
-                fullWidth
-                error={!!errors.departamento}
-                helperText={errors.departamento?.message}
-              />
-            )}
           />
         </Grid>
         <Grid item>
-          <Controller
-            name="cargo"
-            control={control}
-            rules={rules}
-            render={({ field }) => (
-              <TextField
-                label="Cargo"
-                variant="outlined"
-                {...field}
-                fullWidth
-                error={!!errors.cargo}
-                helperText={errors.cargo?.message}
-              />
-            )}
-          />
+          <FormTextField name="cargo" label="Cargo" control={control} />
         </Grid>
         <Grid item>
           <Controller
             name="dataNascimento"
             control={control}
-            rules={rules}
             render={({ field }) => (
               <LocalizationProvider
                 dateAdapter={AdapterDayjs}
@@ -131,57 +94,10 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
           <Divider />
         </Grid>
         <Grid item xs={12}>
-          <Controller
-            name="telefone"
-            control={control}
-            rules={{
-              ...rules,
-              maxLength: {
-                value: 11,
-                message: "Telefone deve ter 11 dígitos",
-              },
-              minLength: {
-                value: 11,
-                message: "Telefone deve ter 11 dígitos",
-              },
-            }}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                fullWidth
-                label="Telefone"
-                error={!!errors.telefone}
-                helperText={errors.telefone?.message}
-                type="tel"
-                inputProps={{
-                  maxLength: 11,
-                  minLength: 11,
-                }}
-              />
-            )}
-          />
+          <FormTextField name="telefone" label="Telefone" control={control} />
         </Grid>
         <Grid item xs={12}>
-          <Controller
-            name="email"
-            control={control}
-            rules={{
-              ...rules,
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                message: "Endereço de email inválido",
-              },
-            }}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                fullWidth
-                label="Email do representante"
-                error={!!errors.email}
-                helperText={errors.email?.message}
-              />
-            )}
-          />
+          <FormTextField name="email" label="Email" control={control} />
         </Grid>
         {/* {<Grid item>
           <Typography variant="h6">Dados de endereço</Typography>
@@ -311,7 +227,7 @@ export const RepresentanteFormBase = (props: RepresentanteFormBaseProps) => {
             loading={isLoading}
             fullWidth
           >
-            Salvar
+            {props.buttonText || "Salvar"}
           </LoadingButton>
         </Grid>
       </Grid>

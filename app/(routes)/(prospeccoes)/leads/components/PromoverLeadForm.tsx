@@ -3,48 +3,50 @@
 import { Grid, Step, StepLabel, Stepper, Typography } from "@mui/material";
 import { useState } from "react";
 import { RepresentanteFormBase } from "@/src/components/forms/representante/RepresentanteFormBase";
-import { CreateRepresentante } from "@/src/types/CreateRepresentante";
 import * as navigation from "next/navigation";
-import { LeadOportunidadeFormBase } from "@/src/components/forms/lead/oportunidade/LeadOportunidadeBaseForm";
-import { LeadOportunidadeCreate } from "@/src/types/prospeccao/oportunidade/OportunidadeCreate";
+import { Lead } from "@/src/types/Lead";
+import { CreateRepresentante, Representate } from "@/src/types/Representante";
+import { CreateOportunidade } from "@/src/types/Oportunidade";
+import { promoteLead } from "../actions";
+import { OportunidadeFormBase } from "../../oportunidades/components/OportunidadeBaseForm";
+import { ErrorNotification } from "@/src/components/notifications/ErrorNotification";
 
 type PromoverLeadFormProps = {
-  leadId: string;
+  lead: Lead;
+  representantes: Representate[];
 };
 
 export default function PromoverLeadForm(props: PromoverLeadFormProps) {
-  const { leadId } = props;
+  const { lead, representantes } = props;
+  const { id: leadId } = lead;
+  const router = navigation.useRouter();
 
   const [activeStep, setActiveStep] = useState(0);
-
   const [representante, setRepresentante] = useState<CreateRepresentante>();
-
-  const router = navigation.useRouter();
+  const [errors, setErrors] = useState<Error[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const handleNext = (formData: CreateRepresentante) => {
     setRepresentante(formData);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
-  const onSubmit = async (formData: LeadOportunidadeCreate) => {
+  const onSubmit = async (formData: CreateOportunidade) => {
     try {
+      setLoading(true);
       formData.valor = Number(formData.valor);
       if (!representante) {
         throw new Error("Erro ao gerar oportunidade");
       }
-
       const res = await promoteLead(leadId, representante, formData);
 
-      if (!res.ok) {
-        throw new Error("Erro ao promover lead");
+      if (res) {
+        router.push(`/oportunidades`);
       }
-      router.push(`/clientes`);
     } catch (error) {
-      if (error instanceof Error) {
-        throw new Error(error.message);
-      } else {
-        throw new Error("Erro ao promover lead");
-      }
+      setErrors([...errors, new Error("Erro ao gerar oportunidade!")]);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -55,42 +57,58 @@ export default function PromoverLeadForm(props: PromoverLeadFormProps) {
       label: "Dados do representante",
       content: (
         <RepresentanteFormBase
+          clienteId={lead.clienteId}
           onSubmit={handleNext}
-          isError={false}
-          isLoading={false}
-          isSuccess={false}
+          isLoading={loading}
           defaultValues={{
             nome: lead.nomeRepresentante,
             telefone: lead.telefoneRepresentante,
             email: lead.emailRepresentante,
           }}
+          buttonText={"Próximo"}
         />
       ),
     },
     {
       label: "Dados da oportunidade",
-      content: <LeadOportunidadeFormBase onSubmit={onSubmit} />,
+      content: (
+        <OportunidadeFormBase
+          clienteId={lead.clienteId}
+          onSubmit={onSubmit}
+          representantes={representantes}
+        />
+      ),
     },
   ];
 
   return (
-    <Grid container direction={"column"} spacing={4} marginTop={1}>
-      <Grid item>
-        <Stepper activeStep={activeStep}>
-          {steps.map((step) => {
-            const { label } = step;
-            return (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-              </Step>
-            );
-          })}
-        </Stepper>
+    <>
+      <Grid container direction={"column"} spacing={4} marginTop={1}>
+        <Grid item>
+          <Stepper activeStep={activeStep}>
+            {steps.map((step) => {
+              const { label } = step;
+              return (
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              );
+            })}
+          </Stepper>
+        </Grid>
+
+        <Grid item container spacing={2} direction={"column"}>
+          <Grid item>{steps[activeStep].content}</Grid>
+        </Grid>
       </Grid>
 
-      <Grid item container spacing={2} direction={"column"}>
-        <Grid item>{steps[activeStep].content}</Grid>
-      </Grid>
-    </Grid>
+      {Boolean(errors.length) && (
+        <ErrorNotification
+          message={errors[0].message}
+          open={Boolean(errors.length)}
+          onClose={() => setErrors([])}
+        />
+      )}
+    </>
   );
 }
