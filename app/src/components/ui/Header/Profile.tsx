@@ -11,6 +11,7 @@ import {
   Menu,
 } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
+import SettingsIcon from "@mui/icons-material/Settings";
 import { useState } from "react";
 
 type ProfileProps = {
@@ -43,8 +44,13 @@ export function Profile(props: ProfileProps) {
             <ListItemIcon>
               <LogoutIcon />
             </ListItemIcon>
-
             <ListItemText primary="Logout" />
+          </ListItemButton>
+          <ListItemButton href="/preferencias">
+            <ListItemIcon>
+              <SettingsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Preferências" />
           </ListItemButton>
         </List>
       </Menu>

@@ -45,11 +45,6 @@ const options = [
     path: "/usuarios",
     icon: <PersonIcon />,
   },
-  {
-    name: "Configurações",
-    path: "/configuracoes",
-    icon: <></>,
-  },
 ];
 
 export function SideMenu() {
