@@ -11,7 +11,7 @@ export function LeadsCardList({ leads }: LeadsCardListProps) {
   return (
     <Grid container spacing={2}>
       {leads.map((lead, index) => {
-        const { nomeFantasia, createdAt, updatedAt } = lead;
+        const { id, createdAt, updatedAt } = lead;
         return (
           <Grid item key={lead.id} xs={12}>
             <Card
@@ -33,9 +33,9 @@ export function LeadsCardList({ leads }: LeadsCardListProps) {
                   </Grid>
                   <Grid container item spacing={1} direction={"column"} xs={10}>
                     <Grid item>
-                      <Typography variant="caption">Nome Fantasia</Typography>
+                      <Typography variant="caption">ID</Typography>
                       <Typography variant="body1" fontWeight={"bold"}>
-                        {nomeFantasia}
+                        {id}
                       </Typography>
                     </Grid>
                     <Grid item>

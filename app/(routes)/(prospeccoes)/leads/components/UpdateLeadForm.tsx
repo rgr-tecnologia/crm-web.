@@ -2,8 +2,7 @@
 import { useRouter } from "next/navigation";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { LeadFormBase } from "./LeadFormBase";
-import { CreateLead } from "@/src/types/lead/CreateLead";
-import { Lead } from "@/src/types/Lead";
+import { CreateLead, Lead } from "@/src/types/Lead";
 import { updateLead } from "../actions";
 import { Cliente } from "@/src/types/cliente/Cliente";
 import { useState } from "react";
@@ -21,7 +20,7 @@ export const UpdateLeadForm = (props: UpdateLeadFormProps) => {
 
   const [isError, setIsError] = useState(false);
 
-  const onSubmit = async (data: Lead) => {
+  const onSubmit = async (data: CreateLead) => {
     try {
       await updateLead(id, data);
       router.push("/leads");

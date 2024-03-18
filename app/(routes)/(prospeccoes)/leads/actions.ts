@@ -15,7 +15,7 @@ export async function createLead(lead: CreateLead) {
   return post<CreateLead, Lead>(`${process.env.API_URL}/leads`, lead);
 }
 
-export async function updateLead(leadId: Lead["id"], lead: Lead) {
+export async function updateLead(leadId: Lead["id"], lead: CreateLead) {
   return put<CreateLead, Lead>(`${process.env.API_URL}/leads/${leadId}`, lead);
 }
 

@@ -26,11 +26,6 @@ const options = [
     icon: <></>,
   },
   {
-    name: "Prospecções",
-    path: "/prospeccoes",
-    icon: <></>,
-  },
-  {
     name: "Oportunidades",
     path: "/oportunidades",
     icon: <></>,

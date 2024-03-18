@@ -2,13 +2,10 @@
 
 import { Grid, Step, StepLabel, Stepper, Typography } from "@mui/material";
 import { useState } from "react";
-import { useQuery } from "react-query";
-import { getLeadById } from "@/src/lib/utils/leads/getLeadById";
-import { RepresentanteFormBase } from "../../../src/components/forms/representante/RepresentanteFormBase";
-import { promoteLead } from "@/src/lib/utils/leads/promoteLead";
+import { RepresentanteFormBase } from "@/src/components/forms/representante/RepresentanteFormBase";
 import { CreateRepresentante } from "@/src/types/cliente/representante/CreateRepresentante";
 import * as navigation from "next/navigation";
-import { LeadOportunidadeFormBase } from "../../../src/components/forms/lead/oportunidade/LeadOportunidadeBaseForm";
+import { LeadOportunidadeFormBase } from "@/src/components/forms/lead/oportunidade/LeadOportunidadeBaseForm";
 import { LeadOportunidadeCreate } from "@/src/types/prospeccao/oportunidade/OportunidadeCreate";
 
 type PromoverLeadFormProps = {
@@ -50,11 +47,6 @@ export default function PromoverLeadForm(props: PromoverLeadFormProps) {
       }
     }
   };
-
-  const { data: lead } = useQuery(
-    "lead",
-    async () => await getLeadById(leadId)
-  );
 
   if (!lead) return <Typography variant={"h6"}>Carregando...</Typography>;
 

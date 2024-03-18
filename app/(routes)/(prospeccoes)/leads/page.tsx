@@ -1,4 +1,4 @@
-import { LeadsList } from "@/(routes)/leads/components/LeadsList";
+import { LeadsList } from "./components/LeadsList";
 import { Container, Typography } from "@mui/material";
 import { getLeads } from "./actions";
 
