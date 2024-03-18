@@ -1,8 +1,7 @@
 "use server";
 
 import { get, post, put, remove } from "@/src/lib/useFetch";
-import { Lead } from "@/src/types/lead/Lead";
-import { CreateLead } from "@/src/types/lead/CreateLead";
+import { CreateLead, Lead } from "@/src/types/Lead";
 
 export async function getLeads() {
   return get<Lead[]>(`${process.env.API_URL}/leads`);

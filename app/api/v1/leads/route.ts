@@ -1,5 +1,5 @@
 import { fetchErrorHandler } from "@/src/lib/errors/fetchErrorHandler";
-import { Lead } from "@/src/types/lead/Lead";
+import { Lead } from "@/src/types/Lead";
 
 const API_URL = process.env.API_URL;
 

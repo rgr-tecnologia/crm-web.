@@ -1,7 +1,7 @@
 import { Card, CardContent, Divider, Grid, Typography } from "@mui/material";
 import { LeadsListActions } from "./LeadsListActions";
 import { ListOrderIdentifier } from "@/src/components/lists/ListOrderIdentifier/ListOrderIdentifier";
-import { Lead } from "@/src/types/lead/Lead";
+import { Lead } from "@/src/types/Lead";
 
 type LeadsCardListProps = {
   leads: Lead[];

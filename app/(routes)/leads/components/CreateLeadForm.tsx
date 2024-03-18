@@ -2,11 +2,11 @@
 import { useRouter } from "next/navigation";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { LeadFormBase } from "./LeadFormBase";
-import { CreateLead } from "@/src/types/lead/CreateLead";
 import { createLead } from "../actions";
 import { useState } from "react";
 import { ErrorNotification } from "@/src/components/notifications/ErrorNotification";
 import { Cliente } from "@/src/types/cliente/Cliente";
+import { CreateLead } from "@/src/types/Lead";
 
 type CreateLeadFormProps = {
   clientes: Cliente[];

@@ -1,41 +1,35 @@
 "use client";
 
-import {
-  Button,
-  FormHelperText,
-  Grid,
-  MenuItem,
-  Select,
-  TextField,
-} from "@mui/material";
+import { Button, FormHelperText, Grid, MenuItem, Select } from "@mui/material";
 import { Controller } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
-import { Lead } from "@/src/types/lead/Lead";
-import { CreateLead } from "@/src/types/lead/CreateLead";
-import { getClientes } from "@/(routes)/clientes/actions";
+import { CreateLead, CreateLeadSchema } from "@/src/types/Lead";
 import { Cliente } from "@/src/types/cliente/Cliente";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormTextField } from "@/src/components/FormTextField";
 
 type LeadFormBaseProps = {
-  onSubmit: (data: any) => void;
+  onSubmit: (data: CreateLead) => void;
   defaultValues?: CreateLead;
   clientes: Cliente[];
 };
 
-export const LeadFormBase = (props: LeadFormBaseProps) => {
+export function LeadFormBase(props: LeadFormBaseProps) {
   const { defaultValues, onSubmit, clientes } = props;
   const {
     control,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<Lead>({
+  } = useForm<CreateLead>({
+    resolver: zodResolver(CreateLeadSchema),
     defaultValues: {
-      nomeFantasia: "",
       nomeRepresentante: "",
-      telefoneRepresentante: "",
       emailRepresentante: "",
+      telefoneRepresentante: "",
       observacao: "",
+      clienteId: clientes[0].id,
       ...defaultValues,
     },
   });
@@ -46,10 +40,6 @@ export const LeadFormBase = (props: LeadFormBaseProps) => {
     }
   }, [defaultValues]);
 
-  const rules = {
-    required: "Campo obrigatório",
-  };
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={2}>
@@ -57,10 +47,13 @@ export const LeadFormBase = (props: LeadFormBaseProps) => {
           <Controller
             name="clienteId"
             control={control}
-            rules={rules}
             render={({ field }) => (
               <>
-                <Select fullWidth {...field} label="Representante responsável">
+                <Select
+                  {...field}
+                  error={Boolean(errors.clienteId?.message)}
+                  fullWidth
+                >
                   {clientes?.map((cliente) => (
                     <MenuItem value={cliente.id} key={cliente.id}>
                       {cliente.nomeFantasia}
@@ -73,92 +66,31 @@ export const LeadFormBase = (props: LeadFormBaseProps) => {
           />
         </Grid>
         <Grid item xs={12}>
-          <Controller
+          <FormTextField
             name="nomeRepresentante"
+            label="Nome do representate"
             control={control}
-            rules={rules}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                fullWidth
-                label="Nome Representante"
-                error={!!errors.nomeRepresentante}
-                helperText={errors.nomeRepresentante?.message}
-              />
-            )}
           />
         </Grid>
         <Grid item xs={12}>
-          <Controller
-            name="telefoneRepresentante"
-            control={control}
-            rules={{
-              ...rules,
-              pattern: {
-                value: /^\d+$/,
-                message: "Telefone deve conter apenas números",
-              },
-              maxLength: {
-                value: 11,
-                message: "Telefone deve ter 11 dígitos",
-              },
-              minLength: {
-                value: 11,
-                message: "Telefone deve ter 11 dígitos",
-              },
-            }}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                fullWidth
-                label="Telefone do representante"
-                error={!!errors.telefoneRepresentante}
-                helperText={errors.telefoneRepresentante?.message}
-                type="tel"
-                inputProps={{
-                  maxLength: 11,
-                  minLength: 11,
-                }}
-              />
-            )}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Controller
+          <FormTextField
             name="emailRepresentante"
+            label="Email do representante"
             control={control}
-            rules={{
-              ...rules,
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                message: "Endereço de email inválido",
-              },
-            }}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                fullWidth
-                label="Email do representante"
-                error={!!errors.emailRepresentante}
-                helperText={errors.emailRepresentante?.message}
-              />
-            )}
           />
         </Grid>
         <Grid item xs={12}>
-          <Controller
-            name="observacao"
+          <FormTextField
+            name="telefoneRepresentante"
+            label="Telefone do representante"
             control={control}
-            rules={rules}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                fullWidth
-                label="Observação"
-                error={!!errors.observacao}
-                helperText={errors.observacao?.message}
-              />
-            )}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <FormTextField
+            name="observacao"
+            label="Observação"
+            control={control}
           />
         </Grid>
 
@@ -170,4 +102,4 @@ export const LeadFormBase = (props: LeadFormBaseProps) => {
       </Grid>
     </form>
   );
-};
+}
