@@ -40,17 +40,17 @@ export function Profile(props: ProfileProps) {
       </IconButton>
       <Menu onClose={handleClose} anchorEl={anchorEl} open={open}>
         <List>
-          <ListItemButton href="/api/auth/logout">
-            <ListItemIcon>
-              <LogoutIcon />
-            </ListItemIcon>
-            <ListItemText primary="Logout" />
-          </ListItemButton>
           <ListItemButton href="/preferencias">
             <ListItemIcon>
               <SettingsIcon />
             </ListItemIcon>
             <ListItemText primary="Preferências" />
+          </ListItemButton>
+          <ListItemButton href="/api/auth/logout">
+            <ListItemIcon>
+              <LogoutIcon />
+            </ListItemIcon>
+            <ListItemText primary="Logout" />
           </ListItemButton>
         </List>
       </Menu>
