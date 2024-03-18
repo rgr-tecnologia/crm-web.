@@ -3,7 +3,7 @@
 import { Grid, Step, StepLabel, Stepper, Typography } from "@mui/material";
 import { useState } from "react";
 import { RepresentanteFormBase } from "@/src/components/forms/representante/RepresentanteFormBase";
-import { CreateRepresentante } from "@/src/types/cliente/representante/CreateRepresentante";
+import { CreateRepresentante } from "@/src/types/CreateRepresentante";
 import * as navigation from "next/navigation";
 import { LeadOportunidadeFormBase } from "@/src/components/forms/lead/oportunidade/LeadOportunidadeBaseForm";
 import { LeadOportunidadeCreate } from "@/src/types/prospeccao/oportunidade/OportunidadeCreate";

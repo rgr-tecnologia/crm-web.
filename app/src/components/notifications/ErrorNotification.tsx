@@ -2,7 +2,7 @@ import { BaseNotification } from "./BaseNotification";
 
 type ErrorNotificationProps = {
   message: string;
-  onClose?: () => void;
+  onClose: () => void;
   open: boolean;
 };
 

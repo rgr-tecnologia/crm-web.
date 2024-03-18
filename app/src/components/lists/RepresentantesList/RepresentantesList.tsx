@@ -1,6 +1,6 @@
 import { Card, CardContent, Divider, Grid, Typography } from "@mui/material";
 import { RepresentantesListActions } from "./RepresentantesListActions";
-import { Representate } from "@/src/types/cliente/representante/Representante";
+import { Representate } from "@/src/types/Representante";
 import { ListOrderIdentifier } from "../ListOrderIdentifier/ListOrderIdentifier";
 
 type RepresentantesListProps = {

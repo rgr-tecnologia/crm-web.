@@ -1,22 +1,29 @@
-import { OportunidadeCreateForm } from "@/src/components/forms/cliente/oportunidade/OportunidadeCreateForm";
-import { RepresentanteQueryProvider } from "@/src/components/queryProviders/RepresentanteQueryProvider";
+import { OportunidadeCreateForm } from "@/(routes)/(prospeccoes)/oportunidades/components/OportunidadeCreateForm";
+import { getRepresentantesByCliente } from "@/(routes)/representantes/actions";
 import { Container } from "@mui/material";
 
 type PageParams = {
   clienteId: string;
 };
 
-export default function Page({ params }: { params: PageParams }) {
+export default async function Page({ params }: { params: PageParams }) {
   const { clienteId } = params;
+  const representantes = await getRepresentantesByCliente(clienteId);
+
+  if (!representantes) {
+    return <Container>Carregando...</Container>;
+  }
+
   return (
-    <RepresentanteQueryProvider>
-      <Container
-        sx={{
-          marginTop: 2,
-        }}
-      >
-        <OportunidadeCreateForm clienteId={clienteId} />
-      </Container>
-    </RepresentanteQueryProvider>
+    <Container
+      sx={{
+        marginTop: 2,
+      }}
+    >
+      <OportunidadeCreateForm
+        clienteId={clienteId}
+        representantes={representantes}
+      />
+    </Container>
   );
 }

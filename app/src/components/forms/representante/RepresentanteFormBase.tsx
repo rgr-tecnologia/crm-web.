@@ -14,7 +14,7 @@ import dayjs from "dayjs";
 import { Controller } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { LoadingButton } from "../../ui/LoadingButton/LoadingButton";
-import { Representate } from "@/src/types/cliente/representante/Representante";
+import { Representate } from "@/src/types/Representante";
 
 type RepresentanteFormBaseProps = {
   onSubmit: (formData: Representate) => void;

@@ -38,6 +38,7 @@ export function CreateClienteForm() {
         <ErrorNotification
           message="Erro ao cadastrar cliente!"
           open={isError}
+          onClose={() => setIsError(false)}
         />
       )}
     </>

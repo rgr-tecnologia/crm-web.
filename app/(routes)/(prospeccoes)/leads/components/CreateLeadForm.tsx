@@ -42,7 +42,11 @@ export const CreateLeadForm = (props: CreateLeadFormProps) => {
         </CardContent>
       </Card>
       {isError && (
-        <ErrorNotification message="Erro ao cadastrar lead!" open={isError} />
+        <ErrorNotification
+          message="Erro ao cadastrar lead!"
+          open={isError}
+          onClose={() => setIsError(false)}
+        />
       )}
     </>
   );

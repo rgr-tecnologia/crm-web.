@@ -4,7 +4,7 @@ import { Cliente } from "@/src/types/cliente/Cliente";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { useQuery } from "react-query";
 import { RepresentanteFormBase } from "./RepresentanteFormBase";
-import { Representate } from "@/src/types/cliente/representante/Representante";
+import { Representate } from "@/src/types/Representante";
 import { getRepresentante } from "@/src/lib/utils/representantes/getRepresentante";
 import { updateRepresentante } from "@/src/lib/utils/representantes/updateRepresentante";
 

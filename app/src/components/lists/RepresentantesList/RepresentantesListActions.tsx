@@ -1,6 +1,6 @@
 "use client";
 
-import { Representate } from "@/src/types/cliente/representante/Representante";
+import { Representate } from "@/src/types/Representante";
 import { Grid, Button, Link, Typography } from "@mui/material";
 
 type RepresentantesListActionsProps = {

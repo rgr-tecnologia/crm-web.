@@ -1,10 +1,10 @@
 "use client";
 import { Button, Grid, Typography } from "@mui/material";
-import { AttachmentsModal } from "@/(routes)/oportunidades/components/AttachmentsModal";
 import { useState } from "react";
 import Link from "next/link";
 import { OportunidadesCardList } from "./OportunidadesCardList";
-import { Oportunidade } from "@/src/types/cliente/oportunidade/Oportunidade";
+import { Oportunidade } from "@/src/types/Oportunidade";
+import { AttachmentsModal } from "./AttachmentsModal";
 
 type OportunidadesListProps = {
   oportunidades: Oportunidade[];

@@ -27,7 +27,7 @@ export async function get<T>(url: string) {
   }
 }
 
-export async function post<T, K>(url: string, data: T) {
+export async function post<T, K>(url: string, data?: T) {
   try {
     const { accessToken } = await getAccessToken(accessTokenConfig);
     const response = await fetch(url, {

@@ -1,5 +1,6 @@
+import { getOportunidadesByCliente } from "@/(routes)/(prospeccoes)/oportunidades/actions";
 import { ClientesOportunidadesList } from "@/src/components/lists/ClientesOportunidadesList/ClientesOportunidadesList";
-import { Oportunidade } from "@/src/types/cliente/oportunidade/Oportunidade";
+import { Oportunidade } from "@/src/types/Oportunidade";
 import { Button, Container, Grid, Typography } from "@mui/material";
 import Link from "next/link";
 
@@ -7,28 +8,18 @@ type Params = {
   clienteId: string;
 };
 
-const BFF_URL = process.env.BFF_URL;
-
-async function getOportunidades(clienteId: string) {
-  const urlToFetch = `${BFF_URL}/clientes/${clienteId}/oportunidades`;
-  const response = await fetch(urlToFetch);
-  return response.json();
-}
-
 export default async function Page({ params }: { params: Params }) {
   const { clienteId } = params;
-  const oportunidades = await getOportunidades(clienteId);
+  const oportunidades = await getOportunidadesByCliente(clienteId);
+
+  if (!oportunidades) {
+    return <Container>Nenhuma oportunidade cadastrada</Container>;
+  }
 
   oportunidades.forEach((oportunidade: Oportunidade) => {
     oportunidade.createdAt = new Date(oportunidade.createdAt);
     oportunidade.updatedAt = new Date(oportunidade.updatedAt);
   });
-
-  const content = oportunidades.length ? (
-    <ClientesOportunidadesList oportunidades={oportunidades} />
-  ) : (
-    <Typography>Nenhuma oportunidade cadastrada</Typography>
-  );
 
   return (
     <Container
@@ -57,7 +48,7 @@ export default async function Page({ params }: { params: Params }) {
           spacing={2}
           direction={"column"}
         >
-          {content}
+          <ClientesOportunidadesList oportunidades={oportunidades} />
         </Grid>
       </Grid>
     </Container>

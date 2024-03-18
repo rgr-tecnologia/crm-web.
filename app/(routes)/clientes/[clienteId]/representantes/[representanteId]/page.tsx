@@ -1,5 +1,4 @@
 import { UpdateRepresentanteForm } from "@/src/components/forms/representante/UpdateRepresentanteForm";
-import { RepresentanteQueryProvider } from "@/src/components/queryProviders/RepresentanteQueryProvider";
 import { Container } from "@mui/material";
 
 type PageParams = {
@@ -10,17 +9,15 @@ type PageParams = {
 export default function Page({ params }: { params: PageParams }) {
   const { clienteId, representanteId } = params;
   return (
-    <RepresentanteQueryProvider>
-      <Container
-        sx={{
-          marginTop: 2,
-        }}
-      >
-        <UpdateRepresentanteForm
-          clienteId={params.clienteId}
-          representanteId={representanteId}
-        />
-      </Container>
-    </RepresentanteQueryProvider>
+    <Container
+      sx={{
+        marginTop: 2,
+      }}
+    >
+      <UpdateRepresentanteForm
+        clienteId={params.clienteId}
+        representanteId={representanteId}
+      />
+    </Container>
   );
 }

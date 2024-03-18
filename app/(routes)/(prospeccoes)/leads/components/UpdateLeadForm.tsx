@@ -48,7 +48,11 @@ export const UpdateLeadForm = (props: UpdateLeadFormProps) => {
         </CardContent>
       </Card>
       {isError && (
-        <ErrorNotification message="Erro ao atualizar lead!" open={false} />
+        <ErrorNotification
+          message="Erro ao atualizar lead!"
+          open={false}
+          onClose={() => setIsError(false)}
+        />
       )}
     </>
   );

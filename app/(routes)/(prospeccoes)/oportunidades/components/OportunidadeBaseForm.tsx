@@ -1,18 +1,8 @@
 "use client";
 
-import {
-  Button,
-  FormHelperText,
-  Grid,
-  MenuItem,
-  Select,
-  TextField,
-} from "@mui/material";
+import { Button, FormHelperText, Grid, MenuItem, Select } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import { OportunidadeCreate } from "@/src/types/cliente/oportunidade/OportunidadeCreate";
 import { OportunidadeEtapa } from "@/src/types/enums/OportunidadeEtapa";
-import { getRepresentantesByClienteId } from "@/src/lib/utils/representantes/getRepresentantesByClienteId";
-import { useQuery } from "react-query";
 import "dayjs/locale/pt-br";
 import { ContratoCaracteristica } from "@/src/types/enums/ContratoCaracteristica";
 import { AreaExecutora } from "@/src/types/enums/AreaExecutora";
@@ -21,19 +11,22 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/pt-br";
 import dayjs from "dayjs";
 import { useEffect } from "react";
+import {
+  CreateOportunidade,
+  CreateOportunidadeSchema,
+} from "@/src/types/Oportunidade";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormTextField } from "@/src/components/FormTextField";
+import { Representate } from "@/src/types/Representante";
 
 type OportunidadeFormBaseProps = {
-  onSubmit: (data: OportunidadeCreate) => void;
-  defaultValues?: OportunidadeCreate;
-  clienteId: string;
+  representantes: Representate[];
+  onSubmit: (data: CreateOportunidade) => void;
+  defaultValues?: CreateOportunidade;
 };
 
 export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
-  const { defaultValues, onSubmit, clienteId } = props;
-
-  const representantes = useQuery("representantes", async () =>
-    getRepresentantesByClienteId(clienteId)
-  );
+  const { representantes, onSubmit, defaultValues } = props;
 
   const {
     control,
@@ -41,7 +34,8 @@ export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
     formState: { errors },
     reset,
     getValues,
-  } = useForm<OportunidadeCreate>({
+  } = useForm<CreateOportunidade>({
+    resolver: zodResolver(CreateOportunidadeSchema),
     defaultValues: {
       etapa: OportunidadeEtapa.NEGOCIACAO,
       dataFechamentoPrevista: new Date(),
@@ -55,37 +49,19 @@ export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
     }
   }, [defaultValues]);
 
-  const rules = {
-    required: "Campo obrigatório",
-  };
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Controller
-            name="titulo"
-            control={control}
-            rules={rules}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                fullWidth
-                label="Título"
-                error={!!errors.titulo}
-                helperText={errors.titulo?.message}
-              />
-            )}
-          />
+          <FormTextField control={control} name="titulo" label="Título" />
         </Grid>
         <Grid item xs={12}>
           <Controller
             name="representanteId"
             control={control}
-            rules={rules}
             render={({ field }) => (
               <Select fullWidth {...field} label="Representante">
-                {representantes.data?.map((representante) => (
+                {representantes?.map((representante) => (
                   <MenuItem value={representante.id} key={representante.id}>
                     {representante.nome}
                   </MenuItem>
@@ -98,7 +74,6 @@ export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
           <Controller
             name="caracteristica"
             control={control}
-            rules={rules}
             render={({ field }) => (
               <Select
                 {...field}
@@ -122,7 +97,6 @@ export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
           <Controller
             name="areaExecutora"
             control={control}
-            rules={rules}
             render={({ field }) => (
               <>
                 <Select
@@ -147,7 +121,6 @@ export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
           <Controller
             name="dataFechamentoPrevista"
             control={control}
-            rules={rules}
             render={({ field }) => (
               <LocalizationProvider
                 dateAdapter={AdapterDayjs}
@@ -173,16 +146,8 @@ export const OportunidadeFormBase = (props: OportunidadeFormBaseProps) => {
           <Controller
             name="valor"
             control={control}
-            rules={rules}
             render={({ field }) => (
-              <TextField
-                {...field}
-                fullWidth
-                label="Valor"
-                error={!!errors.valor}
-                helperText={errors.valor?.message}
-                type="number"
-              />
+              <FormTextField name="valor" label="Valor" control={control} />
             )}
           />
         </Grid>

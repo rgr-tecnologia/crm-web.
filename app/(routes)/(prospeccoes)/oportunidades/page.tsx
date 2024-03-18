@@ -1,29 +1,19 @@
-import { ClientesOportunidadesList } from "@/src/components/lists/ClientesOportunidadesList/ClientesOportunidadesList";
-import { OportunidadesList } from "@/(routes)/oportunidades/components/OportunidadesList";
-import { Oportunidade } from "@/src/types/cliente/oportunidade/Oportunidade";
-import { Container, Typography } from "@mui/material";
-
-const BFF_URL = process.env.BFF_URL;
-
-async function getOportunidades() {
-  const urlToFetch = `${BFF_URL}/oportunidades`;
-  const response = await fetch(urlToFetch);
-  return response.json();
-}
+import { Container } from "@mui/material";
+import { OportunidadesList } from "./components/OportunidadesList";
+import { getOportunidades } from "./actions";
+import { Oportunidade } from "@/src/types/Oportunidade";
 
 export default async function Page() {
   const oportunidades = await getOportunidades();
+
+  if (!oportunidades?.length) {
+    return <Container>Carregando...</Container>;
+  }
 
   oportunidades.forEach((oportunidade: Oportunidade) => {
     oportunidade.createdAt = new Date(oportunidade.createdAt);
     oportunidade.updatedAt = new Date(oportunidade.updatedAt);
   });
-
-  const content = oportunidades.length ? (
-    <ClientesOportunidadesList oportunidades={oportunidades} />
-  ) : (
-    <Typography>Nenhuma oportunidade cadastrada</Typography>
-  );
 
   return (
     <Container
