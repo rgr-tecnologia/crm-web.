@@ -1,26 +1,27 @@
 "use client";
-
-import { Cliente } from "@/src/types/cliente/Cliente";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
-import { ClienteFormBase } from "./ClienteFormBase";
+import { FilialFormBase } from "./FilialFormBase";
 import { ErrorNotification } from "@/src/components/notifications/ErrorNotification";
 import { useRouter } from "next/navigation";
-import { updateCliente } from "../actions";
 import { useState } from "react";
+import { Filial, FilialCreate } from "@/src/types/Filial";
+import { updateFilial } from "../actions";
+import { Cliente } from "@/src/types/cliente/Cliente";
 
-type ClienteFormProps = {
-  cliente: Cliente;
+type FilialUpdateFormProps = {
+  clientes: Cliente[];
+  filial: Filial;
 };
 
-export function UpdateClienteForm(props: ClienteFormProps) {
+export function FilialUpdateForm(props: FilialUpdateFormProps) {
   const router = useRouter();
-  const { cliente } = props;
+  const { filial, clientes } = props;
   const [error, setError] = useState(false);
 
-  const onSubmit = async (formData: Cliente) => {
+  const onSubmit = async (formData: FilialCreate) => {
     try {
-      await updateCliente(cliente.id, formData);
-      router.push("/clientes");
+      await updateFilial(filial.id, formData);
+      router.push("/filiais");
     } catch (e) {
       setError(true);
     }
@@ -32,12 +33,13 @@ export function UpdateClienteForm(props: ClienteFormProps) {
         <CardContent>
           <Grid container spacing={2} direction={"column"}>
             <Grid item>
-              <Typography variant="h6">Editar cliente</Typography>
+              <Typography variant="h6">Editar filial</Typography>
             </Grid>
             <Grid item>
-              <ClienteFormBase
+              <FilialFormBase
+                clientes={clientes}
                 onSubmit={onSubmit}
-                defaultValues={cliente}
+                defaultValues={filial}
                 isLoading={false}
               />
             </Grid>
@@ -46,7 +48,7 @@ export function UpdateClienteForm(props: ClienteFormProps) {
       </Card>
       {error && (
         <ErrorNotification
-          message="Erro ao atualizar cliente!"
+          message="Erro ao atualizar filial!"
           open={false}
           onClose={() => setError(false)}
         />

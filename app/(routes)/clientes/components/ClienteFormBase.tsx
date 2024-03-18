@@ -4,32 +4,30 @@ import { Grid, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { LoadingButton } from "@/src/components/ui/LoadingButton/LoadingButton";
 import { useEffect } from "react";
-import { Cliente } from "@/src/types/cliente/Cliente";
+import {
+  ClienteCreate,
+  ClienteCreateSchema,
+} from "@/src/types/cliente/Cliente";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormTextField } from "@/src/components/FormTextField";
 
 type ClienteFormProps = {
-  onSubmit: (formData: Cliente) => void;
-  defaultValues?: Cliente;
+  onSubmit: (formData: ClienteCreate) => void;
+  defaultValues?: ClienteCreate;
   isLoading: boolean;
 };
 
 export function ClienteFormBase(props: ClienteFormProps) {
   const { onSubmit, defaultValues, isLoading } = props;
 
-  const {
-    handleSubmit,
-    control,
-    reset,
-    formState: { errors },
-  } = useForm<Cliente>({
+  const { handleSubmit, control, reset } = useForm<ClienteCreate>({
+    resolver: zodResolver(ClienteCreateSchema),
     defaultValues: {
+      nomeFantasia: "",
       ativo: true,
       ...defaultValues,
     },
   });
-
-  const rules = {
-    required: "Campo obrigatório",
-  };
 
   useEffect(() => {
     if (defaultValues) {
@@ -41,24 +39,10 @@ export function ClienteFormBase(props: ClienteFormProps) {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={2} direction={"column"}>
         <Grid item>
-          <Controller
+          <FormTextField
             name="nomeFantasia"
+            label="Nome fantasia"
             control={control}
-            rules={rules}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Nome fantasia"
-                variant="outlined"
-                type="text"
-                fullWidth
-                helperText={errors.nomeFantasia?.message}
-                error={!!errors.nomeFantasia}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-            )}
           />
         </Grid>
         <Grid item>

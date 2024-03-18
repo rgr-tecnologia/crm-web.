@@ -20,7 +20,7 @@ export default async function Page() {
         marginTop: 2,
       }}
     >
-      <LeadsList leads={leads || []} />
+      <LeadsList leads={leads} />
     </Container>
   );
 }

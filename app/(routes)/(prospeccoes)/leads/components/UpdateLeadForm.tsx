@@ -18,14 +18,14 @@ export const UpdateLeadForm = (props: UpdateLeadFormProps) => {
   const { id } = lead;
   const router = useRouter();
 
-  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState(false);
 
   const onSubmit = async (data: CreateLead) => {
     try {
       await updateLead(id, data);
       router.push("/leads");
     } catch (error) {
-      setIsError(true);
+      setError(true);
     }
   };
 
@@ -47,11 +47,11 @@ export const UpdateLeadForm = (props: UpdateLeadFormProps) => {
           </Grid>
         </CardContent>
       </Card>
-      {isError && (
+      {error && (
         <ErrorNotification
           message="Erro ao atualizar lead!"
           open={false}
-          onClose={() => setIsError(false)}
+          onClose={() => setError(false)}
         />
       )}
     </>

@@ -13,6 +13,7 @@ import Link from "next/link";
 import PersonIcon from "@mui/icons-material/Person";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import CalculateIcon from "@mui/icons-material/Calculate";
+import BusinessIcon from "@mui/icons-material/Business";
 
 const options = [
   {
@@ -29,6 +30,11 @@ const options = [
     name: "Oportunidades",
     path: "/oportunidades",
     icon: <></>,
+  },
+  {
+    name: "Filiais",
+    path: "/filiais",
+    icon: <BusinessIcon />,
   },
   {
     name: "Contratos",

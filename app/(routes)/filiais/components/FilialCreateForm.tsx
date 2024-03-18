@@ -1,27 +1,28 @@
 "use client";
-
-import { Cliente } from "@/src/types/cliente/Cliente";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
-import { ClienteFormBase } from "./ClienteFormBase";
+import { FilialFormBase } from "./FilialFormBase";
 import { ErrorNotification } from "@/src/components/notifications/ErrorNotification";
 import { useRouter } from "next/navigation";
-import { updateCliente } from "../actions";
 import { useState } from "react";
+import { createFilial } from "../actions";
+import { FilialCreate } from "@/src/types/Filial";
+import { Cliente } from "@/src/types/cliente/Cliente";
 
-type ClienteFormProps = {
-  cliente: Cliente;
+type FilialCreateFormProps = {
+  clientes: Cliente[];
 };
 
-export function UpdateClienteForm(props: ClienteFormProps) {
+export function FilialCreateForm(props: FilialCreateFormProps) {
+  const { clientes } = props;
   const router = useRouter();
-  const { cliente } = props;
+
   const [error, setError] = useState(false);
 
-  const onSubmit = async (formData: Cliente) => {
+  const onSubmit = async (formData: FilialCreate) => {
     try {
-      await updateCliente(cliente.id, formData);
-      router.push("/clientes");
-    } catch (e) {
+      await createFilial(formData);
+      router.push(`/filiais`);
+    } catch (error) {
       setError(true);
     }
   };
@@ -32,12 +33,12 @@ export function UpdateClienteForm(props: ClienteFormProps) {
         <CardContent>
           <Grid container spacing={2} direction={"column"}>
             <Grid item>
-              <Typography variant="h6">Editar cliente</Typography>
+              <Typography variant="h6">Nova filial</Typography>
             </Grid>
             <Grid item>
-              <ClienteFormBase
+              <FilialFormBase
+                clientes={clientes}
                 onSubmit={onSubmit}
-                defaultValues={cliente}
                 isLoading={false}
               />
             </Grid>
@@ -46,8 +47,8 @@ export function UpdateClienteForm(props: ClienteFormProps) {
       </Card>
       {error && (
         <ErrorNotification
-          message="Erro ao atualizar cliente!"
-          open={false}
+          message="Erro ao cadastrar cliente!"
+          open={error}
           onClose={() => setError(false)}
         />
       )}
