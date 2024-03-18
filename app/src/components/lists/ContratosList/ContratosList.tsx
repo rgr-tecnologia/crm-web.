@@ -1,10 +1,10 @@
 "use client";
 
 import { Button, Grid, Typography } from "@mui/material";
-import { Contrato } from "../../../_types/contrato/Contrato";
 import Link from "next/link";
 import { useState } from "react";
 import { ContratosCardList } from "./ContratosCardList";
+import { Contrato } from "@/src/types/Contrato";
 
 type ContratoListProps = {
   contratos: Contrato[];
@@ -54,13 +54,6 @@ export function ContratosList({ contratos, viewMode }: ContratoListProps) {
         justifyContent={"space-between"}
         alignItems={"center"}
       >
-        {/* <Grid item xs={6}>
-          <ClienteAutoComplete
-            clientes={clientes}
-            onChange={onChange}
-            onClear={onClear}
-          />
-        </Grid> */}
         {viewMode && (
           <Grid item>
             <Link href={"contratos/novo"} passHref>

@@ -1,5 +1,6 @@
 "use server";
 import { get, post, put, remove } from "@/src/lib/useFetch";
+import { Contrato, ContratoCreate } from "@/src/types/Contrato";
 import { Oportunidade, CreateOportunidade } from "@/src/types/Oportunidade";
 
 const API_URL = process.env.API_URL;
@@ -49,4 +50,10 @@ export async function reabrirOportunidade(id: string) {
 
 export async function deleteOportunidade(id: string) {
   return await remove(`${API_URL}/oportunidades/${id}`);
+}
+
+export async function gerarContrato(contrato: ContratoCreate) {
+  return await post<ContratoCreate, Contrato>(
+    `${API_URL}/oportunidades/${contrato.oportunidadeId}/gerar-contrato`
+  );
 }

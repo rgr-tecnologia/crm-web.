@@ -6,6 +6,10 @@ export async function getFiliais() {
   return get<Filial[]>(`${process.env.API_URL}/filiais`);
 }
 
+export async function getFiliaisByCliente(clienteId: string) {
+  return get<Filial[]>(`${process.env.API_URL}/clientes/${clienteId}/filiais`);
+}
+
 export async function getFilial(id: string) {
   return get<Filial>(`${process.env.API_URL}/filiais/${id}`);
 }

@@ -1,19 +1,19 @@
 import { Card, CardContent, Divider, Grid, Typography } from "@mui/material";
 import { ListOrderIdentifier } from "@/src/components/lists/ListOrderIdentifier/ListOrderIdentifier";
-import { Filial } from "@/src/types/Filial";
-import { FilialListActions } from "./FilialListActions";
+import { ContratoListActions } from "./ContratoListActions";
+import { Contrato } from "@/src/types/Contrato";
 
-type FilialCardListProps = {
-  filiais: Filial[];
+type ContratoCardListProps = {
+  contratos: Contrato[];
 };
 
-export function FilialCardList({ filiais }: FilialCardListProps) {
+export function ContratoCardList({ contratos }: ContratoCardListProps) {
   return (
     <Grid container spacing={2}>
-      {filiais.map((filial, index) => {
-        const { nome, createdAt, updatedAt, ativo } = filial;
+      {contratos.map((contrato, index) => {
+        const { titulo, createdAt, updatedAt, ativo } = contrato;
         return (
-          <Grid item key={filial.id} xs={12}>
+          <Grid item key={contrato.id} xs={12}>
             <Card
               sx={{
                 width: "100%",
@@ -33,9 +33,9 @@ export function FilialCardList({ filiais }: FilialCardListProps) {
                   </Grid>
                   <Grid container item spacing={1} direction={"column"} xs={10}>
                     <Grid item>
-                      <Typography variant="caption">Razão social</Typography>
+                      <Typography variant="caption">Nome Fantasia</Typography>
                       <Typography variant="body1" fontWeight={"bold"}>
-                        {nome}
+                        {titulo}
                       </Typography>
                     </Grid>
                     <Grid item>
@@ -55,7 +55,7 @@ export function FilialCardList({ filiais }: FilialCardListProps) {
                           <Typography
                             variant="body2"
                             color={
-                              filial?.ativo ? "success.main" : "error.main"
+                              contrato?.ativo ? "success.main" : "error.main"
                             }
                             fontWeight={"bold"}
                           >
@@ -91,7 +91,7 @@ export function FilialCardList({ filiais }: FilialCardListProps) {
                   </Grid>
 
                   <Grid item>
-                    <FilialListActions filial={filial} />
+                    <ContratoListActions contrato={contrato} />
                   </Grid>
                 </Grid>
               </CardContent>
