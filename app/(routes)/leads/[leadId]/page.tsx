@@ -1,23 +1,31 @@
 import { UpdateLeadForm } from "@/(routes)/leads/components/UpdateLeadForm";
-import { ClienteQueryProvider } from "@/src/components/queryProviders/ClienteQueryProvider";
-import { getLeadById } from "@/src/lib/utils/leads/getLeadById";
 import { Container } from "@mui/material";
+import { getLead } from "../actions";
+import { getClientes } from "@/(routes)/clientes/actions";
 
 type PageParams = {
   leadId: string;
 };
 
 export default async function Page({ params }: { params: PageParams }) {
-  const lead = await getLeadById(params.leadId);
+  const lead = await getLead(params.leadId);
+  const clientes = await getClientes();
+
+  if (!lead) {
+    return <Container>Erro ao buscar lead</Container>;
+  }
+
+  if (!clientes) {
+    return <Container>Erro ao buscar clientes</Container>;
+  }
+
   return (
     <Container
       sx={{
         marginTop: 2,
       }}
     >
-      <ClienteQueryProvider>
-        <UpdateLeadForm lead={lead} />
-      </ClienteQueryProvider>
+      <UpdateLeadForm lead={lead} clientes={clientes} />
     </Container>
   );
 }

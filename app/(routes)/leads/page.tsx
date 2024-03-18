@@ -1,38 +1,12 @@
 import { LeadsList } from "@/(routes)/leads/components/LeadsList";
-import { fetchErrorHandler } from "@/src/lib/errors/fetchErrorHandler";
-import { Lead } from "@/src/types/lead/Lead";
 import { Container, Typography } from "@mui/material";
-
-const BFF_URL = process.env.BFF_URL;
-
-async function fetchLeads() {
-  try {
-    const response = await fetch(`${BFF_URL}/leads`, {
-      next: {
-        revalidate: 0,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error("Erro ao buscar leads");
-    }
-
-    const data: Lead[] = await response.json();
-    return data;
-  } catch (error) {
-    fetchErrorHandler(error);
-  }
-}
+import { getLeads } from "./actions";
 
 export default async function Page() {
-  const leads = await fetchLeads();
+  const leads = await getLeads();
 
-  if (!leads?.length) {
-    return (
-      <Container>
-        <Typography variant="h6">Nenhum lead cadastrado</Typography>
-      </Container>
-    );
+  if (!leads) {
+    return <Typography variant="h6">Erro ao buscar leads</Typography>;
   }
 
   leads.forEach((lead) => {

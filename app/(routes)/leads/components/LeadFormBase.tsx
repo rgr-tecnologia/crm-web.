@@ -13,18 +13,17 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { Lead } from "@/src/types/lead/Lead";
 import { CreateLead } from "@/src/types/lead/CreateLead";
-import { useClientes } from "@/src/hooks/useClientes";
+import { getClientes } from "@/(routes)/clientes/actions";
+import { Cliente } from "@/src/types/cliente/Cliente";
 
 type LeadFormBaseProps = {
   onSubmit: (data: any) => void;
   defaultValues?: CreateLead;
+  clientes: Cliente[];
 };
 
 export const LeadFormBase = (props: LeadFormBaseProps) => {
-  const { defaultValues, onSubmit } = props;
-
-  const { data: clientes } = useClientes();
-
+  const { defaultValues, onSubmit, clientes } = props;
   const {
     control,
     handleSubmit,
