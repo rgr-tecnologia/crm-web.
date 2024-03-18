@@ -80,10 +80,6 @@ export function SideMenu() {
               <ListItemText primary={option.name} />
             </ListItemButton>
           ))}
-          <ListItemButton href={"/api/auth/logout"}>
-            <ListItemIcon>{<></>}</ListItemIcon>
-            <ListItemText primary={"Sair"} />
-          </ListItemButton>
         </List>
       </Box>
     </Drawer>
